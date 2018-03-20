@@ -1,0 +1,185 @@
+---
+title: "Exploratory Data Analysis Report"
+output:
+  html_document: 
+    theme: cerulean
+    toc: yes
+    toc_depth: 6
+params:
+  data: data
+  Target: Target
+  Label: Tar_label
+  samc: samc
+  samn: samn
+---
+  
+```{r setup, include=FALSE}
+library(rmarkdown)
+library(SmartEDA)
+library(kableExtra)
+library(knitr)
+library(data.table)
+library(scales)
+library(gridExtra)
+library(ggplot2)
+
+data <- params$data
+
+```
+  
+Main goals of *SmarEDA*:
+
+1. Exploratory Data Analysis (EDA)
+2. Data Reporting
+
+## Summary statistics
+Understand the data types whether the data is numeric, character, or categorical. Identify the data distirbutions, outliers and missing patterns. Extract the important input variables for advance data analysis.
+
+### Overview of the data
+
+Understanding the data selection, variable names, dimensions of the dataset, data types of each variables
+
+```{r eda-ovw-r,warning=FALSE,eval=T,include=F}
+ovw_tabl <- ExpData(data)
+
+```
+
+```{r data_structure}
+kable(ovw_tabl, "html") %>%
+  kable_styling("striped", full_width = F) 
+ 
+```
+
+#### Target variable
+
+Summary of Dependent variable:
+
+  1. Variable name - **`r Target `**
+  2. Variable description - **`r Tar_label `**
+
+
+```{r eda-gp-r,warning=FALSE,eval=T,include=F}
+tab1 = ExpNumStat(data,by="A",gp=Target,Qnt=c(0.1,0.2),MesofShape=2,Outlier=TRUE,round=3)
+rownames(tab1)<- NULL
+tab2 = ExpNumStat(data,by="G",gp=Target,Qnt=c(0.1,0.2),MesofShape=2,Outlier=TRUE,round=3)
+rownames(tab2)<-NULL
+tab3 = ExpNumStat(data,by="GA",gp=Target,Qnt=c(0.1,0.2),MesofShape=2,Outlier=TRUE,round=3)
+rownames(tab3)<-NULL
+tab_tar <- data.frame(table(data[,Target]))
+tab_tar$Descriptions <- Tar_label
+names(tab_tar) <- c(Target,"Frequency","Descriptions")
+rownames(tab_tar)<-NULL
+```
+
+```{r dv-r,warning=FALSE,eval=T,render=tab1,echo=F}
+kable(tab_tar, "html") %>%
+  kable_styling("striped", full_width = F)
+```
+
+
+### Numerical variables
+Summary of numerical variables
+
+#### Summary by Overall 
+
+```{r eda-a1-r,warning=FALSE,eval=F,include=T}
+ExpNumStat(data,by="A",gp=Target,Qnt=c(0.1,0.2),MesofShape=2,Outlier=TRUE,round=3)
+```
+
+```{r eda-a2-r,warning=FALSE,eval=T,render=tab1,echo=F}
+paged_table(tab1)
+```
+
+#### Summary by Group 
+
+```{r eda-gp1-r,warning=FALSE,eval=F,include=T}
+ExpNumStat(data,by="G",gp=Target,Qnt=c(0.1,0.2),MesofShape=2,Outlier=TRUE,round=3)
+```
+
+```{r eda-gp2-r,warning=FALSE,eval=T,render=tab2,echo=F}
+paged_table(tab2)
+```
+
+#### Summary by Group and Overall 
+
+```{r eda-gpa1-r,warning=FALSE,eval=F,include=T}
+ExpNumStat(mtcars,by="GA",gp=Target,Qnt=c(0.1,0.2),MesofShape=2,Outlier=TRUE,round=3)
+```
+
+```{r eda-gpa2-r,warning=FALSE,eval=T,render=tab3,echo=F}
+paged_table(tab3)
+```
+
+
+### Categorical variables
+Summary of categorical/Text data
+
+```{r eda-c-r, eval=T,include=F}
+et1 <- ExpCTable(data,Target=Target,margin=2,clim=10,nlim=3)
+rownames(et1)<-NULL
+et2 <- ExpCatStat(data,Target=Target,Label=Tar_label,print=F,result = "Stat",clim=10,nlim=5)
+rownames(et2)<-NULL
+et3 <- ExpCatStat(data,Target=Target,Label=Tar_label,print=F,result = "IV",clim=10,nlim=5)
+rownames(et3)<-NULL
+```
+
+#### Cross tabulation with Target variable
+```{r eda-c1-r, warning=FALSE,eval=F,include=T}
+ExpCTable(data,Target=Target,margin=2,clim=10,nlim=3)
+```
+
+```{r eda-c11-r,warning=FALSE,eval=T,render=et1,echo=F}
+paged_table(et1)
+```
+
+#### Information values
+```{r eda-c3-r, warning=FALSE,eval=F,include=T}
+ExpCatStat(data,Target=Target,Label=Tar_label,print=F,result = "IV",clim=10,nlim=5)
+```
+
+```{r eda-c31-r,warning=FALSE,eval=T,render=et3,echo=F}
+paged_table(et3)
+```
+
+#### Statistical test
+```{r eda-c2-r, warning=FALSE,eval=F,include=T}
+ExpCatStat(data,Target=Target,Label=Tar_label,print=F,result = "Stat",clim=10,nlim=5)
+```
+
+```{r eda-c21-r,warning=FALSE,eval=T,render=et2,echo=F}
+paged_table(et2)
+```
+
+### Distributions
+Explore and decide which are the variables good for analysis using Boxplot, histograms and Barplots 
+
+
+#### Numerical Data 
+
+##### Boxplot by Overall
+```{r eda-np1-r, warning=FALSE,eval=T,include=T,fig.align='center',fig.height=10,fig.width=15}
+ExpNumViz(data,gp=Target,type=3,nlim=3,Page = c(2,2),fname = NULL,col=NULL,sample=samn)
+```
+
+##### Boxplot by Group (Target variable)
+```{r eda-np2-r, warning=FALSE,eval=T,include=T,fig.align='center',fig.height=10,fig.width=15}
+ExpNumViz(data,gp=Target,type=2,nlim=3,Page = c(2,2),fname = NULL,col=NULL,sample=samn)
+```
+
+##### Boxplot by Overall and group (Target Variable)
+```{r eda-np3-r, warning=FALSE,eval=T,include=T,fig.align='center',fig.height=10,fig.width=15}
+ExpNumViz(data,gp=Target,type=1,nlim=3,Page = c(2,2),fname = NULL,col=NULL,sample=samn)
+```
+
+#### Categorical Data 
+
+##### BarPlot for all categorical predictors
+```{r eda-cp1-r, warning=FALSE,eval=T,include=T,fig.align='center',fig.height=10,fig.width=15}
+ExpCatViz(data,gp=NULL,fname=NULL,clim=10,round=1,margin=2,Page = c(2,2),sample=samc)
+```
+
+##### BarPlot for all categorical predictors with target variable
+```{r eda-cp2-r, warning=FALSE,eval=T,include=T,fig.align='center',fig.height=10,fig.width=15}
+ExpCatViz(data,gp=Target,fname=NULL,clim=10,round=1,margin=2,Page = c(2,2),sample=samc)
+```
+
