@@ -1,0 +1,117 @@
+---
+title: "Exploratory Data Analysis Report"
+date: "`r Sys.Date()`"
+output:
+  html_document: 
+    theme: cerulean
+    toc: yes
+    toc_depth: 6
+params:
+  data: data
+  Target: Target
+  label: label
+  sc: sc
+  sn: sn
+  Rc: Rc
+---
+  
+```{r setup, include=FALSE}
+library(rmarkdown)
+library(SmartEDA)
+library(knitr)
+library(scales)
+library(gridExtra)
+library(ggplot2)
+
+data <- params$data
+
+```
+  
+## Exploratory Data analysis (EDA)
+Analyzing the data sets to summarize their main characteristics of variables, often with visual graphs, without using a statistical model. 
+
+### 1. Overview of the data
+Understanding the dimensions of the dataset, variable names, overall missing summary and data types of each variables
+
+```{r od_1,warning=FALSE,eval=F,include=T}
+# Overiview of the data
+ExpData(data=data,type=1)
+# Structure of the data
+ExpData(data=data,type=2)
+```
+
+```{r od_2,warning=FALSE,eval=T,include=F}
+ovw_tabl <- ExpData(data=data,type=1)
+ovw_tab2 <- ExpData(data=data,type=2)
+```
+
+**Overview of the data**
+```{r od_3,warning=FALSE,eval=T,render=ovw_tabl,echo=F}
+paged_table(ovw_tabl)
+```
+
+**Structure of the data**
+```{r od_32,warning=FALSE,eval=T,render=ovw_tab2,echo=F}
+paged_table(ovw_tab2)
+```
+
+### 2. Summary of numerical variables
+Summary of all numeric variables 
+```{r snv_all,warning=FALSE,eval=T,include=F}
+snv_2 = ExpNumStat(data,by="A",gp=NULL,Qnt=seq(0,1,0.1),MesofShape=2,Outlier=TRUE,round=2)
+rownames(snv_2)<-NULL
+```
+
+```{r snv_2, warning=FALSE,eval=F,include=T}
+ExpNumStat(data,by="A",gp=NULL,Qnt=seq(0,1,0.1),MesofShape=2,Outlier=TRUE,round=2)
+```
+
+```{r snv_2.1,warning=FALSE,eval=T,render=snv_2,echo=F}
+paged_table(snv_2)
+```
+
+### 3. Distributions of numerical variables
+Graphical representation of all numeric features
+
+  * Quantile-quantile plot(Univariate)
+  
+```{r snv2_new,warning=FALSE,eval=T,include=T,fig.align='center',fig.height=10,fig.width=10}
+ExpOutQQ(data,nlim=4,fname=NULL,Page=c(2,2),sample=sn)
+```
+  
+  * Density plot (Univariate)
+
+```{r snv2,warning=FALSE,eval=T,include=T,fig.align='center',fig.height=10,fig.width=10}
+ExpNumViz(data,gp=NULL,type=1,nlim=NULL,fname=NULL,col=NULL,Page=c(2,2),sample=sn)
+```
+
+### 4. Summary of categorical variables
+Summary of categorical variables
+
+```{r eda_4, eval=T,include=F}
+et1 <- ExpCTable(data,Target=NULL,margin=1,clim=10,nlim=NULL,round=2,bin=NULL,per=T)
+rownames(et1)<-NULL
+```
+
+  * frequency for all categorical independent variables
+
+```{r e4.1, warning=FALSE,eval=F,include=T}
+ExpCTable(data,Target=NULL,margin=1,clim=10,nlim=NULL,round=2,bin=NULL,per=T)
+```
+
+```{r e4.1.1,warning=FALSE,eval=T,render=et1,echo=F}
+paged_table(et1)
+```
+>*`NA` is Not Applicable*
+
+### 5. Distributions of categorical variables
+
+  * Bar plots for all categorical variables
+
+#### Bar plots for all categorical variables
+Bar plot with vertical or horizontal bars for all categorical variables 
+
+```{r bp1,warning=FALSE,eval=T,include=T,fig.align='center',fig.height=10,fig.width=10}
+ExpCatViz(data,target=NULL,fname=NULL,clim=10,margin=2,Page = c(2,2),sample=sc)
+```
+

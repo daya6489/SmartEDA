@@ -8,17 +8,16 @@ output:
 params:
   data: data
   Target: Target
-  Label: Tar_label
-  samc: samc
-  samn: samn
+  label: label
+  sc: sc
+  sn: sn
+  Rc: Rc
 ---
   
 ```{r setup, include=FALSE}
 library(rmarkdown)
 library(SmartEDA)
-library(kableExtra)
 library(knitr)
-library(data.table)
 library(scales)
 library(gridExtra)
 library(ggplot2)
@@ -27,159 +26,149 @@ data <- params$data
 
 ```
   
-Main goals of *SmarEDA*:
+## Exploratory Data analysis (EDA)
+Analyzing the data sets to summarize their main characteristics of variables, often with visual graphs, without using a statistical model. 
 
-1. Exploratory Data Analysis (EDA)
-2. Data Reporting
+### 1. Overview of the data
+Understanding the dimensions of the dataset, variable names, overall missing summary and data types of each variables
 
-## Summary statistics
-Understand the data types whether the data is numeric, character, or categorical. Identify the data distirbutions, outliers and missing patterns. Extract the important input variables for advance data analysis.
 
-### Overview of the data
-
-Understanding the data selection, variable names, dimensions of the dataset, data types of each variables
-
-```{r eda-ovw-r,warning=FALSE,eval=T,include=F}
-ovw_tabl <- ExpData(data)
-
+```{r od_1,warning=FALSE,eval=F,include=T}
+# Overiview of the data
+ExpData(data=data,type=1)
+# Structure of the data
+ExpData(data=data,type=2)
 ```
 
-```{r data_structure}
-kable(ovw_tabl, "html") %>%
-  kable_styling("striped", full_width = F) 
- 
+```{r od_2,warning=FALSE,eval=T,include=F}
+ovw_tabl <- ExpData(data=data,type=1)
+ovw_tab2 <- ExpData(data=data,type=2)
 ```
 
-#### Target variable
+**Overview of the data**
+```{r od_3,warning=FALSE,eval=T,render=ovw_tabl,echo=F}
+paged_table(ovw_tabl)
+```
 
-Summary of Dependent variable:
+**Structure of the data**
+```{r od_32,warning=FALSE,eval=T,render=ovw_tab2,echo=F}
+paged_table(ovw_tab2)
+```
+
+**Target variable**
+
+Summary of continuous dependent variable
 
   1. Variable name - **`r Target `**
-  2. Variable description - **`r Tar_label `**
+  2. Variable description - **`r label `**
 
-
-```{r eda-gp-r,warning=FALSE,eval=T,include=F}
-tab1 = ExpNumStat(data,by="A",gp=Target,Qnt=c(0.1,0.2),MesofShape=2,Outlier=TRUE,round=3)
-rownames(tab1)<- NULL
-tab2 = ExpNumStat(data,by="G",gp=Target,Qnt=c(0.1,0.2),MesofShape=2,Outlier=TRUE,round=3)
-rownames(tab2)<-NULL
-tab3 = ExpNumStat(data,by="GA",gp=Target,Qnt=c(0.1,0.2),MesofShape=2,Outlier=TRUE,round=3)
-rownames(tab3)<-NULL
-tab_tar <- data.frame(table(data[,Target]))
-tab_tar$Descriptions <- Tar_label
-names(tab_tar) <- c(Target,"Frequency","Descriptions")
-rownames(tab_tar)<-NULL
+```{r dv-r,warning=FALSE,eval=T,include=F}
+summary(data[,Target])
 ```
 
-```{r dv-r,warning=FALSE,eval=T,render=tab1,echo=F}
-kable(tab_tar, "html") %>%
-  kable_styling("striped", full_width = F)
+### 2. Summary of numerical variables
+
+```{r snv_all,warning=FALSE,eval=T,include=F}
+snv_2 = ExpNumStat(data,by="GA",gp=Target,Qnt=seq(0,1,0.1),MesofShape=2,Outlier=TRUE,round=2)
+rownames(snv_2)<-NULL
 ```
 
+Summary statistics when dependent variable is Continuous **`r Target `**. 
 
-### Numerical variables
-Summary of numerical variables
-
-#### Summary by Overall 
-
-```{r eda-a1-r,warning=FALSE,eval=F,include=T}
-ExpNumStat(data,by="A",gp=Target,Qnt=c(0.1,0.2),MesofShape=2,Outlier=TRUE,round=3)
+```{r snv_2, warning=FALSE,eval=F,include=T}
+ExpNumStat(data,by="A",gp=Target,Qnt=seq(0,1,0.1),MesofShape=2,Outlier=TRUE,round=2)
 ```
 
-```{r eda-a2-r,warning=FALSE,eval=T,render=tab1,echo=F}
-paged_table(tab1)
+```{r snv_2.1,warning=FALSE,eval=T,render=snv_2,echo=F}
+paged_table(snv_2)
 ```
 
-#### Summary by Group 
+### 3. Distributions of numerical variables
+Graphical representation of all numeric features, used below types of plots to explore the data
 
-```{r eda-gp1-r,warning=FALSE,eval=F,include=T}
-ExpNumStat(data,by="G",gp=Target,Qnt=c(0.1,0.2),MesofShape=2,Outlier=TRUE,round=3)
+  * Quantile-quantile plot (Univariate)
+  * Density plot (Univariate)
+  * Scatter plot (Bivariate)
+
+#### Quantile-quantile plot for Numerical variables - Univariate  
+Quantile-quantile plot for all Numerical variables
+
+```{r snv2_new,warning=FALSE,eval=T,include=T,fig.align='center',fig.height=10,fig.width=10}
+ExpOutQQ(data,nlim=4,fname=NULL,Page=c(2,2),sample=sn)
+```
+    
+#### Density plots for numerical variables - Univariate
+Density plot for all numerical variables
+
+```{r snv2,warning=FALSE,eval=T,include=T,fig.align='center',fig.height=10,fig.width=10}
+ExpNumViz(data,gp=NULL,nlim=5,fname=NULL,col=NULL,Page=c(2,2),sample=sn)
 ```
 
-```{r eda-gp2-r,warning=FALSE,eval=T,render=tab2,echo=F}
-paged_table(tab2)
+#### Scatter plot for all Numeric variables vs Continuous dependent variable
+Scatter plot between all numeric variables and target variable **`r Target `**.
+This plot help to examine how well a target variable is correlated with list of dependent variables in the data set.
+
+Dependent variable is **`r Target `** (continuous). 
+
+```{r snv1,warning=FALSE,eval=T,include=T,fig.align='center',fig.height=10,fig.width=10}
+ExpNumViz(data,gp=Target,nlim=5,fname=NULL,col=NULL,Page=c(2,2),sample=sn)
 ```
 
-#### Summary by Group and Overall 
+#### Correlation between Target and Independent variables
+```{r eda_400, eval=T,include=F}
+snv_22 = ExpNumStat(data,by="GA",gp=Target,Qnt=NULL,MesofShape=2,Outlier=FALSE,round=2,dcast=T,val="cor")
+rownames(snv_22)<-NULL
 
-```{r eda-gpa1-r,warning=FALSE,eval=F,include=T}
-ExpNumStat(mtcars,by="GA",gp=Target,Qnt=c(0.1,0.2),MesofShape=2,Outlier=TRUE,round=3)
 ```
 
-```{r eda-gpa2-r,warning=FALSE,eval=T,render=tab3,echo=F}
-paged_table(tab3)
+```{r eda_400.1, warning=FALSE,eval=F,include=T}
+ExpNumStat(data,by="GA",gp=Target,Qnt=NULL,MesofShape=2,Outlier=FALSE,round=2,dcast=T,val="cor")
 ```
 
+```{r eda_400.2,warning=FALSE,eval=T,render=snv_22,echo=F}
+paged_table(snv_22)
+```
 
-### Categorical variables
-Summary of categorical/Text data
+### 4. Summary of categorical variables
+Summary of categorical variables
 
-```{r eda-c-r, eval=T,include=F}
-et1 <- ExpCTable(data,Target=Target,margin=2,clim=10,nlim=3)
+```{r eda_4, eval=T,include=F}
+et1 <- ExpCTable(data,Target=NULL,margin=1,clim=10,nlim=NULL,round=2,bin=NULL,per=T)
 rownames(et1)<-NULL
-et2 <- ExpCatStat(data,Target=Target,Label=Tar_label,print=F,result = "Stat",clim=10,nlim=5)
-rownames(et2)<-NULL
-et3 <- ExpCatStat(data,Target=Target,Label=Tar_label,print=F,result = "IV",clim=10,nlim=5)
-rownames(et3)<-NULL
 ```
 
-#### Cross tabulation with Target variable
-```{r eda-c1-r, warning=FALSE,eval=F,include=T}
-ExpCTable(data,Target=Target,margin=2,clim=10,nlim=3)
+```{r eda_41, eval=T,include=F}
+et11 <- ExpCTable(data,Target=Target,margin=1,clim=10,nlim=NULL,round=2,bin=4,per=T)
+rownames(et11)<-NULL
+```
+  * frequency for all categorical independent variables
+
+```{r e4.1, warning=FALSE,eval=F,include=T}
+ExpCTable(data,margin=1,clim=10,nlim=NULL,round=2,bin=NULL,per=T)
 ```
 
-```{r eda-c11-r,warning=FALSE,eval=T,render=et1,echo=F}
+```{r e4.1.1,warning=FALSE,eval=T,render=et1,echo=F}
 paged_table(et1)
 ```
 
-#### Information values
-```{r eda-c3-r, warning=FALSE,eval=F,include=T}
-ExpCatStat(data,Target=Target,Label=Tar_label,print=F,result = "IV",clim=10,nlim=5)
+ * frequency for all categorical independent variables by descretized **`r Target `**
+
+```{r e4.2, warning=FALSE,eval=F,include=T}
+##bin=4, descretized 4 categories based on quantiles
+ExpCTable(data,Target=Target,margin=1,clim=10,nlim=NULL,round=2,bin=4,per=T)
 ```
 
-```{r eda-c31-r,warning=FALSE,eval=T,render=et3,echo=F}
-paged_table(et3)
+```{r e4.2.1,warning=FALSE,eval=T,render=et11,echo=F}
+paged_table(et11)
 ```
 
-#### Statistical test
-```{r eda-c2-r, warning=FALSE,eval=F,include=T}
-ExpCatStat(data,Target=Target,Label=Tar_label,print=F,result = "Stat",clim=10,nlim=5)
+### 5. Distributions of Categorical variables
+Graphical representation of all Categorical variables
+
+  * Bar plot (Univariate)
+ 
+Bar plot with vertical or horizontal bars for all categorical variables
+
+```{r bp1,warning=FALSE,eval=T,include=T,fig.align='center',fig.height=10,fig.width=10}
+ExpCatViz(data,target=NULL,clim=10,margin=2,Page = c(2,2),sample=sc)
 ```
-
-```{r eda-c21-r,warning=FALSE,eval=T,render=et2,echo=F}
-paged_table(et2)
-```
-
-### Distributions
-Explore and decide which are the variables good for analysis using Boxplot, histograms and Barplots 
-
-
-#### Numerical Data 
-
-##### Boxplot by Overall
-```{r eda-np1-r, warning=FALSE,eval=T,include=T,fig.align='center',fig.height=10,fig.width=15}
-ExpNumViz(data,gp=Target,type=3,nlim=3,Page = c(2,2),fname = NULL,col=NULL,sample=samn)
-```
-
-##### Boxplot by Group (Target variable)
-```{r eda-np2-r, warning=FALSE,eval=T,include=T,fig.align='center',fig.height=10,fig.width=15}
-ExpNumViz(data,gp=Target,type=2,nlim=3,Page = c(2,2),fname = NULL,col=NULL,sample=samn)
-```
-
-##### Boxplot by Overall and group (Target Variable)
-```{r eda-np3-r, warning=FALSE,eval=T,include=T,fig.align='center',fig.height=10,fig.width=15}
-ExpNumViz(data,gp=Target,type=1,nlim=3,Page = c(2,2),fname = NULL,col=NULL,sample=samn)
-```
-
-#### Categorical Data 
-
-##### BarPlot for all categorical predictors
-```{r eda-cp1-r, warning=FALSE,eval=T,include=T,fig.align='center',fig.height=10,fig.width=15}
-ExpCatViz(data,gp=NULL,fname=NULL,clim=10,round=1,margin=2,Page = c(2,2),sample=samc)
-```
-
-##### BarPlot for all categorical predictors with target variable
-```{r eda-cp2-r, warning=FALSE,eval=T,include=T,fig.align='center',fig.height=10,fig.width=15}
-ExpCatViz(data,gp=Target,fname=NULL,clim=10,round=1,margin=2,Page = c(2,2),sample=samc)
-```
-

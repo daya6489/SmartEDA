@@ -1,0 +1,197 @@
+---
+title: "Exploratory Data Analysis Report"
+date: "`r Sys.Date()`"
+output:
+  html_document: 
+    theme: cerulean
+    toc: yes
+    toc_depth: 6
+params:
+  data: data
+  Target: Target
+  label: label
+  sc: sc
+  sn: sn
+  Rc: Rc
+---
+  
+```{r setup, include=FALSE}
+library(rmarkdown)
+library(SmartEDA)
+library(knitr)
+library(scales)
+library(gridExtra)
+library(ggplot2)
+
+data <- params$data
+
+```
+  
+## Exploratory Data analysis (EDA)
+Analyzing the data sets to summarize their main characteristics of variables, often with visual graphs, without using a statistical model. 
+
+### 1. Overview of the data
+Understanding the dimensions of the dataset, variable names, overall missing summary and data types of each variables
+
+```{r od_1,warning=FALSE,eval=F,include=T}
+# Overiview of the data
+ExpData(data=data,type=1)
+# Structure of the data
+ExpData(data=data,type=2)
+```
+
+```{r od_2,warning=FALSE,eval=T,include=F}
+ovw_tabl <- ExpData(data=data,type=1)
+ovw_tab2 <- ExpData(data=data,type=2)
+```
+
+**Overview of the data**
+```{r od_3,warning=FALSE,eval=T,render=ovw_tabl,echo=F}
+paged_table(ovw_tabl)
+```
+
+**Structure of the data**
+```{r od_32,warning=FALSE,eval=T,render=ovw_tab2,echo=F}
+paged_table(ovw_tab2)
+```
+
+**Target variable**
+
+Summary of categorical dependent variable
+
+  1. Variable name - **`r Target `**
+  2. Variable description - **`r label `**
+
+```{r dd,warning=FALSE,eval=T,include=F}
+if(is.null(label)) label <- Target
+tab_tar <- data.frame(table(data[,Target]))
+tab_tar$Descriptions <- label
+names(tab_tar) <- c(Target,"Frequency","Descriptions")
+rownames(tab_tar)<-NULL
+```
+
+```{r dv-r,warning=FALSE,eval=T,render=tab_tar,echo=F}
+tab_tar
+```
+
+### 2. Summary of numerical variables
+
+Summary of all numerical variables 
+
+```{r snv_all,warning=FALSE,eval=T,include=F}
+snv_2 = ExpNumStat(data,by="GA",gp=Target,Qnt=seq(0,1,0.1),MesofShape=2,Outlier=TRUE,round=2)
+rownames(snv_2)<-NULL
+```
+
+Summary statistics when dependent variable is categorical **`r Target `**. Summary statistics will be splitted into category level
+
+```{r snv_2, warning=FALSE,eval=F,include=T}
+ExpNumStat(data,by="GA",gp=Target,Qnt=seq(0,1,0.1),MesofShape=2,Outlier=TRUE,round=2)
+```
+
+```{r snv_2.1,warning=FALSE,eval=T,render=snv_2,echo=F}
+paged_table(snv_2)
+```
+
+### 3. Distributions of Numerical variables
+
+* Box plots for all numerical variables vs categorical dependent variable - Bivariate comparision only with categories
+
+  * Quantile-quantile plot(Univariate)
+  * Density plot (Univariate)
+  * Box plot (univariate and Bivariate)
+
+#### Quantile-quantile plot for Numerical variables - Univariate  
+Quantile-quantile plot for all Numerical variables
+
+```{r snv2_new,warning=FALSE,eval=T,include=T,fig.align='center',fig.height=10,fig.width=10}
+ExpOutQQ(data,nlim=4,fname=NULL,Page=c(2,2),sample=sn)
+```
+      
+#### Density plots for Numerical variables - Univariate
+Density plot for all Numerical variables
+
+```{r snv2,warning=FALSE,eval=T,include=T,fig.align='center',fig.height=10,fig.width=10}
+ExpNumViz(data,gp=NULL,type=1,nlim=NULL,fname=NULL,col=NULL,Page=c(2,2),sample=sn)
+```
+
+#### Box plots for all numeric features vs categorical dependent variable - Bivariate comparision only with categories
+Boxplot for all the numeric attributes by each category of **`r Target `**
+
+```{r snv4,warning=FALSE,eval=T,include=T,fig.align='center',fig.height=10,fig.width=10}
+ExpNumViz(data,gp=Target,type=2,nlim=NULL,fname=NULL,col=NULL,Page=c(2,2),sample=sn)
+```
+
+### 4. Summary of categorical variables
+Summary of categorical variable
+
+```{r eda_4, eval=T,include=F}
+if(is.null(Rc)) {Rc=as.character(paste0(unique(data[,Target])[1]))}
+et1 <- ExpCTable(data,Target=Target,margin=1,clim=10,nlim=NULL,round=2,bin=NULL,per=F)
+rownames(et1)<-NULL
+
+et4 <- ExpCatStat(data,Target=Target,result = "Stat",clim=10,nlim=5,bins=10,Pclass=Rc,plot=FALSE,top=20,Round=2)
+rownames(et4)<-NULL
+
+et5 <- ExpCatStat(data,Target=Target,result = "IV",clim=10,nlim=5,bins=10,Pclass=Rc,plot=FALSE,top=20,Round=2)
+rownames(et5)<-NULL
+```
+
+**Cross tabulation with target variable**
+
+  * Custom tables between all categorical independent variables and traget variable **`r Target `** 
+
+```{r e4.1, warning=FALSE,eval=F,include=T}
+ExpCTable(data,Target=Target,margin=1,clim=10,nlim=NULL,round=2,bin=NULL,per=F)
+```
+
+```{r e4.1.1,warning=FALSE,eval=T,render=et1,echo=F}
+paged_table(et1)
+```
+
+**Information Value**
+
+```{r e4.2, warning=FALSE,eval=F,include=T}
+ExpCatStat(data,Target=Target,Label=label,result = "IV",clim=10,nlim=5,Pclass=Rc)
+
+```
+
+```{r e4.21,warning=FALSE,eval=T,render=et5,echo=F}
+paged_table(et5)
+```
+
+**Statistical test**
+```{r e4.3, warning=FALSE,eval=F,include=T}
+ExpCatStat(data,Target=Target,Label=label,result = "Stat",clim=10,nlim=5,Pclass=Rc)
+```
+
+```{r e4.31,warning=FALSE,eval=T,render=et4,echo=F}
+paged_table(et4)
+```
+
+**Variable importance based on Information value**
+
+```{r ed3.91,warning=FALSE,eval=T,fig.align='center',fig.height=7,fig.width=7}
+varimp <- ExpCatStat(Carseats,Target="Urban",result = "Stat",clim=10,nlim=5,bins=10,Pclass="Yes",plot=TRUE,top=10,Round=2)
+```
+
+
+### 5. Distributions of categorical variables
+Graphical representation of all categorical variables
+
+  * Bar plot (Univariate)
+  * Stacked Bar plot (Bivariate)
+
+**Bar plots for all categorical variables**
+
+  * Bar plot with vertical or horizontal bars for all categorical variables 
+
+```{r bp1,warning=FALSE,eval=T,include=T,fig.align='center',fig.height=10,fig.width=10}
+ExpCatViz(data,target=NULL,fname=NULL,clim=10,margin=2,Page = c(2,1),sample=sc)
+```
+
+  * Stacked bar plot with vertical or horizontal bars for all categorical variables 
+
+```{r bp2,warning=FALSE,eval=T,include=T,fig.align='center',fig.height=10,fig.width=10}
+ExpCatViz(data,target=Target,fname=NULL,clim=10,margin=2,Page = c(2,1),sample=sc)
+```
