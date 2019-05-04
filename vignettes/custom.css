@@ -1,0 +1,91 @@
+#TOC {
+  position: fixed;
+  left: 0;
+  top: 10px;
+  width: 230px;
+  height: 100%;
+  overflow:auto;
+}
+
+/*Remove undrline in link*/
+#TOC a{
+  text-decoration: none;
+  /*color: #428bca;*/
+  color: #21759b;
+}
+
+/*Remove Bullets*/
+#TOC li {
+    list-style:none;
+    background-image:none;
+    background-repeat:none;
+    background-position:0;
+}
+
+body {
+  max-width: 800px;
+  margin: auto;
+  margin-left:290px;
+  line-height: 20px;
+}
+
+/*Center the titles*/
+h1.title, h3.subtitle, h4.author, h4.date {
+text-align: center;
+}
+
+/*Change title colors*/
+h1, h2, h3, h4 {
+color: rgb(23, 57, 119);
+}
+
+/*Change background color of code blocks*/
+pre.sourceCode.r {
+  background: #eee;
+  /*overflow: scroll;*/
+  /*word-break: break-all;*/
+  word-wrap: break-word;
+}
+
+
+table {
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  margin:auto; /*Center the table*/
+}
+
+
+caption {
+  text-align: center;
+  color: silver;
+  text-transform: uppercase;
+  padding: 2px;
+}
+
+thead {
+  background: SteelBlue;
+  color: white;
+}
+
+th,
+td {
+  padding: 2px 5px;
+}
+
+tbody tr:nth-child(even) {
+  background: WhiteSmoke;
+}
+
+tbody tr td {
+  font-family: monospace;
+  text-align:center;
+}
+
+tfoot {
+  background: SeaGreen;
+  color: white;
+  text-align: right;
+}
+
+tfoot tr th:last-child {
+  font-family: monospace;
+}

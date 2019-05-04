@@ -1,0 +1,11 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^revdep$
+^README\.Rmd$
+^README-.*\.png$
+^cran-comments\.md$
+^CONDUCT\.md$
+^\.travis\.yml$
+^codecov\.yml$
+^CODE_OF_CONDUCT\.md$
+^CRAN-RELEASE$
