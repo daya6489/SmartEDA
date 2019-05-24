@@ -19,12 +19,6 @@ The SmartEDA R package has four unique functionalities as
 
 <img src="man/figures/smarteda_funtions.png?sanitize=true&raw=true"/>
 
-## Comparison with other packages
-
-Below compares the SmartEDA package with other similar packages available in CRAN for exploratory data analysis
-
-<img src="man/figures/SmartEDA_comp.png?sanitize=true&raw=true"/>
-
 ## Installation
 
 The package can be installed directly from CRAN.
