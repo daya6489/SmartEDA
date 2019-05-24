@@ -172,9 +172,8 @@ paged_table(et4)
 **Variable importance based on Information value**
 
 ```{r ed3.91,warning=FALSE,eval=T,fig.align='center',fig.height=7,fig.width=7}
-varimp <- ExpCatStat(Carseats,Target="Urban",result = "Stat",clim=10,nlim=5,bins=10,Pclass="Yes",plot=TRUE,top=10,Round=2)
+varimp <- ExpCatStat(data,Target=Target,result = "Stat",clim=10,nlim=5,Pclass=Rc,bins=10,plot=TRUE,top=30,Round=2)
 ```
-
 
 ### 5. Distributions of categorical variables
 Graphical representation of all categorical variables

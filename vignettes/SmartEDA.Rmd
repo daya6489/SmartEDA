@@ -1,7 +1,7 @@
 ---
 title: "Summarize and Explore the Data"
 subtitle: "R package that automates most of exploratory analyses tasks in modeling"
-author: "Dayananda Ubrangala, Kiran R, Ravi Prasad Kondapalli"
+author: "Dayananda Ubrangala, Kiran R, Ravi Prasad Kondapalli, Sayan Putatunda"
 date: "`r Sys.Date()`"
 output: 
   rmarkdown::html_vignette:
