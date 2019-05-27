@@ -5,10 +5,10 @@
 
 ---
 
-## Background
+# Background
 In a quality statistical data analysis the initial step has to be exploratory. Exploratory data analysis begins with the univariate exploratory analyis - examining the variable one at a time. Next comes bivariate analysis followed by multivariate analyis. SmartEDA package helps in getting the complete exploratory data analysis just by running the function instead of writing lengthy r code.
 
-## Functionalities of SmartEDA
+# Functionalities of SmartEDA
 
 The SmartEDA R package has four unique functionalities as
 
@@ -17,9 +17,10 @@ The SmartEDA R package has four unique functionalities as
 * Custom table
 * HTML EDA report
 
-<img src="man/figures/smarteda_funtions.png?sanitize=true&raw=true"/>
+![SmartEDA](https://github.com/daya6489/SmartEDA/man/figures/smarteda_funtions.png)
 
-## Installation
+
+# Installation
 
 The package can be installed directly from CRAN.
 
@@ -34,9 +35,9 @@ install.packages("devtools")
 devtools::install_github("daya6489/SmartEDA")
 ```
 
-## Example
+# Example
 
-#### Data
+## Data
 In this vignette, we will be using a simulated data set containing sales of child car seats at 400 different stores. 
 
 Data Source [ISLR package](https://www.rdocumentation.org/packages/ISLR/versions/1.2/topics/Carseats).
