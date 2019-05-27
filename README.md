@@ -17,7 +17,7 @@ The SmartEDA R package has four unique functionalities as
 * Custom table
 * HTML EDA report
 
-![SmartEDA](https://github.com/daya6489/SmartEDA/man/figures/smarteda_funtions.png)
+![SmartEDA](https://github.com/daya6489/SmartEDA/blob/master/man/figures/smarteda_funtions.PNG)
 
 
 # Installation
