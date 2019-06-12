@@ -20,6 +20,9 @@ The SmartEDA R package has four unique functionalities as
 ![SmartEDA](https://github.com/daya6489/SmartEDA/blob/master/man/figures/smarteda_funtions.PNG)
 
 
+# Journal of Open Source Software Article
+An article describing SmartEDA pacakge for exploratory data analysis approach has been published in [arxiv](https://arxiv.org/pdf/1903.04754.pdf) and currently it is under review at The Journal of Open Source Software. Please cite the paper if you use SmartEDA in your work!
+
 # Installation
 
 The package can be installed directly from CRAN.
@@ -28,11 +31,11 @@ The package can be installed directly from CRAN.
 install.packages("SmartEDA")
 ```
 
-You can install SmartEDA from github with:
+You can install the latest development verion of the [SmartEDA](https://github.com/daya6489/SmartEDA) from github with:
 	
 ```R
 install.packages("devtools")
-devtools::install_github("daya6489/SmartEDA")
+devtools::install_github("daya6489/SmartEDA",ref = "develop")
 ```
 
 # Example
@@ -111,6 +114,11 @@ ExpNumViz(mtcars,gp="carb",type=3,nlim=25,fname = file.path(tempdir(),"Mtcars4")
 ## Variable importance graph using information values
   ExpCatStat(Carseats,Target="Urban",result="Stat",Pclass="Yes",plot=TURE,top=20,Round=2)
 ```
+## Variable importance based on Information value
+
+```R
+  ExpCatStat(Carseats,Target="Urban",result = "Stat",clim=10,nlim=5,bins=10,Pclass="Yes",plot=TRUE,top=10,Round=2)
+```
 
 ## Create HTML EDA report
 Create a exploratory data analysis report in HTML format
@@ -118,6 +126,30 @@ Create a exploratory data analysis report in HTML format
 ```R
 	ExpReport(Carseats,Target="Urban",label=NULL,op_file="test.html",op_dir=getwd(),sc=2,sn=2,Rc="Yes")
 ```
+
+## Quantile-quantile plot for numeric variables
+
+```R
+	ExpOutQQ(CData,nlim=10,fname=NULL,Page=c(2,2),sample=4)
+```
+
+## Parallel Co-ordinate plots
+
+```R
+## Defualt ExpParcoord funciton
+	ExpParcoord(CData,Group=NULL,Stsize=NULL,Nvar=c("Price","Income","Advertising","Population","Age","Education"))
+## With Stratified rows and selected columns only
+  ExpParcoord(CData,Group="ShelveLoc",Stsize=c(10,15,20),Nvar=c("Price","Income"),Cvar=c("Urban","US"))
+## Without stratification
+  ExpParcoord(CData,Group="ShelveLoc",Nvar=c("Price","Income"),Cvar=c("Urban","US"),scale=NULL)
+## Scale change  
+  ExpParcoord(CData,Group="US",Nvar=c("Price","Income"),Cvar=c("ShelveLoc"),scale="std")
+## Selected numeric variables
+  ExpParcoord(CData,Group="ShelveLoc",Stsize=c(10,15,20),Nvar=c("Price","Income","Advertising","Population","Age","Education"))
+## Selected categorical variables
+  ExpParcoord(CData,Group="US",Stsize=c(15,50),Cvar=c("ShelveLoc","Urban"))
+```
+
 
 ## Exploratory analysis - Custom tables, summary statistics
 Descriptive summary on all input variables for each level/combination of group variable. Also while running the analysis we can filter row/cases of the data. 
@@ -141,3 +173,6 @@ Descriptive summary on all input variables for each level/combination of group v
 	ExpCustomStat(Carseats,Cvar = c("Urban","US"), Nvar=c("Population","Sales","CompPrice"), stat = c('Count','Prop','mean','sum','var','min','max'), filt=c("ShelveLoc=='Good'^Urban=='Yes'^Price>=150"))
 ```
 
+## Articles
+
+See [article wiki page](https://github.com/daya6489/SmartEDA/wiki/Articles).

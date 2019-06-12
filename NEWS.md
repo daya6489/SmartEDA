@@ -1,3 +1,9 @@
+### SmartEDA 0.3.2
+#### Enhancements
+* Updated 'README.md' file
+* Fixed a typo error in `ExpNumStat` - changed skwenwss to skewness
+
+
 ### SmartEDA 0.3.1
 #### Enhancements
 * Added 'bins', 'plot', 'round' and 'top' options to plot bar graph in `ExpCatStat`

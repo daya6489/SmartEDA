@@ -107,7 +107,7 @@ ExpNumStat = function(data,by=NULL,gp=NULL,Qnt=NULL,Nlim=10,MesofShape=2,Outlier
                 CV = round(sd(x,na.rm = T)/mean(x,na.rm = T),r),
                 IQR = round(IQR(x,na.rm = T),r))
     Skw_kurt <- c(
-      Skweness = round(ExpSkew(x,type="moment"),r),
+      Skewness = round(ExpSkew(x,type="moment"),r),
       Kurtosis = round(ExpKurtosis(x,type="excess"),r)
       # MesofShape= ""
     )
