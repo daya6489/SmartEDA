@@ -1,8 +1,11 @@
 Package: SmartEDA
 Type: Package
 Title: Summarize and Explore the Data
-Version: 0.3.2
-Author: Dayanand Ubrangala; Kiran R; Ravi Prasad Kondapalli; Sayan Putatunda
+Version: 0.3.1
+Authors@R: c(person("Dayanand", "Ubrangala", role = c("aut", "cre"), email = "daya6489@gmail.com"),
+             person("Kiran", "R", role = "aut"),
+             person("Ravi", "Prasad Kondapalli", role = "ctb"),
+             person("Sayan", "Putatunda", role = "ctb"))
 Maintainer: Dayanand Ubrangala<daya6489@gmail.com>
 Depends: R (>= 3.3.0)
 Imports: ggplot2(>= 2.2.1),sampling(>= 2.8),scales(>= 0.5.0),rmarkdown(>= 1.9),ISLR(>= 1.2),data.table(>= 1.10.4-3),gridExtra(>= 2.3),GGally(>= 1.4.0)
