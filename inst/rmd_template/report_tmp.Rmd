@@ -9,6 +9,7 @@ params:
   data: data
   Target: Target
   label: label
+  theme: theme
   sc: sc
   sn: sn
   Rc: Rc
@@ -101,28 +102,36 @@ ExpOutQQ(data,nlim=4,fname=NULL,Page=c(2,2),sample=sn)
 Density plot for all numerical variables
 
 ```{r snv2,warning=FALSE,eval=T,include=T,fig.align='center',fig.height=10,fig.width=10}
-ExpNumViz(data,gp=NULL,nlim=5,fname=NULL,col=NULL,Page=c(2,2),sample=sn)
+ExpNumViz(data,target=NULL,nlim=10,fname=NULL,col=NULL,theme=theme,Page=c(2,2),sample=sn)
 ```
 
-#### Scatter plot for all Numeric variables vs Continuous dependent variable
+#### Scatter plot for all Numeric variables
 Scatter plot between all numeric variables and target variable **`r Target `**.
 This plot help to examine how well a target variable is correlated with list of dependent variables in the data set.
+
+```{r snv223,warning=FALSE,eval=T,include=T,fig.align='center',fig.height=10,fig.width=10}
+ExpNumViz(data,target=NULL,nlim=5,Page=c(2,1),theme=theme,sample=sn,scatter=TRUE)
+```
+
+
+#### Correlation between dependent variable vs Independent variables
 
 Dependent variable is **`r Target `** (continuous). 
 
 ```{r snv1,warning=FALSE,eval=T,include=T,fig.align='center',fig.height=10,fig.width=10}
-ExpNumViz(data,gp=Target,nlim=5,fname=NULL,col=NULL,Page=c(2,2),sample=sn)
+ExpNumViz(data,target=Target,nlim=5,fname=NULL,col=NULL,theme=theme,Page=c(2,2),sample=sn)
 ```
 
-#### Correlation between Target and Independent variables
+** Correlation summary table
+
 ```{r eda_400, eval=T,include=F}
-snv_22 = ExpNumStat(data,by="GA",gp=Target,Qnt=NULL,MesofShape=2,Outlier=FALSE,round=2,dcast=T,val="cor")
+snv_22 = ExpNumStat(data,by="GA",gp=Target,MesofShape=2,Outlier=FALSE,round=2,dcast=T,val="cor")
 rownames(snv_22)<-NULL
 
 ```
 
 ```{r eda_400.1, warning=FALSE,eval=F,include=T}
-ExpNumStat(data,by="GA",gp=Target,Qnt=NULL,MesofShape=2,Outlier=FALSE,round=2,dcast=T,val="cor")
+ExpNumStat(data,by="GA",gp=Target,MesofShape=2,Outlier=FALSE,round=2,dcast=T,val="cor")
 ```
 
 ```{r eda_400.2,warning=FALSE,eval=T,render=snv_22,echo=F}
@@ -133,18 +142,18 @@ paged_table(snv_22)
 Summary of categorical variables
 
 ```{r eda_4, eval=T,include=F}
-et1 <- ExpCTable(data,Target=NULL,margin=1,clim=10,nlim=NULL,round=2,bin=NULL,per=T)
+et1 <- ExpCTable(data,Target=NULL,margin=1,clim=10,nlim=5,round=2,per=T)
 rownames(et1)<-NULL
 ```
 
 ```{r eda_41, eval=T,include=F}
-et11 <- ExpCTable(data,Target=Target,margin=1,clim=10,nlim=NULL,round=2,bin=4,per=T)
+et11 <- ExpCTable(data,Target=Target,margin=1,clim=10,nlim=5,round=2,bin=4,per=T)
 rownames(et11)<-NULL
 ```
   * frequency for all categorical independent variables
 
 ```{r e4.1, warning=FALSE,eval=F,include=T}
-ExpCTable(data,margin=1,clim=10,nlim=NULL,round=2,bin=NULL,per=T)
+ExpCTable(data,margin=1,clim=10,nlim=5,round=2,per=T)
 ```
 
 ```{r e4.1.1,warning=FALSE,eval=T,render=et1,echo=F}
@@ -155,7 +164,7 @@ paged_table(et1)
 
 ```{r e4.2, warning=FALSE,eval=F,include=T}
 ##bin=4, descretized 4 categories based on quantiles
-ExpCTable(data,Target=Target,margin=1,clim=10,nlim=NULL,round=2,bin=4,per=T)
+ExpCTable(data,Target=Target,margin=1,clim=10,nlim=5,round=2,bin=4,per=T)
 ```
 
 ```{r e4.2.1,warning=FALSE,eval=T,render=et11,echo=F}
@@ -170,5 +179,5 @@ Graphical representation of all Categorical variables
 Bar plot with vertical or horizontal bars for all categorical variables
 
 ```{r bp1,warning=FALSE,eval=T,include=T,fig.align='center',fig.height=10,fig.width=10}
-ExpCatViz(data,target=NULL,clim=10,margin=2,Page = c(2,2),sample=sc)
+ExpCatViz(data,clim=10,margin=2,theme=theme,Page = c(2,2),sample=sc)
 ```

@@ -28,7 +28,7 @@ library(ggplot2)
 ```
 
 
-## Introduction
+## 1. Introduction
 
 
 The document introduces the **SmartEDA** package and how it can help you to build exploratory data analysis.
@@ -62,7 +62,7 @@ Science is the eye of everyone, one who hasnt got it, is like a blind ||
 To summarize, SmartEDA package helps in getting the complete exploratory data analysis just by running the function instead of writing lengthy r code.
 
 
-## Data
+## 2. Data
 
 In this vignette, we will be using a simulated data set containing sales of child car seats at 400 different stores. 
 
@@ -79,7 +79,7 @@ library("SmartEDA")
 Carseats= ISLR::Carseats
 ```
 
-### Overview of the data
+### 2.1 Overview of the data
 Understanding the dimensions of the dataset, variable names, overall missing summary and data types of each variables
 
 ```{r od_1,warning=FALSE,eval=F,include=T}
@@ -107,16 +107,16 @@ kable(ovw_tab2, "html")
 ```
 
 
-## Exploratory data analysis (EDA)
+## 3. Exploratory data analysis (EDA)
 This function shows the EDA output for 3 different cases
 
 1.	**Target variable is not defined**
 2.	**Target variable is continuous**
 3.	**Target variable is categorical**
 
-### Example for case 1: Target variable is not defined
+### 3.1 Example for case 1: Target variable is not defined
 
-#### 1.1 Summary of numerical variables
+#### 3.1.1 Summary of numerical variables
 Summary of all numerical variables 
 ```{r c1.1,warning=FALSE,eval=T,include=F}
 ec1 = ExpNumStat(Carseats,by="A",gp=NULL,Qnt=seq(0,1,0.1),MesofShape=2,Outlier=TRUE,round=2,Nlim=3)
@@ -132,18 +132,18 @@ ExpNumStat(Carseats,by="A",gp=NULL,Qnt=seq(0,1,0.1),MesofShape=2,Outlier=TRUE,ro
 paged_table(ec1)
 ```
 
-#### 1.2 Distributions of numerical variables
+#### 3.1.2 Distributions of numerical variables
 Graphical representation of all numeric features
 
   * Density plot (Univariate)
 
 ```{r c1.2 ,warning=FALSE,eval=T,include=T,fig.align='center',fig.height=7,fig.width=7}
 # Note: Variable excluded (if unique value of variable which is less than or eaual to 10 [nlim=10])
-plot1 <- ExpNumViz(Carseats,gp=NULL,nlim=10,Page=c(2,2),sample=8,theme=)
+plot1 <- ExpNumViz(Carseats,target=NULL,nlim=10,Page=c(2,2),sample=4)
 plot1[[1]]
 ```
 
-#### 1.3. Summary of categorical variables
+#### 3.1.3. Summary of categorical variables
 
 ```{r ec13, eval=T,include=F}
 et1 <- ExpCTable(Carseats,Target=NULL,margin=1,clim=10,nlim=5,round=2,bin=NULL,per=T)
@@ -153,7 +153,7 @@ rownames(et1)<-NULL
   * frequency for all categorical independent variables
 
 ```{r ec14, warning=FALSE,eval=F,include=T}
-ExpCTable(Carseats,Target=NULL,margin=1,clim=10,nlim=NULL,round=2,bin=NULL,per=T)
+ExpCTable(Carseats,Target=NULL,margin=1,clim=10,nlim=3,round=2,bin=NULL,per=T)
 ```
 
 ```{r ec14.1,warning=FALSE,eval=T,render=et1,echo=F}
@@ -161,7 +161,7 @@ kable(et1,"html")
 ```
 >*`NA` is Not Applicable*
 
-#### 1.4. Distributions of categorical variables
+#### 3.1.4. Distributions of categorical variables
 
   * Bar plots for all categorical variables
 
@@ -170,9 +170,9 @@ plot2 <- ExpCatViz(Carseats,target=NULL,col ="slateblue4",clim=10,margin=2,Page 
 plot2[[1]]
 ```
 
-### Example for case 2: Target variable is continuous
+### 3.2 Example for case 2: Target variable is continuous
 
-#### 2.1. Target variable 
+#### 3.2.1. Target variable 
 Summary of continuous dependent variable
 
   1. Variable name - **Price**
@@ -182,7 +182,7 @@ Summary of continuous dependent variable
 summary(Carseats[,"Price"])
 ```
 
-#### 2.2 Summary of numerical variables
+#### 3.2.2 Summary of numerical variables
 Summary statistics when dependent variable is continuous **Price**. 
 ```{r con_1,warning=FALSE,eval=T,include=F}
 cpp = ExpNumStat(Carseats,by="A",gp="Price",Qnt=seq(0,1,0.1),MesofShape=1,Outlier=TRUE,round=2)
@@ -199,10 +199,10 @@ paged_table(cpp)
 
 >*If Target variable is continuous, summary statistics will add the correlation column (Correlation between Target variable vs all independet variables)*
 
-#### 2.3 Distributions of numerical variables
+#### 3.2.3 Distributions of numerical variables
 Graphical representation of all numeric variables
 
-  * Scatter plot (Bivariate)
+  * Scatter plot (Bivariate) - with continuous dependent variable
 
 Scatter plot between all numeric variables and target variable **Price**.
 This plot help to examine how well a target variable is correlated with dependent variables.
@@ -212,31 +212,40 @@ Dependent variable is **Price** (continuous).
 ```{r snv1,warning=FALSE,eval=T,include=T,fig.align='center',fig.height=7,fig.width=7}
 #Note: sample=8 means randomly selected 8 scatter plots
 #Note: nlim=4 means included numeric variable with unique value is more than 4
-plot3 <- ExpNumViz(Carseats,gp="Price",nlim=4,fname=NULL,col="red",Page=c(2,2),sample=8)
+plot3 <- ExpNumViz(Carseats,target="Price",nlim=4,scatter=FALSE,fname=NULL,col="green",Page=c(2,2),sample=8)
 plot3[[1]]
 ```
 
-#### 2.4. Summary of categorical variables
+  * Scatter plot (Bivariate) - between all the numerical variables
+
+```{r snv1_1,warning=FALSE,eval=T,include=T,fig.align='center',fig.height=7,fig.width=7}
+#Note: sample=8 means randomly selected 8 scatter plots
+#Note: nlim=4 means included numeric variable with unique value is more than 4
+plot31 <- ExpNumViz(Carseats,target="US",nlim=4,scatter=TRUE,fname=NULL,Page=c(2,1),sample=4)
+plot31[[1]]
+```
+
+#### 3.2.4. Summary of categorical variables
 Summary of categorical variables
 
 ```{r eda_41, eval=T,include=F}
-et11 <- ExpCTable(Carseats,Target="Price",margin=1,clim=10,nlim=NULL,round=2,bin=4,per=F)
+et11 <- ExpCTable(Carseats,Target="Price",margin=1,clim=10,round=2,bin=4,per=F)
 rownames(et11)<-NULL
 ```
  * frequency for all categorical independent variables by descretized **Price** 
 
 ```{r e4.2, warning=FALSE,eval=F,include=T}
 ##bin=4, descretized 4 categories based on quantiles
-ExpCTable(Carseats,Target="Price",margin=1,clim=10,nlim=NULL,round=2,bin=4,per=F)
+ExpCTable(Carseats,Target="Price",margin=1,clim=10,round=2,bin=4,per=F)
 ```
 
 ```{r e4.2.1,warning=FALSE,eval=T,render=et11,echo=F}
 paged_table(et11)
 ```
 
-### Example for case 3: Target variable is categorical
+### 3.3 Example for case 3: Target variable is categorical
 
-#### 3.1. Summary of categorical dependent variable
+#### 3.3.1. Summary of categorical dependent variable
 
   1. Variable name - **Urban**
   2. Variable description - **Whether the store is in an urban or rural location**
@@ -252,7 +261,7 @@ rownames(tab_tar)<-NULL
 kable(tab_tar, "html")
 ```
 
-#### 3.2 Summary of numerical variables
+#### 3.3.2 Summary of numerical variables
 Summary of all numeric variables 
 ```{r snc1,warning=FALSE,eval=T,include=F}
 snc = ExpNumStat(Carseats,by="GA",gp="Urban",Qnt=seq(0,1,0.1),MesofShape=2,Outlier=TRUE,round=2)
@@ -267,21 +276,21 @@ ExpNumStat(Carseats,by="GA",gp="Urban",Qnt=seq(0,1,0.1),MesofShape=2,Outlier=TRU
 paged_table(snc)
 ```
 
-#### 3.3 Distributions of Numerical variables
+#### 3.3.3 Distributions of Numerical variables
 
 * Box plots for all numerical variables vs categorical dependent variable - Bivariate comparision only with categories
 
 Boxplot for all the numeric attributes by each category of **Urban**
 
 ```{r bp3.1,warning=FALSE,eval=T,include=T,fig.align='center',fig.height=7,fig.width=7}
-plot4 <- ExpNumViz(Carseats,gp="Urban",type=1,nlim=NULL,fname=NULL,col=c("darkgreen","springgreen3","springgreen1"),Page=c(2,2),sample=8)
+plot4 <- ExpNumViz(Carseats,target="Urban",type=1,nlim=3,fname=NULL,col=c("darkgreen","springgreen3","springgreen1"),Page=c(2,2),sample=8)
 plot4[[1]]
 ```
 
-#### 3.4 Summary of categorical variables
+#### 3.3.4 Summary of categorical variables
 
 ```{r ed3.3, eval=T,include=F}
-et100 <- ExpCTable(Carseats,Target="Urban",margin=1,clim=10,nlim=NULL,round=2,bin=NULL,per=F)
+et100 <- ExpCTable(Carseats,Target="Urban",margin=1,clim=10,nlim=3,round=2,bin=NULL,per=F)
 rownames(et100)<-NULL
 
 et4 <- ExpCatStat(Carseats,Target="Urban",result = "Stat",clim=3,nlim=3,bins=10,Pclass="Yes",plot=FALSE,top=20,Round=2)
@@ -298,7 +307,7 @@ et5 <- et5[1:15,]
   * Custom tables between all categorical independent variables and target variable **Urban** 
 
 ```{r ed3.4, warning=FALSE,eval=F,include=T}
-ExpCTable(Carseats,Target="Urban",margin=1,clim=10,nlim=NULL,round=2,bin=NULL,per=F)
+ExpCTable(Carseats,Target="Urban",margin=1,clim=10,nlim=3,round=2,bin=NULL,per=F)
 ```
 
 ```{r ed3.5,warning=FALSE,eval=T,render=et100,echo=F,out.height=8,out.width=8}
@@ -333,7 +342,7 @@ varimp <- ExpCatStat(Carseats,Target="Urban",result = "Stat",clim=10,nlim=5,bins
 ```
 
 
-#### 3.5. Distributions of categorical variables
+#### 3.3.5. Distributions of categorical variables
 
 Stacked bar plot with vertical or horizontal bars for all categorical variables 
 
@@ -342,11 +351,11 @@ plot5 <- ExpCatViz(Carseats,target="Urban",fname=NULL,clim=5,col=c("slateblue4",
 plot5[[1]]
 ```
 
-## Quantile-quantile plot for numeric variables
+## 4. Quantile-quantile plot for numeric variables
 
 Function definition:
 ```
-ExpOutQQ (data,nlim=NULL,fname=NULL,Page=NULL,sample=NULL)
+ExpOutQQ (data,nlim=3,fname=NULL,Page=NULL,sample=NULL)
 data    : Input dataframe or data.table
 nlim    : numeric variable limit
 fname   : output file name (Output will be in PDF format)
@@ -361,7 +370,7 @@ qqp <- ExpOutQQ(CData,nlim=10,fname=NULL,Page=c(2,2),sample=4)
 qqp[[1]]
 ```
 
-## Parallel Co-ordinate plots
+## 5. Parallel Co-ordinate plots
 
 Function definition:
 ```
@@ -374,24 +383,24 @@ Cvar    : vector of categorical variables, default it will consider all the cate
 scale   : scale the variables in the parallel coordinate plot[Default normailized with minimum of the variable is zero and maximum of the variable is one]
 ```
 
-### Defualt ExpParcoord funciton
+### 5.1 Defualt ExpParcoord funciton
 ```{r,warning=FALSE,eval=T,include=T,fig.align='center',fig.height=3,fig.width=7}
 ExpParcoord(CData,Group=NULL,Stsize=NULL,Nvar=c("Price","Income","Advertising","Population","Age","Education"))
 ```
 
-### With Stratified rows and selected columns only
+### 5.2 With Stratified rows and selected columns only
 ```{r,warning=FALSE,eval=T,include=T,fig.align='center',fig.height=3,fig.width=7}
 ExpParcoord(CData,Group="ShelveLoc",Stsize=c(10,15,20),Nvar=c("Price","Income"),Cvar=c("Urban","US"))
 
 ```
 
-### Without stratification
+### 5.3 Without stratification
 ```{r,warning=FALSE,eval=T,include=T,fig.align='center',fig.height=3,fig.width=7}
 ExpParcoord(CData,Group="ShelveLoc",Nvar=c("Price","Income"),Cvar=c("Urban","US"),scale=NULL)
 
 ```
 
-### Scale change
+### 5.4 Scale change
 
  `std: univariately, subtract mean and divide by standard deviation`
  
@@ -400,18 +409,18 @@ ExpParcoord(CData,Group="US",Nvar=c("Price","Income"),Cvar=c("ShelveLoc"),scale=
 
 ```
 
-### Selected numeric variables
+### 5.5 Selected numeric variables
 ```{r,warning=FALSE,eval=T,include=T,fig.align='center',fig.height=3,fig.width=7}
 ExpParcoord(CData,Group="ShelveLoc",Stsize=c(10,15,20),Nvar=c("Price","Income","Advertising","Population","Age","Education"))
 ```
 
-### Selected categorical variables
+### 5.6 Selected categorical variables
 ```{r,warning=FALSE,eval=T,include=T,fig.align='center',fig.height=3,fig.width=7}
 ExpParcoord(CData,Group="US",Stsize=c(15,50),Cvar=c("ShelveLoc","Urban"))
 
 ```
 
-## Customized Summary Statistics
+## 6. Customized Summary Statistics
 
 Used 'data.table' package functions 
 
@@ -460,9 +469,3 @@ ExpCustomStat(Carseats,Cvar=c("Urban","ShelveLoc"),Nvar=c("Age","Price","Adverti
 ```{r dud31,warning=FALSE,eval=T,render=e1du2,echo=F,out.height=8,out.width=8}
 kable(e1du2,"html")
 ```
-
-
-
-
-
-

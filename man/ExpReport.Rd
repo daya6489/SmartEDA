@@ -4,8 +4,9 @@
 \alias{ExpReport}
 \title{Function to create HTML EDA report}
 \usage{
-ExpReport(data,Template=NULL,Target=NULL,label=NULL,op_file=NULL,
-op_dir=getwd(),sc=NULL,sn=NULL,Rc=NULL)
+ExpReport(data, Template = NULL, Target = NULL, label = NULL,
+  theme = "Default", op_file = NULL, op_dir = getwd(), sc = NULL,
+  sn = NULL, Rc = NULL)
 }
 \arguments{
 \item{data}{a data frame}
@@ -15,6 +16,8 @@ op_dir=getwd(),sc=NULL,sn=NULL,Rc=NULL)
 \item{Target}{dependent variable. If there is no defined target variable then keep as it is NULL.}
 
 \item{label}{target variable descriptions, not a mandatory field}
+
+\item{theme}{customized ggplot theme (default SmartEDA theme) (for Some extra themes use Package: ggthemes)}
 
 \item{op_file}{output file name (.html)}
 
@@ -31,14 +34,28 @@ Create a exploratory data analysis report in HTML format
 }
 \details{
 The "ExpReport" function will generate a HTML report for any R data frames.
-If the markdown template is ready, we can use that template to generate the HTML report else
-It will generate three different types of HTML report based on the Target field
+}
+\note{
+If the markdown template is ready, you can use that template to generate the HTML report
 
-IF Target = NULL, means there is no defined dependent varaible then it will genreate general EDA report at overall level
-
-IF Target = continuous, then it will genreate EDA report including univariate and multivarite summary statistics with correlation.
-
-IF Target = categorical, then it will genreate EDA report including univariate and multivarite summary statistics with chi-square, Information values.
+ExpReport will generate three different types of HTML report based on the Target field
+\itemize{
+\item IF Target = NULL, means there is no defined dependent varaible then it will genreate general EDA report at overall level
+\item IF Target = continuous, then it will genreate EDA report including univariate and multivarite summary statistics with correlation.
+\item IF Target = categorical, then it will genreate EDA report including univariate and multivarite summary statistics with chi-square, Information values.
+}
+}
+\examples{
+## Creating HTML report
+\dontrun{
+ library (ggthemes)
+ # Create report where target variable is categorical
+ ExpReport(mtcars,Target="gear",label="car",theme=theme_economist(),op_file="Samp1.html",Rc=3)
+ # Create report where target variable is continuous
+ ExpReport(mtcars,Target="wt",label="car",theme="Default",op_file="Samp2.html")
+ # Create report where no target variable defined
+ ExpReport(mtcars,Target=NULL,label="car",theme=theme_foundation(),op_file="Samp3.html")
+}
 }
 \seealso{
 \code{\link[DataExplorer:create_report]{create_report}}

@@ -10,6 +10,7 @@ params:
   data: data
   Target: Target
   label: label
+  theme: theme
   sc: sc
   sn: sn
   Rc: Rc
@@ -99,7 +100,8 @@ paged_table(snv_2)
 
   * Quantile-quantile plot(Univariate)
   * Density plot (Univariate)
-  * Box plot (univariate and Bivariate)
+  * Box plot (Univariate and Bivariate)
+  * Scatter plot (Bivariate)
 
 #### Quantile-quantile plot for Numerical variables - Univariate  
 Quantile-quantile plot for all Numerical variables
@@ -112,14 +114,20 @@ ExpOutQQ(data,nlim=4,fname=NULL,Page=c(2,2),sample=sn)
 Density plot for all Numerical variables
 
 ```{r snv2,warning=FALSE,eval=T,include=T,fig.align='center',fig.height=10,fig.width=10}
-ExpNumViz(data,gp=NULL,type=1,nlim=NULL,fname=NULL,col=NULL,Page=c(2,2),sample=sn)
+ExpNumViz(data,target=NULL,type=1,Page=c(2,2),theme=theme,sample=sn)
+```
+
+#### Scatter plot for all numeric features - Bivariate analysis
+
+```{r snv4223,warning=FALSE,eval=T,include=T,fig.align='center',fig.height=10,fig.width=10}
+ExpNumViz(data,target=Target,Page=c(2,1),theme=theme,sample=sn,scatter=TRUE)
 ```
 
 #### Box plots for all numeric features vs categorical dependent variable - Bivariate comparision only with categories
 Boxplot for all the numeric attributes by each category of **`r Target `**
 
 ```{r snv4,warning=FALSE,eval=T,include=T,fig.align='center',fig.height=10,fig.width=10}
-ExpNumViz(data,gp=Target,type=2,nlim=NULL,fname=NULL,col=NULL,Page=c(2,2),sample=sn)
+ExpNumViz(data,target=Target,type=2,theme=theme,Page=c(2,2),sample=sn)
 ```
 
 ### 4. Summary of categorical variables
@@ -127,7 +135,7 @@ Summary of categorical variable
 
 ```{r eda_4, eval=T,include=F}
 if(is.null(Rc)) {Rc=as.character(paste0(unique(data[,Target])[1]))}
-et1 <- ExpCTable(data,Target=Target,margin=1,clim=10,nlim=NULL,round=2,bin=NULL,per=F)
+et1 <- ExpCTable(data,Target=Target,margin=1,clim=10,nlim=5,round=2,bin=NULL,per=F)
 rownames(et1)<-NULL
 
 et4 <- ExpCatStat(data,Target=Target,result = "Stat",clim=10,nlim=5,bins=10,Pclass=Rc,plot=FALSE,top=20,Round=2)
@@ -142,11 +150,14 @@ rownames(et5)<-NULL
   * Custom tables between all categorical independent variables and traget variable **`r Target `** 
 
 ```{r e4.1, warning=FALSE,eval=F,include=T}
-ExpCTable(data,Target=Target,margin=1,clim=10,nlim=NULL,round=2,bin=NULL,per=F)
+ExpCTable(data,Target=Target,margin=1,clim=10,nlim=5,round=2,bin=NULL,per=F)
 ```
 
 ```{r e4.1.1,warning=FALSE,eval=T,render=et1,echo=F}
-paged_table(et1)
+if(!is.null(dim(et1))){
+paged_table(et1)  
+}
+
 ```
 
 **Information Value**
@@ -186,11 +197,11 @@ Graphical representation of all categorical variables
   * Bar plot with vertical or horizontal bars for all categorical variables 
 
 ```{r bp1,warning=FALSE,eval=T,include=T,fig.align='center',fig.height=10,fig.width=10}
-ExpCatViz(data,target=NULL,fname=NULL,clim=10,margin=2,Page = c(2,1),sample=sc)
+ExpCatViz(data,target=NULL,fname=NULL,clim=10,margin=2,theme=theme,Page = c(2,1),sample=sc)
 ```
 
   * Stacked bar plot with vertical or horizontal bars for all categorical variables 
 
 ```{r bp2,warning=FALSE,eval=T,include=T,fig.align='center',fig.height=10,fig.width=10}
-ExpCatViz(data,target=Target,fname=NULL,clim=10,margin=2,Page = c(2,1),sample=sc)
+ExpCatViz(data,target=Target,fname=NULL,clim=10,margin=2,theme=theme,Page = c(2,1),sample=sc)
 ```

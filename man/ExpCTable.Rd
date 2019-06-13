@@ -4,7 +4,8 @@
 \alias{ExpCTable}
 \title{Function to create frequency and custom tables}
 \usage{
-ExpCTable(data,Target=NULL,margin=1,clim=10,nlim=NULL,round=2,bin=NULL,per=FALSE)
+ExpCTable(data, Target = NULL, margin = 1, clim = 10, nlim = 10,
+  round = 2, bin = 3, per = FALSE)
 }
 \arguments{
 \item{data}{dataframe or matrix}
@@ -28,27 +29,23 @@ Frequency tables, Cross tables
 
  Columns description for frequency tables:
 
-  •	Variable – Variable name
-
-  •	Valid – Variable values
-
-  •	Frequency – Frequency
-
-  •	Percent – Relative frequency
-
-  •	CumPercent – Cumulative sum of relative frequency
+\itemize{
+  \item \code{Variable} - Variable name
+  \item \code{Valid} - Variable values
+  \item \code{Frequency} - Frequency
+  \item \code{Percent} - Relative frequency
+  \item \code{CumPercent} - Cumulative sum of relative frequency
+}
 
  Columns description for custom tables:
 
-  •	Variable – Variable name
-
-  •	Category -  Variable values
-
-  •	Count – Number of counts
-
-  •	Per – Percentages
-
-  •	Total – Total count
+\itemize{
+  \item \code{Variable} - Variable name
+  \item \code{Category} - Variable values
+  \item \code{Count} - Number of counts
+  \item \code{Per} - Percentages
+  \item \code{Total} - Total count
+}
 }
 \description{
 this function will automatically select categorical variables and generate frequency or cross tables based on the user inputs. Output includes counts, percentages, row total and column total.

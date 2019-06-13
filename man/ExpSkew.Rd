@@ -4,7 +4,7 @@
 \alias{ExpSkew}
 \title{Measures of Shape - Skewness}
 \usage{
-ExpSkew(x,type)
+ExpSkew(x, type)
 }
 \arguments{
 \item{x}{A numeric object or data.frame}

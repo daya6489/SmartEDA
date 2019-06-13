@@ -1,3 +1,9 @@
+# SmartEDA 0.3.2
+## Enhancements
+* Added 'scatter' option to plot the correlation plot between all the numeric variables in a dataframe `ExpNumViz`
+* Added 'theme' option to customise the graph theme in `ExpReport`
+* Changed input parameter name from 'gp' to 'target' in `ExpNumViz`
+
 # SmartEDA 0.3.1
 ## Enhancements
 * Added 'bins', 'plot', 'round' and 'top' options to plot bar graph in `ExpCatStat`

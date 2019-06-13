@@ -4,8 +4,9 @@
 \alias{ExpNumStat}
 \title{Summary statistics for numerical variables}
 \usage{
-ExpNumStat(data,by=NULL,gp=NULL,Qnt=NULL,Nlim=10,MesofShape=2,
-Outlier=FALSE,round=3,dcast=FALSE,val=NULL)
+ExpNumStat(data, by = "A", gp = NULL, Qnt = NULL, Nlim = 10,
+  MesofShape = 2, Outlier = FALSE, round = 3, dcast = FALSE,
+  val = NULL)
 }
 \arguments{
 \item{data}{dataframe or matrix}
@@ -30,74 +31,57 @@ Outlier=FALSE,round=3,dcast=FALSE,val=NULL)
 }
 \value{
 summary statistics for numeric independent variables
+
+Summary by:
+
+\itemize{
+  \item \code{Only overall level}
+  \item \code{Only group level}
+  \item \code{Both overall and group level}
+}
 }
 \description{
 Function provides summary statistics for all numerical variable. This function automatically scans through each variable and select only numeric/integer variables. Also if we know the target variable, function will generate relationship between target variable and each independent variable.
 }
 \details{
-Summary by – overall
-
-Summary by – group (target variable)
-
-Summary by – overall and group (target variable)
-
 coloumn descriptions
-
-•	Vname – Variable name
-
-•	Group – Target variable
-
-•	TN – Total sample (inculded NA observations)
-
-•	nNeg – Total negative observations
-
-•	nZero – Total zero observations
-
-•	nPos – Total positive observations
-
-•	NegInf – Negative infinite count
-
-•	PosInf – Positive infinite count
-
-•	NA_value – Not Applicable count
-
-•	Per_of_Missing – Percentage of missings
-
-•	Min – minimum value
-
-•	Max – maximum value
-
-•	Mean – average value
-
-•	Median – median value
-
-•	SD – Standard deviation
-
-•	CV – coefficient of variations (SD/mean)*100
-
-•	IQR – Inter quartile range
-
-•	Qnt – Specified quantiles
-
-•	MesofShape – Skewness and Kurtosis
-
-•	Outlier – Number of outliers
-
-•	Cor – Correlation b/w target and independent variables
+\itemize{
+  \item \code{Vname} - Variable name
+  \item \code{Group} - Target variable
+  \item \code{TN} - Total sample (inculded NA observations)
+  \item \code{nNeg} - Total negative observations
+  \item \code{nPos} - Total positive observations
+  \item \code{nZero} - Total zero observations
+  \item \code{NegInf} - Negative infinite count
+  \item \code{PosInf} - Positive infinite count
+  \item \code{NA_value} - Not Applicable count
+  \item \code{Per_of_Missing} - Percentage of missings
+  \item \code{Min} - minimum value
+  \item \code{Max} - maximum value
+  \item \code{Mean} - average value
+  \item \code{Median} - median value
+  \item \code{SD} - Standard deviation
+  \item \code{CV} - coefficient of variations (SD/mean)*100
+  \item \code{IQR} - Inter quartile range
+  \item \code{Qnt} - quantile values
+  \item \code{MesofShape} - Skewness and Kurtosis
+  \item \code{Outlier} - Number of outliers
+  \item \code{Cor} - Correlation b/w target and independent variables
+}
 }
 \examples{
-## Descriptive summary of numeric variables - Summary by Target variables
+# Descriptive summary of numeric variables - Summary by Target variables
 ExpNumStat(mtcars,by="G",gp="gear",Qnt=c(0.1,0.2),MesofShape=2,
-Outlier=TRUE,round=3)
-## Descriptive summary of numeric variables - Summary by Overall
+           Outlier=TRUE,round=3)
+# Descriptive summary of numeric variables - Summary by Overall
 ExpNumStat(mtcars,by="A",gp="gear",Qnt=c(0.1,0.2),MesofShape=2,
-Outlier=TRUE,round=3)
-## Descriptive summary of numeric variables - Summary by Overall and Group
+           Outlier=TRUE,round=3)
+# Descriptive summary of numeric variables - Summary by Overall and Group
 ExpNumStat(mtcars,by="GA",gp="gear",Qnt=seq(0,1,.1),MesofShape=1,
-Outlier=TRUE,round=2)
-## Summary by specific statistics for all numeric variables
+           Outlier=TRUE,round=2)
+# Summary by specific statistics for all numeric variables
 ExpNumStat(mtcars,by="GA",gp="gear",Qnt=c(0.1,0.2),MesofShape=2,
-Outlier=FALSE,round=2,dcast = TRUE,val = "IQR")
+           Outlier=FALSE,round=2,dcast = TRUE,val = "IQR")
 }
 \seealso{
 \code{\link[psych:describe.by]{describe.by}}

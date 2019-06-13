@@ -4,7 +4,7 @@
 \alias{ExpStat}
 \title{Function provides summary statistics for individual categorical predictors}
 \usage{
-ExpStat(X,Y,valueOfGood = NULL)
+ExpStat(X, Y, valueOfGood = NULL)
 }
 \arguments{
 \item{X}{Independent categorical variable.}
@@ -16,23 +16,20 @@ ExpStat(X,Y,valueOfGood = NULL)
 \value{
 The function provides summary statistics like
 
-Unique levels
-
-Chi square statistics
-
-P value
-
-Degrees of freedom
-
-Information value
-
-Predictive class
+\itemize{
+  \item \code{Unique} number of levels
+  \item \code{Chi square} statistics
+  \item \code{P} value
+  \item \code{df} Degrees of freedom
+  \item \code{IV} Information value
+  \item \code{Predictive} class
+}
 }
 \description{
 Provides bivariate summary statistics for all the categorical predictors against target variables. Output includes chi - square value, degrees of freedom, information value, p-value
 }
 \details{
-For a given binary Y variable and X categorical variables, the summary statistics are computed. Summary statistics included Pearson's Chi-squared Test for Count Data, "chisq.test" which performs chi-squared contingency table tests and goodness-of-fit tests. If any NA value present in X or Y variable, which will be considered as NA as in category while computing the contingency table.
+Summary statistics included Pearson's Chi-squared Test for Count Data, "chisq.test" which performs chi-squared contingency table tests and goodness-of-fit tests. If any NA value present in X or Y variable, which will be considered as NA as in category while computing the contingency table.
 
 Also added unique levels for each X categorical variables and degrees of freedom
 }

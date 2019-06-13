@@ -46,7 +46,7 @@ paged_table(ec1)
 
 ## ----c1.2 ,warning=FALSE,eval=T,include=T,fig.align='center',fig.height=7,fig.width=7----
 # Note: Variable excluded (if unique value of variable which is less than or eaual to 10 [nlim=10])
-plot1 <- ExpNumViz(Carseats,gp=NULL,nlim=10,Page=c(2,2),sample=8,theme=)
+plot1 <- ExpNumViz(Carseats,target=NULL,nlim=10,Page=c(2,2),sample=4)
 plot1[[1]]
 
 ## ----ec13, eval=T,include=F----------------------------------------------
@@ -54,7 +54,7 @@ et1 <- ExpCTable(Carseats,Target=NULL,margin=1,clim=10,nlim=5,round=2,bin=NULL,p
 rownames(et1)<-NULL
 
 ## ----ec14, warning=FALSE,eval=F,include=T--------------------------------
-#  ExpCTable(Carseats,Target=NULL,margin=1,clim=10,nlim=NULL,round=2,bin=NULL,per=T)
+#  ExpCTable(Carseats,Target=NULL,margin=1,clim=10,nlim=3,round=2,bin=NULL,per=T)
 
 ## ----ec14.1,warning=FALSE,eval=T,render=et1,echo=F-----------------------
 kable(et1,"html")
@@ -79,16 +79,22 @@ paged_table(cpp)
 ## ----snv1,warning=FALSE,eval=T,include=T,fig.align='center',fig.height=7,fig.width=7----
 #Note: sample=8 means randomly selected 8 scatter plots
 #Note: nlim=4 means included numeric variable with unique value is more than 4
-plot3 <- ExpNumViz(Carseats,gp="Price",nlim=4,fname=NULL,col="red",Page=c(2,2),sample=8)
+plot3 <- ExpNumViz(Carseats,target="Price",nlim=4,scatter=FALSE,fname=NULL,col="green",Page=c(2,2),sample=8)
 plot3[[1]]
 
+## ----snv1_1,warning=FALSE,eval=T,include=T,fig.align='center',fig.height=7,fig.width=7----
+#Note: sample=8 means randomly selected 8 scatter plots
+#Note: nlim=4 means included numeric variable with unique value is more than 4
+plot31 <- ExpNumViz(Carseats,target="US",nlim=4,scatter=TRUE,fname=NULL,Page=c(2,1),sample=4)
+plot31[[1]]
+
 ## ----eda_41, eval=T,include=F--------------------------------------------
-et11 <- ExpCTable(Carseats,Target="Price",margin=1,clim=10,nlim=NULL,round=2,bin=4,per=F)
+et11 <- ExpCTable(Carseats,Target="Price",margin=1,clim=10,round=2,bin=4,per=F)
 rownames(et11)<-NULL
 
 ## ----e4.2, warning=FALSE,eval=F,include=T--------------------------------
 #  ##bin=4, descretized 4 categories based on quantiles
-#  ExpCTable(Carseats,Target="Price",margin=1,clim=10,nlim=NULL,round=2,bin=4,per=F)
+#  ExpCTable(Carseats,Target="Price",margin=1,clim=10,round=2,bin=4,per=F)
 
 ## ----e4.2.1,warning=FALSE,eval=T,render=et11,echo=F----------------------
 paged_table(et11)
@@ -113,11 +119,11 @@ rownames(snc)<-NULL
 paged_table(snc)
 
 ## ----bp3.1,warning=FALSE,eval=T,include=T,fig.align='center',fig.height=7,fig.width=7----
-plot4 <- ExpNumViz(Carseats,gp="Urban",type=1,nlim=NULL,fname=NULL,col=c("darkgreen","springgreen3","springgreen1"),Page=c(2,2),sample=8)
+plot4 <- ExpNumViz(Carseats,target="Urban",type=1,nlim=3,fname=NULL,col=c("darkgreen","springgreen3","springgreen1"),Page=c(2,2),sample=8)
 plot4[[1]]
 
 ## ----ed3.3, eval=T,include=F---------------------------------------------
-et100 <- ExpCTable(Carseats,Target="Urban",margin=1,clim=10,nlim=NULL,round=2,bin=NULL,per=F)
+et100 <- ExpCTable(Carseats,Target="Urban",margin=1,clim=10,nlim=3,round=2,bin=NULL,per=F)
 rownames(et100)<-NULL
 
 et4 <- ExpCatStat(Carseats,Target="Urban",result = "Stat",clim=3,nlim=3,bins=10,Pclass="Yes",plot=FALSE,top=20,Round=2)
@@ -129,7 +135,7 @@ rownames(et5)<-NULL
 et5 <- et5[1:15,]
 
 ## ----ed3.4, warning=FALSE,eval=F,include=T-------------------------------
-#  ExpCTable(Carseats,Target="Urban",margin=1,clim=10,nlim=NULL,round=2,bin=NULL,per=F)
+#  ExpCTable(Carseats,Target="Urban",margin=1,clim=10,nlim=3,round=2,bin=NULL,per=F)
 
 ## ----ed3.5,warning=FALSE,eval=T,render=et100,echo=F,out.height=8,out.width=8----
 kable(et100,"html")

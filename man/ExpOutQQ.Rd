@@ -4,7 +4,7 @@
 \alias{ExpOutQQ}
 \title{Quantile-Quantile Plots}
 \usage{
-ExpOutQQ(data,nlim=NULL,fname=NULL,Page=NULL,sample=NULL)
+ExpOutQQ(data, nlim = 3, fname = NULL, Page = NULL, sample = NULL)
 }
 \arguments{
 \item{data}{Input dataframe or data.table}

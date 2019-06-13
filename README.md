@@ -19,7 +19,6 @@ The SmartEDA R package has four unique functionalities as
 
 ![SmartEDA](https://github.com/daya6489/SmartEDA/blob/master/man/figures/smarteda_funtions.PNG)
 
-
 # Journal of Open Source Software Article
 An article describing SmartEDA pacakge for exploratory data analysis approach has been published in [arxiv](https://arxiv.org/pdf/1903.04754.pdf) and currently it is under review at The Journal of Open Source Software. Please cite the paper if you use SmartEDA in your work!
 
@@ -82,12 +81,12 @@ To summarise the numeric variables, you can use following r codes from this paca
 
 ```R
 ## Generate Boxplot by category
-ExpNumViz(mtcars,gp="gear",type=2,nlim=25,fname = file.path(tempdir(),"Mtcars2"),Page = c(2,2))
+ExpNumViz(mtcars,target="gear",type=2,nlim=25,fname = file.path(tempdir(),"Mtcars2"),Page = c(2,2))
 ## Generate Density plot
-ExpNumViz(mtcars,gp=NULL,type=3,nlim=25,fname = file.path(tempdir(),"Mtcars3"),Page = c(2,2))
+ExpNumViz(mtcars,target=NULL,type=3,nlim=25,fname = file.path(tempdir(),"Mtcars3"),Page = c(2,2))
 ## Generate Scatter plot
-ExpNumViz(mtcars,gp="carb",type=3,nlim=25,fname = file.path(tempdir(),"Mtcars4"),Page = c(2,2))
-
+ExpNumViz(mtcars,target="carb",type=3,nlim=25,fname = file.path(tempdir(),"Mtcars4"),Page = c(2,2))
+ExpNumViz(mtcars,target="am",scatter=TRUE)
 ```
 
 ## Summary of Categorical variables	
@@ -124,7 +123,7 @@ ExpNumViz(mtcars,gp="carb",type=3,nlim=25,fname = file.path(tempdir(),"Mtcars4")
 Create a exploratory data analysis report in HTML format
 
 ```R
-	ExpReport(Carseats,Target="Urban",label=NULL,op_file="test.html",op_dir=getwd(),sc=2,sn=2,Rc="Yes")
+	ExpReport(Carseats,Target="Urban",label=NULL,theme="Default",op_file="test.html",op_dir=getwd(),sc=2,sn=2,Rc="Yes")
 ```
 
 ## Quantile-quantile plot for numeric variables

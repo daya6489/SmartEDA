@@ -15,30 +15,28 @@ ExpInfoValue(X, Y, valueOfGood = NULL)
 }
 \value{
 Information value (iv) and Predictive power class
-
-information value
-
-predictive class
+\itemize{
+  \item \code{information} value
+  \item \code{predictive} class
+}
 }
 \description{
 Provides information value for each categorical variable (X) against target variable (Y)
 }
 \details{
 Information value is one of the most useful technique to select important variables in a predictive model. It helps to rank variables on the basis of their importance. The IV is calculated using the following formula
-
-IV = (Percentage of Good event - Percentage of Bad event) * WOE, where WOE is weight of evidence
-
-WOE = log(Percentage of Good event - Percentage of Bad event)
+\itemize{
+  \item \code{IV} - (Percentage of Good event - Percentage of Bad event) * WOE, where WOE is weight of evidence
+  \item \code{WOE} - log(Percentage of Good event - Percentage of Bad event)
+}
 
 Here is what the values of IV mean according to Siddiqi (2006)
-
-If information value is < 0.03 then predictive power = "Not Predictive"
-
-If information value is 0.03 to 0.1 then predictive power = "Somewhat Predictive"
-
-If information value is 0.1 to 0.3 then predictive power = "Meidum Predictive"
-
-If information value is >0.3 then predictive power = "Highly Predictive"
+\itemize{
+  \item \code{If information value is < 0.03} then predictive power = "Not Predictive"
+  \item \code{If information value is 0.03 to 0.1} then predictive power = "Somewhat Predictive"
+  \item \code{If information value is 0.1 to 0.3} then predictive power = "Meidum Predictive"
+  \item \code{If information value is >0.3} then predictive power = "Highly Predictive"
+}
 }
 \examples{
 X = mtcars$gear
