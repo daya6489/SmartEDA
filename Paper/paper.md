@@ -24,34 +24,36 @@ bibliography: paper.bib
 
 # Introduction: Exploratory Data Analysis
 
-Nowadays, we see applications of Data Science almost everywhere. Some of the well highlighted aspects of data science are the various statistical and machine learning techniques applied for solving a problem. However, any data science activity starts with an Exploratory Data Analysis (EDA). The term "Exploratory Data Analysis" was coined by [@eda:1]. EDA can be defined as the art and science of performing initial investigation on the data by means of statistical and visualization techniques that can bring out the important aspects in the data that can be used for further analysis [@eda:1]. EDA puts an emphasis on hypothesis generation and pattern recognition from the raw data [@eda:8]. There have been many studies conducted on EDA reported in the Statistics literature.Some of earliest work done on Exploratory Data Analysis (EDA) including coining the term and defining some of the basic EDA techniques was done by [@eda:1]. However, many researchers have formulated different definitions of EDA over the years. One of the widely accepted definition is that "Exploratory data analysis isolates patterns and features of the data and reveals these forcefully to the analyst" [@eda:12].
+Nowadays, we see applications of Data Science almost everywhere. Some of the well-highlighted aspects of data science are the various statistical and machine learning techniques applied to solve a problem. However, any data science activity starts with an Exploratory Data Analysis (EDA). The term "Exploratory Data Analysis" was coined by @eda:1. EDA can be defined as the art and science of performing an initial investigation on the data by means of statistical and visualization techniques that can bring out the important aspects in the data that can be used for further analysis [@eda:1]. There have been many studies conducted on EDA reported in the Statistics literature. Some of the earliest work done on Exploratory Data Analysis (EDA), including coining the term and defining some of the basic EDA techniques was done by @eda:1. However, many researchers have formulated different definitions of EDA over the years.
 
-@eda:4 introduced EDA in the context of data mining and resampling with focus on pattern recognition, cluster detection and variable selection. Over the years, EDA has been used various applications across different domains such as geoscience research [@eda:7], auditing [@eda:8], game-based assessments [@eda:9], clinical study groups [@eda:10] and more.
+@eda:4 introduced EDA in the context of data mining and resampling with a focus on pattern recognition, cluster detection, and variable selection. Over the years, EDA has been used various applications across different domains such as geoscience research [@eda:7], game-based assessments [@eda:9], clinical study groups [@eda:10], and more.
 
-EDA can be categorized into Descriptive statistical techniques and graphical techniques [@eda:11]. The first category encompasses various univariate and multivariate statistical techniques whereas the second category comprises the various visualization techniques. Both of these techniques are used to explore the data, understand the patterns in the data, understand the existing relationships between the variables and most importantly, generate data drive insights that can be used by the business stakeholders. However, EDA requires a lot of manual effort and also a substantial amount of coding effort in statistical computing packages such as R @Venables+Ripley:2002. There is a huge need for automation of the EDA process and this motivated us to develop the SmartEDA package and come up with this paper. 
+EDA can be categorized into Descriptive statistical techniques and graphical techniques. The first category encompasses various univariate and multivariate statistical techniques, whereas the second category comprises various visualization techniques. Both of these techniques are used to explore the data, understand the patterns in the data, understand the existing relationships between the variables and most importantly, generate data driven insights that can be used by the business stakeholders. However, EDA requires a lot of manual effort and also a substantial amount of coding effort in a programming environment such as R [@R]. There is a huge need for automation of the EDA process, and this motivated us to develop the SmartEDA package and come up with this paper. 
 
 
 
 # Key Functionality
 
-The SmartEDA package automatically select the variables and performs the related descriptive statistics. Moreover, it also analyzes information value, weight of evidence, custom tables, summary statistics and performs graphical techniques for both numeric and categorical variables. 
+The SmartEDA package automatically selects the variables and performs the related descriptive statistics. Moreover, it also analyzes the information value, the weight of evidence, custom tables, summary statistics, and performs graphical techniques for both numeric and categorical variables. 
 
-Some of the most important advantages of the SmartEDA package are that it can help in applying end to end EDA process without having to remember the different R package names, write lengthy R scripts, no manual effort required to prepare the EDA report and finally, automatically categorize the variables  into the right data type (viz. Character, Numeric, Factor and more) based on the input data. Thus, the main benefits of SmartEDA are in development time savings, less error percentage and reproducibility. 
+Some of the most important advantages of the SmartEDA package are that it can help in applying end to end EDA process without having to remember the different R package names, write lengthy R scripts, no manual effort required to prepare the EDA report and finally, automatically categorize the variables  into the right data type (viz. Character, Numeric, Factor and more) based on the input data. Thus, the main benefits of SmartEDA are in development time savings, less error percentage, and reproducibility. 
 
-Moreover, the SmartEDA package has customized options for the data.table package such as (1) Generate appropriate summary statistics depending on the data type, (2) Data reshaping using data.table.dcast(), (3) Filter rows/cases where conditions are true. Options to apply filters at variable level or complete data set like base subsetting and (4) Options to calculate measures of central tendency (like Mean, Median, Mode, etc.), measures of variance/dispersion (like Standard Deviation, Variance, etc.), Count, Proportions, Quantiles, IQR, Percentages of Shares (PS) for numerical data. Figure 1 summarizes the various functionalities of SmartEDA. 
+Moreover, the SmartEDA package has customized options for the data.table package such as (1) Generates appropriate summary statistics depending on the data type, (2) Data reshaping using data.table.dcast(), (3) Filter rows/cases where conditions are true. Options to apply filters at variable level or complete data set like base subsetting and (4) Options to calculate measures of central tendency (like Mean, Median, Mode, etc.), measures of variance/dispersion (like Standard Deviation, Variance, etc.), Count, Proportions, Quantiles, IQR, Percentages of Shares (PS) for numerical data. Figure 1 summarizes the various functionalities of SmartEDA. 
 
 ![The various functionalities of SmartEDA.](paper_figures/Fig1.png){width="5in"}
 
 
 # Illustration
-We apply SmartEDA to generate insights on the sales of Child car seats at different locations. We will use the "Carseats" data available in the ISLR package [@pack:7] that contains 11 variables such as unit sales in each locations (Sales), price charged by competitors (CompPrice), community income level, (Income) population size in region (population), advertising budget (Advertising), price company charges for car seats in each site (Price), quality of shelving location (ShelveLoc), average age of local population (Age), education level at each location (Education), urban/rural location indicator (Urban) and US store/non-US store indicator (US).
+We apply SmartEDA to generate insights on the sales of Child car seats at different locations. We will use the "Carseats" data available in the ISLR package [@pack:7] that contains 11 variables such as unit sales in each locations (Sales), price charged by competitors (CompPrice), community income level, (Income) population size in region (population), advertising budget (Advertising), price company charges for car seats in each site (Price), quality of shelving location (ShelveLoc), average age of local population (Age), education level at each location (Education), urban/rural location indicator (Urban), and US store/non-US store indicator (US).
 
-We will now use SmartEDA for understanding the dimensions of the dataset, variable names, overall missing summary and data types of each variables.
+We will now use SmartEDA for understanding the dimensions of the dataset, variable names, overall missing summary, and data types of each variable.
 
 ```r
 > library("SmartEDA")
 > library("ISLR")
 > Carseats <- ISLR::Carseats
+
+
 
 > ExpData(data=Carseats,type=1)
 # output
@@ -70,7 +72,7 @@ We will now use SmartEDA for understanding the dimensions of the dataset, variab
 12 %. of Variables having >90% missing cases    0% (0)
 ```
 
-Now let us look at the summary of the numerical/integer variables such as Advertising, Age, CompPrice, Income, Population, Price and Sales.
+Now let us look at the summary of the numerical/integer variables such as Advertising, Age, CompPrice, Income, Population, Price and, Sales.
 
 ```r
 > ExpNumStat(Carseats,by="A",gp=NULL,Qnt=NULL,MesofShape=2,
@@ -87,7 +89,7 @@ Now let us look at the summary of the numerical/integer variables such as Advert
 # ....  with 10 more columns such as max, mean, median, 
 # ...   SD, CV, IQR, Skewness, Kurtosis and more.
 ```
-We will now check for the summary of categorical variables namely, ShelveLoc, Urban and US.
+We will now check for the summary of categorical variables, namely, ShelveLoc, Urban, and US.
 
 ```r
 > ExpCTable(Carseats)
@@ -121,7 +123,7 @@ We can visualize the different graphical representations using the SmartEDA pack
 > ExpOutQQ(Carseats,nlim=10,sample=1)
 # Co-ordinate plots
 > ExpParcoord(Carseats,Group="ShelveLoc",Stsize=c(10,15,20),Nvar=
-+     c("Price","Income","Advertising","Population","Age","Education"))
++  c("Price","Income","Advertising","Population","Age","Education"))
 ```
 
 ![Graphical representations of the Carseats data using SmartEDA.](paper_figures/Fig2.png){width="5in"}
@@ -135,23 +137,23 @@ Figure 9 compares the SmartEDA package [@smartEDA] with other similar packages a
 ![Comparison of SmartEDA with available R packages.](paper_figures/Fig3.png){width="5in"}
 
 
-We can see in Figure 3 that the current version of SmartEDA has almost all the desired characteristics mentioned above except the points (h) and (i) i.e. normality plots and feature binning respectively. These two features would be incorporated in the next release and we are currently working on it. However, the unique and the strongest functionality provided by SmartEDA is point (f) i.e. extension to data.table package which none of the other packages provide. Thus, SmartEDA does add value given the importance and popularity of data.table among R users for analyzing large datasets. Figure 9 shows that SmartEDA is better than almost all the other packages available in CRAN. The closest competitor to SmartEDA seems to be the DataExplorer package but it doesn't possess the (b) and (f) features viz. Function to provide summary statistics for all numerical variables and extension to data.table package respectively. Also, another distinctive feature that SmartEDA has but none of the other similar packages have is the ability to export all the charts in a pdf.
+We can see in Figure 3 that the current version of SmartEDA has almost all the desired characteristics mentioned above except the points (h) and (i) i.e., normality plots and feature binning respectively. These two features would be incorporated in the next release, and we are currently working on it. However, the unique and the strongest functionality provided by SmartEDA is the point (f) i.e., an extension to data.table package which none of the other packages offer. Thus, SmartEDA does add value given the importance and popularity of data.table among R users for analyzing large datasets. Figure 9 shows that SmartEDA is better than almost all the other packages available in CRAN. The closest competitor to SmartEDA seems to be the DataExplorer package, but it doesn't possess the (b) and (f) features viz. Function to provide summary statistics for all numerical variables and extension to data.table package respectively. Also, another distinctive feature that SmartEDA has but none of the other similar packages have is the ability to export all the charts in a pdf.
 
 # Conclusion
 
-The contribution of this paper is in development of a new package in R i.e. SmartEDA for automated Exploratory Data Analysis. SmartEDA package helps in implementing the complete Exploratory Data Analysis just by running the function instead of writing lengthy R code. The users of SmartEDA can automate the entire EDA process on any dataset with easy to implements functions and export EDA reports that follows the industry and academia best practices. The SmartEDA can provide summary statistics along with graphical plots for both numerical and categorical variables. It also provides extension to data.table package which none of the other packages available in CRAN provides. Overall, the main benefits of SmartEDA are in development time savings, less error percentage and reproducibility.  As of July 2019, the SmartEDA package has more than 5000+ downloads, which indicates its acceptability and maturity in the Statistics and the Machine learning community.
+The contribution of this paper is in the development of a new package in R i.e., SmartEDA for automated Exploratory Data Analysis. SmartEDA package helps in implementing the complete Exploratory Data Analysis just by running the function instead of writing lengthy R code. The users of SmartEDA can automate the entire EDA process on any dataset with easy to implement functions and export EDA reports that follow the industry and academia best practices. The SmartEDA can provide summary statistics along with graphical plots for both numerical and categorical variables. It also provides an extension to data.table package which none of the other packages available in CRAN provides. Overall, the main benefits of SmartEDA are in development time savings, less error percentage, and reproducibility.  As of August 2019, the SmartEDA package has more than 5700+ downloads, which indicates its acceptability and maturity in the Statistics and the Machine learning community.
 
 
 
 # Availability
 
-The software is distributed under a MIT + file LICENSE (Repository: CRAN) and is available from <https://github.com/daya6489/SmartEDA>.
+The software is distributed under an MIT + file LICENSE (Repository: CRAN) and is available from <https://github.com/daya6489/SmartEDA>.
 
 
 
 # Acknowledgements
 
-We would like to thank VMware and the Enterprise and Data Analytics (EDA) leadership for giving us the required infrastructure and support for this work. We are grateful to the R community for their acceptance and feedback to improve our package further.
+We want to thank VMware and the Enterprise and Data Analytics (EDA) leadership for giving us the required infrastructure and support for this work. We are grateful to the R community for their acceptance and feedback to improve our package further.
 
 # References
 
