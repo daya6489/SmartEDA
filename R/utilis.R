@@ -97,22 +97,23 @@ ds_fun <- function(x, r, MesofShape, Qnt, Outlier){
     Kurtosis = round(ExpKurtosis(x, type = "excess"), r)
   )
   Out_rp <- c(
-    `LB` <- round(quantile(x, 0.25, na.rm = TRUE) - (1.5 * IQR(x, na.rm = T)), r),
-    `UB` <- round(quantile(x, 0.75, na.rm = TRUE) + (1.5 * IQR(x, na.rm = T)), r),
-    nOutliers <- length(which(x > (quantile(x, 0.75, na.rm = TRUE) + (1.5 * IQR(x, na.rm = T ))) | x < (quantile(x, 0.25, na.rm = TRUE) - (1.5 * IQR(x, na.rm = T))))))
+    LB = round(quantile(x, 0.25, na.rm = TRUE) - (1.5 * IQR(x, na.rm = TRUE)), r),
+    UB = round(quantile(x, 0.75, na.rm = TRUE) + (1.5 * IQR(x, na.rm = TRUE)), r),
+    nOutliers = length(which(x > (quantile(x, 0.75, na.rm = TRUE) + (1.5 * IQR(x, na.rm = TRUE ))) | x < (quantile(x, 0.25, na.rm = TRUE) - (1.5 * IQR(x, na.rm = T)))))
+    )
 
      if (MesofShape == 1){
-         if (!is.null(Qnt) & Outlier == F){
-           qntil <- round(quantile(x, prob = Qnt, na.rm = T), r);
+         if (!is.null(Qnt) & Outlier == FALSE){
+           qntil <- round(quantile(x, prob = Qnt, na.rm = TRUE), r);
            vect_value <- c(BasDST, qntil);
            return(vect_value)
            } else
-              if (Outlier == T & !is.null(Qnt)){
-                qntil <- round(quantile(x, prob = Qnt, na.rm = T), r)
+              if (Outlier == TRUE & !is.null(Qnt)){
+                qntil <- round(quantile(x, prob = Qnt, na.rm = TRUE), r)
                 vect_value <- c(BasDST, qntil, Out_rp)
                 return(vect_value)
                 } else
-                  if (Outlier == T & is.null(Qnt)){
+                  if (Outlier == TRUE & is.null(Qnt)){
                       vect_value <- c(BasDST, Out_rp)
                       return(vect_value)
                   } else {

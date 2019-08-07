@@ -65,6 +65,7 @@
 #'            Outlier=FALSE,round=2,dcast = TRUE,val = "IQR")
 #' @author dubrangala
 #' @importFrom stats quantile median IQR var reorder sd cor
+#' @importFrom data.table dcast
 #' @export ExpNumStat
 
 ExpNumStat <- function(data, by = "A", gp = NULL, Qnt = NULL, Nlim = 10, MesofShape = 2,
