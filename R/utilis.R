@@ -43,28 +43,28 @@ swritepdf <- function(fname, plot_l, Page){
 # Selecting multiple colours based on the chart input
 scolorsel <- function(col = NULL, nlevel = 0){
   if (is.null(col)){
-  if (nlevel <= 1) {
-    fill_1 <- c("#5F9EA0")
-  } else
-    if (nlevel == 2) {
-      fill_1 <- c("#5F9EA0", "#E1B378")
+    if (nlevel <= 1) {
+      fill_1 <- hcl.colors(1, "Set 2")
     } else
-      if (nlevel > 2) {
-        fill_1 <- colors()[srswor(nlevel, length(colors()) ) == 1]
+      if (nlevel == 2) {
+        fill_1 <- hcl.colors(2, "Set 2")
+      } else
+        if (nlevel > 2) {
+          fill_1 <- colors()[srswor(nlevel, length(colors()) ) == 1]
         }
   } else {
     if (nlevel == length(col)) {
       fill_1 <- col
-      } else
+    } else
       if (length(col) == 1) {
         fill_1 <- col
-        } else
+      } else
         if (length(col) > nlevel) {
           fill_1 <- col[1 : nlevel]
-          } else
+        } else
           if (nlevel > 0) {
             fill_1 <- hcl.colors(nlevel, "Set 2")
-            }
+          }
   }
   return(fill_1)
 }
