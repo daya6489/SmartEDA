@@ -3,7 +3,6 @@ context("Distributions of numerical variables")
 test_that("test normal functions", {
   expect_error(ExpNumViz(data = iris, target = "Species", col = rainbow(2),
                          sample = 1, scatter = TRUE))
-  expect_silent(ExpNumViz(data = mtcars))
   expect_error(ExpNumViz(data = iris, target = "Petal.Length", scatter = TRUE))
   expect_message(ExpNumViz(data = iris, target = "Species", col = "yellow"))
 

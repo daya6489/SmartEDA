@@ -1,18 +1,22 @@
 # defualt ggplot theme used in SmartEDA
 
 smtheme <- function(theme){
-  if (theme == "Default"){
-    mytheme <- theme(axis.text.x = element_text(angle = 90, vjust = .5, hjust = 0.95, size = 8, colour = "grey20"),
-        axis.text.y = element_text(vjust = .5, hjust = 0.95, size = 8, colour = "grey20"),
-        plot.title = element_text(hjust = 0.5, face = "bold", colour = "#5F9EA0", size = 12),
-        axis.line = element_line(size = 1, colour = "black"),
-        panel.grid.major = element_line(colour = "#d3d3d3", linetype = "dashed"),
-        panel.grid.minor = element_blank(),
-        panel.border = element_blank(),
-        panel.background = element_blank())
-    } else {
+  themedf <- theme(axis.text.x = element_text(angle = 90, vjust = .5, hjust = 0.95, size = 8, colour = "grey20"),
+                   axis.text.y = element_text(vjust = .5, hjust = 0.95, size = 8, colour = "grey20"),
+                   plot.title = element_text(hjust = 0.5, face = "bold", colour = "#5F9EA0", size = 12),
+                   axis.line = element_line(size = 1, colour = "black"),
+                   panel.grid.major = element_line(colour = "#d3d3d3", linetype = "dashed"),
+                   panel.grid.minor = element_blank(),
+                   panel.border = element_blank(),
+                   panel.background = element_blank())
+  if (theme == "Default") kp <- 1
+  if (theme != "Default") kp <- 2
+
+  switch (kp,
+          mytheme <- themedf,
           mytheme <- theme
-        }
+  )
+if (class(mytheme) != "theme") stop("Input ggplot theme is incorrect")
   return(mytheme)
 }
 

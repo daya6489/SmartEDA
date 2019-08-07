@@ -3,7 +3,6 @@ context("Distributions of categorical variables")
 test_that("test target and color inputs", {
   expect_error(ExpCatViz(data = mtcars, target = "gear", col = rainbow(4)))
   expect_message(ExpCatViz(data = mtcars, target = "mpg"))
-  expect_silent(ExpCatViz(data = mtcars))
 })
 
 

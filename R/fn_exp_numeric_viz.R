@@ -38,7 +38,7 @@
 #'   \item \code{Box plot} by overall sample
 #'   \item \code{Box plot} by stratified sample
 #'}
-#' @importFrom grDevices colors
+#' @importFrom grDevices colors hcl.colors
 #' @importFrom gridExtra marrangeGrob
 #' @importFrom sampling srswor
 #' @importFrom utils combn
