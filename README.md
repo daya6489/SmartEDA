@@ -19,6 +19,11 @@ The SmartEDA R package has four unique functionalities as
 
 ![SmartEDA](https://github.com/daya6489/SmartEDA/blob/master/man/figures/smarteda_funtions.PNG)
 
+# Comparison with other packages
+
+SmartEDA package with other similar packages available in CRAN for exploratory data analysis viz. dlookr, DataExplorer, Hmisc, exploreR, RtutoR and summarytools. The metric for evaluation is the availability of various desired features for performing an Exploratory data analysis
+
+![SmartEDA](https://github.com/daya6489/SmartEDA/blob/master/man/figures/SmartEDA_comp.PNG)
 
 # Journal of Open Source Software Article
 An article describing SmartEDA pacakge for exploratory data analysis approach has been published in [arxiv](https://arxiv.org/pdf/1903.04754.pdf) and currently it is under review at The Journal of Open Source Software. Please cite the paper if you use SmartEDA in your work!
@@ -150,6 +155,30 @@ Create a exploratory data analysis report in HTML format
   ExpParcoord(CData,Group="US",Stsize=c(15,50),Cvar=c("ShelveLoc","Urban"))
 ```
 
+
+## Univariate Outlier analysis
+
+In statistics, an outlier is a data point that differs significantly from other observations. An outlier may be due to variability in the measurement or it may indicate experimental error; the latter are sometimes excluded from the data set.An outlier can cause serious problems in statistical analyses.
+
+Identifying outliers: There are several methods we can use to identify outliers. In ExpOutliers used two methods (1) Boxplot and (2) Standard Deviation
+
+![SmartEDA](https://github.com/daya6489/SmartEDA/blob/master/man/figures/outlierPlot_image.PNG)
+
+
+```R
+##Identifying outliers mehtod - Boxplot
+ExpOutliers(Carseats, varlist = c("Sales","CompPrice","Income"), method = "boxplot",  capping = c(0.1, 0.9))
+
+##Identifying outliers mehtod - 3 Standard Deviation
+ExpOutliers(Carseats, varlist = c("Sales","CompPrice","Income"), method = "3xStDev",  capping = c(0.1, 0.9))
+
+##Create outlier flag (1,0) if there are any outliers 
+ExpOutliers(Carseats, varlist = c("Sales","CompPrice","Income"), method = "3xStDev",  capping = c(0.1, 0.9), outflag = TRUE)
+
+##Impute outlier value by mean or median valie
+ExpOutliers(Carseats, varlist = c("Sales","CompPrice","Income"), method = "3xStDev", treatment = "mean", capping = c(0.1, 0.9), outflag = TRUE)
+
+```
 
 ## Exploratory analysis - Custom tables, summary statistics
 Descriptive summary on all input variables for each level/combination of group variable. Also while running the analysis we can filter row/cases of the data. 
