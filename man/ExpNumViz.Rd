@@ -4,14 +4,13 @@
 \alias{ExpNumViz}
 \title{Distributions of numeric variables}
 \usage{
-ExpNumViz(data, target = NULL, type = 1, nlim = 3, fname = NULL,
-  col = NULL, Page = NULL, sample = NULL, scatter = FALSE,
-  gtitle = NULL, theme = "Default")
+ExpNumViz (data,gp=NULL,type=1,nlim=NULL,fname=NULL,col=NULL,Page=NULL,
+sample=NULL,gtitle=NULL,theme="Default")
 }
 \arguments{
 \item{data}{dataframe or matrix}
 
-\item{target}{target variable}
+\item{gp}{target variable}
 
 \item{type}{1 (boxplot by category and overall), 2 (boxplot by category only), 3 (boxplot for overall)}
 
@@ -25,57 +24,42 @@ ExpNumViz(data, target = NULL, type = 1, nlim = 3, fname = NULL,
 
 \item{sample}{random selection of plots}
 
-\item{scatter}{option to run scatter plot between all the numerical variables (default scatter=FALSE)}
-
 \item{gtitle}{chart title}
 
-\item{theme}{adding extra themes, geoms, and scales for 'ggplot2' (eg: themes options from ggthemes package)}
+\item{theme}{extra themes, geoms, and scales for 'ggplot2' (use theme from ggthemes package)}
 }
 \value{
 returns collated graphs in PDF or JPEG format
 
-\itemize{
-  \item \code{Univariate plot} density plot for all the numeric data with the value of shape of the distribution (Skewness & Kurtosis)
-  \item \code{Bivariate plot} correlatin plot for all the numeric data
-  \item \code{Bivariate plot} scatter plot between continuous dependent variable and Independent variables
-  \item \code{Box plot} by overall sample
-  \item \code{Box plot} by stratified sample
-}
+Scatter plot for numeric data
+
+Density plot for numeric data
+
+Boxplot – by overall
+
+Boxplot – by group (target variable)
+
+Boxplot – by overall and group (target variable)
 }
 \description{
 This function automatically scans through each variable and creates density plot, scatter plot and box plot for continuous variable.
 }
 \details{
 This function automatically scan each variables and generate a graph based on the user inputs. Graphical representation includes scatter plot, box plot and density plots.
+If input "gp" is continuous then output is scatter plots
 
-\itemize{
-  \item \code{target} is continuous then output is scatter plots
-  \item \code{target} is categorical then output is box plot
-  \item \code{target} is NULL then density plot for all numeric features
-  \item \code{scatter = TRUE} generate multiple scatter plot between all the independent contionuos variables with or without group argument
-}
+If input "gp" is categorical then output is box plot.
+
+If input "gp" is NULL, means there is no target variable and this will generate density plot for all numeric features
 }
 \examples{
 ## Generate Boxplot by category
-ExpNumViz(iris,target = "Species", type = 2, nlim = 2,
-           col = c("red", "green", "blue", "pink"), Page = NULL, sample = 2, scatter = FALSE,
-           gtitle = "Box plot: ")
+ExpNumViz(mtcars,gp="gear",type=2,nlim=25,fname = file.path(tempdir(),"Mtcars2"),Page = c(2,2))
 ## Generate Density plot
-ExpNumViz(iris, nlim = 2,
-           col = NULL,Page = NULL, sample = 2, scatter = FALSE,
-           gtitle = "Density plot: ")
-## Generate Scatter plot by Dependent variable
-ExpNumViz(iris,target = "Sepal.Length", type = 1, nlim = 2,
-           col = "red", Page = NULL, sample = NULL, scatter = FALSE,
-           gtitle = "Scatter plot: ", theme = "Default")
-## Generate Scatter plot for all the numerical variables
-ExpNumViz(iris,target = "Species", type = 1, nlim = 2,
-           col = c("red", "green", "blue"), Page = NULL, sample = NULL, scatter = TRUE,
-           gtitle = "Scatter plot: ", theme = "Default")
+ExpNumViz(mtcars,gp=NULL,type=3,nlim=25,fname = file.path(tempdir(),"Mtcars3"),Page = c(2,2))
+## Generate Scatter plot
+ExpNumViz(mtcars,gp="carb",type=3,nlim=25,fname = file.path(tempdir(),"Mtcars4"),Page = c(2,2))
 }
 \seealso{
 \code{\link[ggplot2:geom_boxplot]{geom_boxplot}}
-\code{\link[ggthemes:ggthemes]{ggthemes}}
-\code{\link[ggplot2:geom_density]{geom_density}}
-\code{\link[ggplot2:geom_point]{geom_point}}
 }
