@@ -17,3 +17,4 @@ test_that("test output object", {
   expect_output(str(catstat), "chr")
   expect_equal(ctat, as.numeric(catstat[2]))
 })
+?chisq.test

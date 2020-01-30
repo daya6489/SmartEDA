@@ -220,3 +220,32 @@ kable(e1du1,"html")
 ## ----dud31,warning=FALSE,eval=T,render=e1du2,echo=F,out.height=8,out.width=8------------------------------------------------------------------------
 kable(e1du2,"html")
 
+## ----ktana, eval=T,include=F------------------------------------------------------------------------------------------------------------------------
+ana1 <- ExpOutliers(Carseats, varlist = c("Sales","CompPrice","Income"), method = "boxplot",  treatment = "mean", capping = c(0.1, 0.9))
+outlier_summ <- ana1[[1]]
+outlier_data <- ana1[[2]]
+
+ana2 <- ExpOutliers(Carseats, varlist = c("Sales","CompPrice","Income"), method = "3xStDev",  treatment = "median", capping = c(0.1, 0.9))
+outlier_summ1 <- ana2[[1]]
+outlier_data1 <- ana2[[2]]
+
+
+## ----out1, warning=FALSE,eval=F,include=T-----------------------------------------------------------------------------------------------------------
+#  ExpOutliers(Carseats, varlist = c("Sales","CompPrice","Income"), method = "boxplot",  treatment = "mean", capping = c(0.1, 0.9))
+
+## ----out11,warning=FALSE,eval=T,render=outlier_summ,echo=F,out.height=8,out.width=8-----------------------------------------------------------------
+kable(outlier_summ,"html")
+
+## ----out12,warning=FALSE,eval=T,render=outlier_data,echo=F,out.height=8,out.width=8-----------------------------------------------------------------
+kable(head(outlier_data),"html")
+
+## ----out2, warning=FALSE,eval=F,include=T-----------------------------------------------------------------------------------------------------------
+#  ExpOutliers(Carseats, varlist = c("Sales","CompPrice","Income"), method = "3xStDev",  treatment = "medain", capping = c(0.1, 0.9))
+#  
+
+## ----out21,warning=FALSE,eval=T,render=outlier_summ1,echo=F,out.height=8,out.width=8----------------------------------------------------------------
+kable(outlier_summ1,"html")
+
+## ----out22,warning=FALSE,eval=T,render=outlier_data1,echo=F,out.height=8,out.width=8----------------------------------------------------------------
+kable(head(outlier_data1),"html")
+

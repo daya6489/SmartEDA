@@ -1,3 +1,7 @@
+# SmartEDA 0.3.3
+## New Features
+* Added function `ExpOutliers` to run univariate outlier analysis
+
 # SmartEDA 0.3.2
 ## Enhancements
 * Added 'scatter' option to plot the correlation plot between all the numeric variables in a dataframe `ExpNumViz`

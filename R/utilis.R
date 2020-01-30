@@ -16,7 +16,7 @@ smtheme <- function(theme){
           mytheme <- themedf,
           mytheme <- theme
   )
-if (class(mytheme) != "theme") stop("Input ggplot theme is incorrect")
+#if (class(mytheme) != "theme") stop("Input ggplot theme is incorrect")
   return(mytheme)
 }
 

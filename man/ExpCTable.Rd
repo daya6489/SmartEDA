@@ -14,9 +14,9 @@ ExpCTable(data, Target = NULL, margin = 1, clim = 10, nlim = 10,
 
 \item{margin}{margin of index, 1 for row based proportions and 2 for column based proportions}
 
-\item{clim}{maximum categories to be considered for frequency/custom table. Variables will be dropped if unique levels are higher than ‘clim’ for class factor/character variable. Default value is 10.}
+\item{clim}{maximum categories to be considered for frequency/custom table. Variables will be dropped if unique levels are higher than 'clim' for class factor/character variable. Default value is 10.}
 
-\item{nlim}{numeric variable unique limits. Default ‘nlim’ values is 3, table excludes the numeric variables which is having greater than ‘nlim’ unique values}
+\item{nlim}{numeric variable unique limits. Default 'nlim' values is 3, table excludes the numeric variables which is having greater than 'nlim' unique values}
 
 \item{round}{round off}
 
@@ -30,21 +30,21 @@ Frequency tables, Cross tables
  Columns description for frequency tables:
 
 \itemize{
-  \item \code{Variable} - Variable name
-  \item \code{Valid} - Variable values
-  \item \code{Frequency} - Frequency
-  \item \code{Percent} - Relative frequency
-  \item \code{CumPercent} - Cumulative sum of relative frequency
+  \item \code{Variable} is Variable name
+  \item \code{Valid} is Variable values
+  \item \code{Frequency} is Frequency
+  \item \code{Percent} is Relative frequency
+  \item \code{CumPercent} is Cumulative sum of relative frequency
 }
 
  Columns description for custom tables:
 
 \itemize{
-  \item \code{Variable} - Variable name
-  \item \code{Category} - Variable values
-  \item \code{Count} - Number of counts
-  \item \code{Per} - Percentages
-  \item \code{Total} - Total count
+  \item \code{Variable} is Variable name
+  \item \code{Category} is Variable values
+  \item \code{Count} is Number of counts
+  \item \code{Per} is Percentages
+  \item \code{Total} is Total count
 }
 }
 \description{
@@ -55,8 +55,8 @@ this function provides both frequency and custom tables for all categorical feat
 }
 \examples{
 # Frequency table
-ExpCTable(mtcars,Target=NULL,margin=1,clim=10,nlim=3,bin=NULL,per=FALSE)
+ExpCTable(mtcars, Target = NULL, margin = 1, clim = 10, nlim = 3, bin = NULL, per = FALSE)
 # Crosstbale for Mtcars data
-ExpCTable(mtcars,Target="gear",margin=1,clim=10,nlim=3,bin=NULL,per=FALSE)
+ExpCTable(mtcars, Target = "gear", margin = 1, clim = 10, nlim = 3, bin = NULL, per = FALSE)
 
 }

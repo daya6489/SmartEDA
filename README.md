@@ -9,8 +9,8 @@
 
 ## Background
 In a quality statistical data analysis the initial step has to be exploratory. Exploratory data 
-analysis begins with the univariate exploratory analyis - examining the variable one at a time. 
-Next comes bivariate analysis followed by multivariate analyis. SmartEDA package helps in getting 
+analysis begins with the univariate exploratory analysis - examining the variable one at a time. 
+Next comes bivariate analysis followed by multivariate analysis. SmartEDA package helps in getting 
 the complete exploratory data analysis just by running the function instead of writing lengthy r code.
 
 -----
@@ -29,8 +29,7 @@ The SmartEDA R package has four unique functionalities as
 -----
 
 ## Journal of Open Source Software Article
-An article describing SmartEDA pacakge for exploratory data analysis approach has been published in [arxiv](https://arxiv.org/pdf/1903.04754.pdf) and currently it is under review at The Journal of Open 
-Source Software. Please cite the paper if you use SmartEDA in your work!
+An article describing SmartEDA package for exploratory data analysis approach has been published in the Journal of Open Source Software [JOSS](https://joss.theoj.org/papers/e56dad3d192cfeddd10fcc1550505ceb). Please cite the paper if you use SmartEDA in your work.
 
 -----
 
@@ -160,6 +159,19 @@ Create a exploratory data analysis report in HTML format
   ExpParcoord(CData,Group="ShelveLoc",Nvar=c("Price","Income"),Cvar=c("Urban","US"),scale=NULL)
 ```
 
+### Univariate outlier analysis
+
+```R
+## Boxplot method
+  ExpOutliers(Carseats, varlist = c("Sales","CompPrice","Income"), method = "boxplot",  capping = c(0.1, 0.9))
+
+## treating outlier value with mean imputation
+  ExpOutliers(Carseats, varlist = c("Sales","CompPrice","Income"), method = "boxplot",  treatment = "mean", capping = c(0.1, 0.9))
+
+## Standard deviation method
+  ExpOutliers(Carseats, varlist = c("Sales","CompPrice","Income"), method = "3xStDev",  treatment = "mean", capping = c(0.1, 0.9))
+
+```
 
 ### Exploratory analysis - Custom tables, summary statistics
 Descriptive summary on all input variables for each level/combination of group variable. Also while 
@@ -207,37 +219,13 @@ See [article wiki page](https://github.com/daya6489/SmartEDA/wiki/Articles).
 <div id="ref-chon2010">
 
 Chon Ho, Y. (2010). Exploratory data analysis in the context of data mining and resampling.
-International Journal of Psychological Research, 3(1), 9–22. doi:<https://doi.org/10.21500/20112084.819>
-
-</div>
-
-<div id="ref-coates2016">
-
-Coates, M. (2016). exploreR: Tools for Quickly Exploring Data. Retrieved from <https://CRAN.R-project.org/package=exploreR>
-
-</div>
-
-<div id="ref-comtois2018">
-
-Comtois, D. (2018). summarytools: *Tools to Quickly and Neatly Summarize Data*. Retrieved from <https://CRAN.R-project.org/package=summarytools>
-
-</div>
-
-<div id="ref-cui2018">
-
-Cui, B. (2018). DataExplorer: *Data Explorer*. Retrieved from <https://CRAN.Rproject.org/package=DataExplorer>
+International Journal of Psychological Research, 3(1), 9–22.
 
 </div>
 
 <div id="ref-diCerbo2015">
 
 DiCerbo et al. (2015). *Serious Games Analytics. Advances in Game-Based Learning*. In C. Loh, Y. Sheng, & D. Ifenthaler (Eds.),. Cham: Springer. doi:10.1007/978-3-319-05834-4
-
-</div>
-
-<div id="ref-harrell2018">
-
-Harrell et al. (2018). Hmisc: *Harrell Miscellaneous*, Retrieved from <https://CRAN.Rproject.org/package=Hmisc>
 
 </div>
 
@@ -249,13 +237,12 @@ Hoaglin, D., Mosteller, F., & Tukey, J. (1983). *Understanding robust and explor
 
 <div id="ref-jaggi2013">
 
-Jaggi, S. (2013). *Descriptive statistics and exploratory data analysis. Indian Agricultural Statistics Research Institute*. Retrieved from <http://www.iasri.res.in/ebook/EB_SMAR/ebook_pdf%20files/Manual%20II/1-Descriptive%20Statistics.pdf>
-
+Jaggi, S. (2013). *Descriptive statistics and exploratory data analysis. Indian Agricultural Statistics Research Institute*
 </div>
 
 <div id="ref-james2017">
 
-James, G., Witten, D., Hastie, T., & Tibshirani, R. (2017). ISLR: *Data for an Introduction to Statistical Learning with Applications in R*. doi:<https://doi.org/10.1007/978-1-4614-7138-7_1>
+James, G., Witten, D., Hastie, T., & Tibshirani, R. (2017). ISLR: *Data for an Introduction to Statistical Learning with Applications in R*.
 
 </div>
 
@@ -273,19 +260,19 @@ Liu, Q. (2014, October). The Application of Exploratory Data Analysis in Auditin
 
 <div id="ref-maet2017">
 
-Ma, X., Hummer, D., Golden, J. J., Fox, P. A., Hazen, R. M., Morrison, S. M., Downs, R.T., et al. (2017). *Using Visual Exploratory Data Analysis to Facilitate Collaboration and Hypothesis Generation in Cross-Disciplinary Research*. International Journal of Geo-Information, 6(368), 1–11. doi:<https://doi.org/10.3390/ijgi6110368>
+Ma, X., Hummer, D., Golden, J. J., Fox, P. A., Hazen, R. M., Morrison, S. M., Downs, R.T., et al. (2017). *Using Visual Exploratory Data Analysis to Facilitate Collaboration and Hypothesis Generation in Cross-Disciplinary Research*. International Journal of Geo-Information, 6(368), 1–11.
 
 </div>
 
 <div id="ref-nair2018">
 
-Nair, A. (2018). RtutoR: *Shiny Apps for Plotting and Exploratory Analysis*. Retrieved from <https://CRAN.R-project.org/package=RtutoR>
+Nair, A. (2018). RtutoR: *Shiny Apps for Plotting and Exploratory Analysis*.
 
 </div>
 
 <div id="ref-ryu2018">
 
-Ryu, C. (2018). dlookr: *Tools for Data Diagnosis, Exploration, Transformation*. Retrieved from <https://CRAN.R-project.org/package=dlookr>
+Ryu, C. (2018). dlookr: *Tools for Data Diagnosis, Exploration, Transformation*.
 
 </div>
 

@@ -15,7 +15,7 @@ ExpNumStat(data, by = "A", gp = NULL, Qnt = NULL, Nlim = 10,
 
 \item{gp}{target variable if any, default NULL}
 
-\item{Qnt}{default NULL. Specified quantiles [c(.25,0.75) will find 25th and 75th percentiles]}
+\item{Qnt}{default NULL. Specified quantiles is c(.25,0.75) will find 25th and 75th percentiles}
 
 \item{Nlim}{numeric variable limit (default value is 10 which means it will only consider those variable having more than 10 unique values and variable type is numeric/integer)}
 
@@ -46,37 +46,37 @@ Function provides summary statistics for all numerical variable. This function a
 \details{
 coloumn descriptions
 \itemize{
-  \item \code{Vname} - Variable name
-  \item \code{Group} - Target variable
-  \item \code{TN} - Total sample (inculded NA observations)
-  \item \code{nNeg} - Total negative observations
-  \item \code{nPos} - Total positive observations
-  \item \code{nZero} - Total zero observations
-  \item \code{NegInf} - Negative infinite count
-  \item \code{PosInf} - Positive infinite count
-  \item \code{NA_value} - Not Applicable count
-  \item \code{Per_of_Missing} - Percentage of missings
-  \item \code{Min} - minimum value
-  \item \code{Max} - maximum value
-  \item \code{Mean} - average value
-  \item \code{Median} - median value
-  \item \code{SD} - Standard deviation
-  \item \code{CV} - coefficient of variations (SD/mean)*100
-  \item \code{IQR} - Inter quartile range
-  \item \code{Qnt} - quantile values
-  \item \code{MesofShape} - Skewness and Kurtosis
-  \item \code{Outlier} - Number of outliers
-  \item \code{Cor} - Correlation b/w target and independent variables
+  \item \code{Vname} is Variable name
+  \item \code{Group} is Target variable
+  \item \code{TN} is Total sample (inculded NA observations)
+  \item \code{nNeg} is Total negative observations
+  \item \code{nPos} is Total positive observations
+  \item \code{nZero} is Total zero observations
+  \item \code{NegInf} is Negative infinite count
+  \item \code{PosInf} is Positive infinite count
+  \item \code{NA_value} is Not Applicable count
+  \item \code{Per_of_Missing} is Percentage of missings
+  \item \code{Min} is minimum value
+  \item \code{Max} is maximum value
+  \item \code{Mean} is average value
+  \item \code{Median} is median value
+  \item \code{SD} is Standard deviation
+  \item \code{CV} is coefficient of variations (SD/mean)*100
+  \item \code{IQR} is Inter quartile range
+  \item \code{Qnt} is quantile values
+  \item \code{MesofShape} is Skewness and Kurtosis
+  \item \code{Outlier} is Number of outliers
+  \item \code{Cor} is Correlation b/w target and independent variables
 }
 }
 \examples{
-# Descriptive summary of numeric variables - Summary by Target variables
+# Descriptive summary of numeric variables is Summary by Target variables
 ExpNumStat(mtcars,by="G",gp="gear",Qnt=c(0.1,0.2),MesofShape=2,
            Outlier=TRUE,round=3)
-# Descriptive summary of numeric variables - Summary by Overall
+# Descriptive summary of numeric variables is Summary by Overall
 ExpNumStat(mtcars,by="A",gp="gear",Qnt=c(0.1,0.2),MesofShape=2,
            Outlier=TRUE,round=3)
-# Descriptive summary of numeric variables - Summary by Overall and Group
+# Descriptive summary of numeric variables is Summary by Overall and Group
 ExpNumStat(mtcars,by="GA",gp="gear",Qnt=seq(0,1,.1),MesofShape=1,
            Outlier=TRUE,round=2)
 # Summary by specific statistics for all numeric variables

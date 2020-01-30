@@ -23,13 +23,13 @@
 #' \itemize{
 #'   \item \code{Bar graph} for raw data(this function will dynamically pick all the categorical variable and plot the bar chart)
 #'   \item \code{Bar graph} for aggregated data
-#'   \item \code{Bar graph} - a Stacked Bar graph by target variable
+#'   \item \code{Bar graph} is a Stacked Bar graph by target variable
 #'}
 #'
 #' @examples
 #' ## Bar graph for specified variable
-#' mtdata <- mtcars
-#' mtdata$carname <- rownames(mtcars)
+#' mtdata = mtcars
+#' mtdata$carname = rownames(mtcars)
 #' ExpCatViz(data=mtdata,target="carname",col="blue",rdata=TRUE,value="mpg")
 #' n=nrow(mtdata)
 #' ExpCatViz(data=mtdata,target="carname",col=rainbow(n),rdata=TRUE,value="mpg") ## Ranibow colour

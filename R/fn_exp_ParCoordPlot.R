@@ -1,6 +1,6 @@
-#' Parallel Co-ordinate plots
+#' Parallel Co ordinate plots
 #'
-#' This function creates parallel Co-ordinate plots
+#' This function creates parallel Co ordinate plots
 #'
 #' @param data Input dataframe or data.table
 #' @param Group stratification variables
@@ -9,10 +9,10 @@
 #' @param Cvar vector of categorical variables, default it will consider all the categorical variable
 #' @param scale scale the variables in the parallel coordinate plot (Default normailized with minimum of the variable is zero and maximum of the variable is one) (see ggparcoord details for more scale options)
 #' @seealso \code{\link[GGally:ggparcoord]{ggparcoord}}
-#' @return  Parallel Co-ordinate plots
+#' @return  Parallel Co ordinate plots
 #'
 #' @details
-#' The Parallel Co-ordinate plots having the functionalities of visulization for sample rows if data size large. Also data can be stratified basis of Target or group variables. It will normalize all numeric variables between 0 and 1 also having other standardization options. It will automatically make dummy (1,0) variables for categorical variables
+#' The Parallel Co ordinate plots having the functionalities of visulization for sample rows if data size large. Also data can be stratified basis of Target or group variables. It will normalize all numeric variables between 0 and 1 also having other standardization options. It will automatically make dummy (1,0) variables for categorical variables
 #'
 #' @examples
 #' CData = ISLR::Carseats

@@ -1,6 +1,6 @@
-#' Quantile-Quantile Plots
+#' Quantile Quantile Plots
 #'
-#' This function automatically scans through each variable and creates normal QQ plot also adds a line to a normal quantile-quantile plot.
+#' This function automatically scans through each variable and creates normal QQ plot also adds a line to a normal quantile quantile plot.
 #'
 #' @param data Input dataframe or data.table
 #' @param nlim numeric variable limit
@@ -8,7 +8,7 @@
 #' @param Page output pattern. if Page=c(3,2), It will generate 6 plots with 3 rows and 2 columns
 #' @param sample random number of plots
 #' @seealso \code{\link[ggplot2:geom_qq]{geom_qq}}
-#' @return  Normal quantile-quantile plot
+#' @return  Normal quantile quantile plot
 #'
 #' @examples
 #' CData = ISLR::Carseats

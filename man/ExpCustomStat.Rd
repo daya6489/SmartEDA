@@ -14,7 +14,7 @@ ExpCustomStat(data, Cvar = NULL, Nvar = NULL, stat = NULL,
 
 \item{Nvar}{quantitative variables on which to run summary statistics for.}
 
-\item{stat}{descriptive statistics. Sepecify which summary statistics required (Included all base stat functions like 'mean','medain','max','min','sum','IQR','sd','var',quantile like P0.1, P0.2 etc'). Also added two more stat here are 'PS' - percentage of shares and 'Prop' - column percentage}
+\item{stat}{descriptive statistics. Sepecify which summary statistics required (Included all base stat functions like 'mean','medain','max','min','sum','IQR','sd','var',quantile like P0.1, P0.2 etc'). Also added two more stat here are 'PS' is percentage of shares and 'Prop' is column percentage}
 
 \item{gpby}{default value is True. Group level summary will be created based on list of categorical variable. If summary required at each categorical variable level then keep this option as FALSE}
 
@@ -33,7 +33,7 @@ Table of descriptive statistics. Output returns matrix object containing descrip
 \details{
 Filter unique value from all the numeric variables
 
-Case1: Excluding unique values or outliers values like '999' or '9999' or '-9' or '-1111', or '888' etc from each selected variables.
+Case1: Excluding unique values or outliers values like '999' or '9999' or '888' etc from each selected variables.
 
 Eg:dat = data.frame(x = c(23,24,34,999,12,12,23,999,45),
                  y = c(1,3,4,999,0,999,0,8,999,0)

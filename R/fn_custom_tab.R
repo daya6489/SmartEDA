@@ -5,7 +5,7 @@
 #' @param data dataframe or Matrix
 #' @param Cvar qualitative variables on which to stratify / subgroup or run categorical summaries
 #' @param Nvar quantitative variables on which to run summary statistics for.
-#' @param stat descriptive statistics. Sepecify which summary statistics required (Included all base stat functions like 'mean','medain','max','min','sum','IQR','sd','var',quantile like P0.1, P0.2 etc'). Also added two more stat here are 'PS' - percentage of shares and 'Prop' - column percentage
+#' @param stat descriptive statistics. Sepecify which summary statistics required (Included all base stat functions like 'mean','medain','max','min','sum','IQR','sd','var',quantile like P0.1, P0.2 etc'). Also added two more stat here are 'PS' is percentage of shares and 'Prop' is column percentage
 #' @param gpby default value is True. Group level summary will be created based on list of categorical variable. If summary required at each categorical variable level then keep this option as FALSE
 #' @param filt filter out data while running the summary statistics. Filter can apply accross data or individual variable level using filt option. If there are multiple filters, seperate the conditons by using '^'. Ex: Nvar = c("X1","X2","X3","X4"), let say we need to exclude data X1>900 for X1 variable, X2==10 for X2 variable, Gender !='Male' for X3 variable and all data for X4 then filt should be, filt = c("X1>900"^"X2==10"^"Gender!='Male'"^all) or  c("X1>900"^"X2==10"^"Gender!='Male'"^ ^). in case if you want to keep all data for some of the variable listed in Nvar, then specify inside the filt like ^all^ or ^ ^(single space)
 #' @param dcast fast dcast from data.table
@@ -15,7 +15,7 @@
 #' @details
 #' Filter unique value from all the numeric variables
 #'
-#' Case1: Excluding unique values or outliers values like '999' or '9999' or '-9' or '-1111', or '888' etc from each selected variables.
+#' Case1: Excluding unique values or outliers values like '999' or '9999' or '888' etc from each selected variables.
 #'
 #' Eg:dat = data.frame(x = c(23,24,34,999,12,12,23,999,45),
 #'                  y = c(1,3,4,999,0,999,0,8,999,0)

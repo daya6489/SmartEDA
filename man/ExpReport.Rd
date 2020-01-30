@@ -42,7 +42,7 @@ ExpReport will generate three different types of HTML report based on the Target
 \itemize{
 \item IF Target = NULL, means there is no defined dependent varaible then it will genreate general EDA report at overall level
 \item IF Target = continuous, then it will genreate EDA report including univariate and multivarite summary statistics with correlation.
-\item IF Target = categorical, then it will genreate EDA report including univariate and multivarite summary statistics with chi-square, Information values.
+\item IF Target = categorical, then it will genreate EDA report including univariate and multivarite summary statistics with chi square, Information values.
 }
 }
 \examples{
