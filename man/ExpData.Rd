@@ -4,7 +4,7 @@
 \alias{ExpData}
 \title{Function to generate the overview of a data frame}
 \usage{
-ExpData(data,type=1)
+ExpData(data, type = 1)
 }
 \arguments{
 \item{data}{a data frame}
@@ -16,10 +16,10 @@ This function used to produce summaries of data structure and overview of the da
 }
 \details{
 This function provides overview and structure of the data frames.
-
-IF Type=1,overeview of the data (column names are "Descriptions", "Obs")
-
-If Type=2,structure of the data (column names are "S.no","Variable Name","Variable Type","% of Missing","No. of Unique values")
+\itemize{
+\item Type = 1, overeview of the data (column names are "Descriptions", "Obs")
+\item Type = 2, structure of the data (column names are "S.no", "Variable Name", "Variable Type", "% of Missing", "No. of Unique values")
+}
 }
 \examples{
 # Overview of the data

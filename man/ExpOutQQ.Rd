@@ -2,9 +2,9 @@
 % Please edit documentation in R/fn_exp_QQPlot.R
 \name{ExpOutQQ}
 \alias{ExpOutQQ}
-\title{Quantile-Quantile Plots}
+\title{Quantile Quantile Plots}
 \usage{
-ExpOutQQ(data,nlim=NULL,fname=NULL,Page=NULL,sample=NULL)
+ExpOutQQ(data, nlim = 3, fname = NULL, Page = NULL, sample = NULL)
 }
 \arguments{
 \item{data}{Input dataframe or data.table}
@@ -18,10 +18,10 @@ ExpOutQQ(data,nlim=NULL,fname=NULL,Page=NULL,sample=NULL)
 \item{sample}{random number of plots}
 }
 \value{
-Normal quantile-quantile plot
+Normal quantile quantile plot
 }
 \description{
-This function automatically scans through each variable and creates normal QQ plot also adds a line to a normal quantile-quantile plot.
+This function automatically scans through each variable and creates normal QQ plot also adds a line to a normal quantile quantile plot.
 }
 \examples{
 CData = ISLR::Carseats

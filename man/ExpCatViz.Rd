@@ -4,19 +4,20 @@
 \alias{ExpCatViz}
 \title{Distributions of categorical variables}
 \usage{
-ExpCatViz(data,target=NULL,fname=NULL,clim=10,col=NULL,margin=1,Page=NULL,
-Flip=F,sample=NULL,rdata=FALSE,value=NULL,gtitle=NULL,theme="Default")
+ExpCatViz(data, target = NULL, fname = NULL, clim = 10, col = NULL,
+  margin = 1, Page = NULL, Flip = F, sample = NULL,
+  rdata = FALSE, value = NULL, gtitle = NULL, theme = "Default")
 }
 \arguments{
 \item{data}{dataframe or matrix}
 
-\item{target}{target variable. This is not a mandatory field.}
+\item{target}{target variable. This is not a mandatory field}
 
 \item{fname}{output file name. Output will be generated in PDF format}
 
-\item{clim}{maximum categories to be considered to include in bar graphs.}
+\item{clim}{maximum categories to be considered to include in bar graphs}
 
-\item{col}{define the colors to fill the bars, default it will take sample colours.}
+\item{col}{define the colors to fill the bars, default it will take sample colours}
 
 \item{margin}{index, 1 for row based proportions and 2 for column based proportions}
 
@@ -32,25 +33,33 @@ Flip=F,sample=NULL,rdata=FALSE,value=NULL,gtitle=NULL,theme="Default")
 
 \item{gtitle}{graph title}
 
-\item{theme}{extra themes, geoms, and scales for 'ggplot2' (use theme from ggthemes package)}
+\item{theme}{adding extra themes, geoms, and scales for 'ggplot2' (eg: themes options from ggthemes package)}
 }
 \value{
 This function returns collated graphs in grid format in PDF or JPEG format. All the files will be stored in the working directory
 
-Bar graph - for raw data(this function will dynamically pick all the categorical variable and plot the bar chart)
-
-Bar graph - aggregated data
-
-Stacked Bar graph by target variable
+\itemize{
+  \item \code{Bar graph} for raw data(this function will dynamically pick all the categorical variable and plot the bar chart)
+  \item \code{Bar graph} for aggregated data
+  \item \code{Bar graph} is a Stacked Bar graph by target variable
+}
 }
 \description{
 This function automatically scans through each variable and creates bar plot for categorical variable.
 }
 \examples{
 ## Bar graph for specified variable
-mtdata <- mtcars
-mtdata$carname <- rownames(mtcars)
+mtdata = mtcars
+mtdata$carname = rownames(mtcars)
 ExpCatViz(data=mtdata,target="carname",col="blue",rdata=TRUE,value="mpg")
+n=nrow(mtdata)
+ExpCatViz(data=mtdata,target="carname",col=rainbow(n),rdata=TRUE,value="mpg") ## Ranibow colour
+# Stacked bar chart
+ExpCatViz(data=mtdata,target = "gear",col=hcl.colors(3, "Set 2"))
+ExpCatViz(data=mtdata,target = "gear",col=c("red", "green", "blue"))
+# Bar chart
+ExpCatViz(data=mtdata)
+ExpCatViz(data=mtdata,col="blue",gtitle = "Barplot")
 }
 \seealso{
 \code{\link[ggplot2:geom_bar]{geom_bar}}

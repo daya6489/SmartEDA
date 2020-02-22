@@ -39,7 +39,7 @@
 #' # Bar chart
 #' ExpCatViz(data=mtdata)
 #' ExpCatViz(data=mtdata,col="blue",gtitle = "Barplot")
-#' @importFrom grDevices colors hcl.colors pdf dev.off
+#' @importFrom grDevices colors pdf dev.off
 #' @importFrom gridExtra marrangeGrob
 #' @importFrom sampling srswor
 #' @export ExpCatViz

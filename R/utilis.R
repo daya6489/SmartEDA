@@ -45,13 +45,19 @@ swritepdf <- function(fname, plot_l, Page){
 
 # chart colour selection function
 # Selecting multiple colours based on the chart input
+hcl_colors <- c("#ED90A4","#EC919F","#EC929A","#EB9396","#E99491","#E8968C","#E79787","#E59883","#E3997E","#E19B79","#DF9C75","#DC9E70","#DA9F6C","#D7A168","#D4A264","#D1A360","#CEA55C","#CBA659","#C7A857","#C3A954","#C0AB52"
+                ,"#BCAC51","#B8AD50","#B4AF4F","#AFB050","#ABB150","#A6B352","#A1B454","#9CB556","#97B658","#92B75B","#8CB85F","#86B962","#80BA66","#7ABB6A","#74BC6E","#6DBD73","#66BD77","#5FBE7C","#57BF80","#4FBF85","#46C089"
+                ,"#3CC08E","#31C193","#24C197","#12C19C","#00C1A0","#00C1A5","#00C1A9","#00C1AE","#00C1B2","#00C1B6","#00C1BA","#00C0BE","#00C0C2","#00BFC6","#00BECA","#00BECD","#00BDD1","#15BCD4","#28BBD7","#36B9DA","#42B8DD"
+                ,"#4DB7DF","#57B6E2","#60B4E4","#69B2E6","#72B1E7","#7AAFE9","#82ADEA","#8AACEB","#91AAEC","#98A8EC","#9FA6EC","#A5A4EC","#ACA2EC","#B2A0EC","#B79FEB","#BD9DEA","#C29BE9","#C699E7","#CB98E6","#CF96E4","#D395E2"
+                ,"#D793DF","#DA92DD","#DD91DA","#E090D7","#E28FD4","#E58FD1","#E78ECD","#E88ECA","#EA8DC6","#EB8DC2","#EC8DBE","#ED8EBA","#ED8EB6","#EE8EB1","#EE8FAD","#ED90A8")
+
 scolorsel <- function(col = NULL, nlevel = 0){
   if (is.null(col)){
     if (nlevel <= 1) {
-      fill_1 <- hcl.colors(1, "Set 2")
+      fill_1 <- hcl_colors[1]
     } else
       if (nlevel == 2) {
-        fill_1 <- hcl.colors(2, "Set 2")
+        fill_1 <- hcl_colors[1:2]
       } else
         if (nlevel > 2) {
           fill_1 <- colors()[srswor(nlevel, length(colors()) ) == 1]
@@ -67,7 +73,7 @@ scolorsel <- function(col = NULL, nlevel = 0){
           fill_1 <- col[1 : nlevel]
         } else
           if (nlevel > 0) {
-            fill_1 <- hcl.colors(nlevel, "Set 2")
+            fill_1 <- hcl_colors[1:nlevel]
           }
   }
   return(fill_1)

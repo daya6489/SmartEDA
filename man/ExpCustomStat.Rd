@@ -4,8 +4,8 @@
 \alias{ExpCustomStat}
 \title{Customized summary statistics}
 \usage{
-ExpCustomStat(data,Cvar=NULL,Nvar=NULL,stat=NULL,gpby=TRUE,filt=NULL,dcast=FALSE,
-value=NULL)
+ExpCustomStat(data, Cvar = NULL, Nvar = NULL, stat = NULL,
+  gpby = TRUE, filt = NULL, dcast = FALSE, value = NULL)
 }
 \arguments{
 \item{data}{dataframe or Matrix}
@@ -14,7 +14,7 @@ value=NULL)
 
 \item{Nvar}{quantitative variables on which to run summary statistics for.}
 
-\item{stat}{descriptive statistics. Sepecify which summary statistics required (Included all base stat functions like 'mean','medain','max','min','sum','IQR','sd','var',quantile like P0.1, P0.2 etc'). Also added two more stat here are 'PS' - percentage of shares and 'Prop' - column percentage}
+\item{stat}{descriptive statistics. Sepecify which summary statistics required (Included all base stat functions like 'mean','medain','max','min','sum','IQR','sd','var',quantile like P0.1, P0.2 etc'). Also added two more stat here are 'PS' is percentage of shares and 'Prop' is column percentage}
 
 \item{gpby}{default value is True. Group level summary will be created based on list of categorical variable. If summary required at each categorical variable level then keep this option as FALSE}
 
@@ -33,18 +33,40 @@ Table of descriptive statistics. Output returns matrix object containing descrip
 \details{
 Filter unique value from all the numeric variables
 
-This will be usefull when we need to exclude some unique imputed or outliers values like '999' or '9999' or '-9' or '-1111', or '888' etc from each selected variables.
+Case1: Excluding unique values or outliers values like '999' or '9999' or '888' etc from each selected variables.
 
 Eg:dat = data.frame(x = c(23,24,34,999,12,12,23,999,45),
                  y = c(1,3,4,999,0,999,0,8,999,0)
 
 Exclude 999:
+
 x = c(23,24,34,12,12,23,45)
+
 y = c(1,3,4,0,0,8,0)
+
+Case2: Summarise the data with selected descriptive statistics like 'mean' and 'median' or 'sum' and 'variance' etc..
+
+Case3: Aggregate the data with different statistics using group by statement
+
+Case4: Reshape the summary statistics.. etc
 
 The complete functionality of `ExpCustomStat` function is detailed in vignette help page with example code.
 }
 \examples{
-ExpCustomStat(mtcars,Cvar=c("vs","am","gear"),Nvar=c("disp","mpg"),
-stat=c("Count","sum","PS"),gpby=TRUE,filt =NULL)
+## Selected summary statistics 'Count,sum, percentage of shares' for
+## disp and mpg variables by vs, am and gear
+ExpCustomStat(mtcars, Cvar=c("vs","am","gear"), Nvar = c("disp","mpg"),
+             stat = c("Count","sum","PS"), gpby = TRUE, filt = NULL)
+
+ExpCustomStat(mtcars, Cvar=c("gear"), Nvar = c("disp","mpg"),
+             stat = c("Count","sum","var"), gpby = TRUE, filt = "am==1")
+
+ExpCustomStat(mtcars, Cvar = c("gear"), Nvar = c("disp","mpg"),
+             stat = c("Count","sum","mean","median"), gpby = TRUE, filt = "am==1")
+
+## Selected summary statistics 'Count and fivenum stat for disp and mpg
+## variables by gear
+ExpCustomStat(mtcars, Cvar = c("gear"), Nvar = c("disp", "mpg"),
+              stat = c("Count",'min','p0.25','median','p0.75','max'), gpby = TRUE)
+
 }

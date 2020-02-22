@@ -2,9 +2,10 @@
 % Please edit documentation in R/fn_exp_ParCoordPlot.R
 \name{ExpParcoord}
 \alias{ExpParcoord}
-\title{Parallel Co-ordinate plots}
+\title{Parallel Co ordinate plots}
 \usage{
-ExpParcoord (data,Group=NULL,Stsize=NULL,Nvar=NULL,Cvar=NULL,scale=NULL)
+ExpParcoord(data, Group = NULL, Stsize = NULL, Nvar = NULL,
+  Cvar = NULL, scale = NULL)
 }
 \arguments{
 \item{data}{Input dataframe or data.table}
@@ -20,31 +21,31 @@ ExpParcoord (data,Group=NULL,Stsize=NULL,Nvar=NULL,Cvar=NULL,scale=NULL)
 \item{scale}{scale the variables in the parallel coordinate plot (Default normailized with minimum of the variable is zero and maximum of the variable is one) (see ggparcoord details for more scale options)}
 }
 \value{
-Parallel Co-ordinate plots
+Parallel Co ordinate plots
 }
 \description{
-This function creates parallel Co-ordinate plots
+This function creates parallel Co ordinate plots
 }
 \details{
-The Parallel Co-ordinate plots having the functionalities of visulization for sample rows if data size large. Also data can be stratified basis of Target or group variables. It will normalize all numeric variables between 0 and 1 also having other standardization options. It will automatically make dummy (1,0) variables for categorical variables
+The Parallel Co ordinate plots having the functionalities of visulization for sample rows if data size large. Also data can be stratified basis of Target or group variables. It will normalize all numeric variables between 0 and 1 also having other standardization options. It will automatically make dummy (1,0) variables for categorical variables
 }
 \examples{
 CData = ISLR::Carseats
 # Defualt ExpParcoord funciton
 ExpParcoord(CData,Group=NULL,Stsize=NULL,
-Nvar=c("Price","Income","Advertising","Population","Age","Education"))
+			   Nvar=c("Price","Income","Advertising","Population","Age","Education"))
 # With Stratified rows and selected columns only
 ExpParcoord(CData,Group="ShelveLoc",Stsize=c(10,15,20),
-Nvar=c("Price","Income"),Cvar=c("Urban","US"))
+			   Nvar=c("Price","Income"),Cvar=c("Urban","US"))
 # Without stratification
 ExpParcoord(CData,Group="ShelveLoc",Nvar=c("Price","Income"),
-Cvar=c("Urban","US"),scale=NULL)
+			   Cvar=c("Urban","US"),scale=NULL)
 # Scale changed std: univariately, subtract mean and divide by standard deviation
 ExpParcoord(CData,Group="US",Nvar=c("Price","Income"),
-Cvar=c("ShelveLoc"),scale="std")
+			   Cvar=c("ShelveLoc"),scale="std")
 # Selected numeric variables
 ExpParcoord(CData,Group="ShelveLoc",Stsize=c(10,15,20),
-Nvar=c("Price","Income","Advertising","Population","Age","Education"))
+			   Nvar=c("Price","Income","Advertising","Population","Age","Education"))
 
 }
 \seealso{

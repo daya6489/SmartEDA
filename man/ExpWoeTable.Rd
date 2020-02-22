@@ -4,7 +4,7 @@
 \alias{ExpWoeTable}
 \title{Function provides summary statistics with weight of evidence}
 \usage{
-ExpWoeTable(X, Y, valueOfGood = NULL,print=FALSE,Round=2)
+ExpWoeTable(X, Y, valueOfGood = NULL, print = FALSE, Round = 2)
 }
 \arguments{
 \item{X}{Independent categorical variable.}

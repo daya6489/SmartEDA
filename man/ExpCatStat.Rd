@@ -4,8 +4,9 @@
 \alias{ExpCatStat}
 \title{Function provides summary statistics for all character or categorical columns in the dataframe}
 \usage{
-ExpCatStat(data,Target=NULL,result=c("Stat","IV"),clim=10,nlim=10,bins=10,
-Pclass=NULL,plot=FALSE,top=20,Round=2)
+ExpCatStat(data, Target = NULL, result = "Stat", clim = 10,
+  nlim = 10, bins = 10, Pclass = NULL, plot = FALSE, top = 20,
+  Round = 2)
 }
 \arguments{
 \item{data}{dataframe or matrix}
@@ -22,7 +23,7 @@ Pclass=NULL,plot=FALSE,top=20,Round=2)
 
 \item{Pclass}{reference category of target variable}
 
-\item{plot}{Inforamtion value barplot (default False)}
+\item{plot}{Inforamtion value barplot (default FALSE)}
 
 \item{top}{for plotting top information values (default value is 20)}
 
@@ -30,48 +31,37 @@ Pclass=NULL,plot=FALSE,top=20,Round=2)
 }
 \value{
 This function provides summary statistics for categorical variable
-
-Stat-Summary statistics includes Chi square test scores, p value, Information values, Cramers V and Degree if association
-
-IV- Weight of evidence and Information values
+\itemize{
+  \item \code{Stat} - Summary statistics includes Chi square test scores, p value, Information values, Cramers V and Degree if association
+  \item \code{IV} - Weight of evidence and Information values
+}
 
 Columns description:
-
- •	Variable – variable name
-
- •	Target -  Target variable label
-
- •	class – name of bin (variable value otherwise)
-
- •	out0 – number of good observations
-
- •	out1 – number of bad observations
-
- •	Total – Total values for each category
-
- •	pct1 – good observations / total good observations
-
- •	pct0 – bad observations / total bad observations
-
- •	odds – Odds ratio [(a/b)/(c/d)]
-
- •	woe – Weight of Evidence – calculated as ln(odds)
-
- •	iv – Information Value  - ln(odds) * (pct0 – pct1)
+\itemize{
+  \item \code{Variable} variable name
+  \item \code{Target} - Target variable
+  \item \code{class} - name of bin (variable value otherwise)
+  \item \code{out0} - number of good observations
+  \item \code{out1} - number of bad observations
+  \item \code{Total} - Total values for each category
+  \item \code{pct1} - good observations / total good observations
+  \item \code{pct0} - bad observations / total bad observations
+  \item \code{odds} - Odds ratio [(a/b)/(c/d)]
+  \item \code{woe} - Weight of Evidence – calculated as ln(odds)
+  \item \code{iv} - Information Value  - ln(odds) * (pct0 – pct1)
+}
 }
 \description{
 This function combines results from weight of evidence, information value and summary statistics.
 }
 \details{
 Criteria used for categorical variable predictive power classification are
-
-If information value is < 0.03 then predictive power = "Not Predictive"
-
-If information value is 0.3 to 0.1 then predictive power = "Somewhat Predictive"
-
-If information value is 0.1 to 0.3 then predictive power = "Meidum Predictive"
-
-If information value is >0.3 then predictive power = "Highly Predictive"
+\itemize{
+  \item \code{If information value is < 0.03} then predictive power = "Not Predictive"
+  \item \code{If information value is 0.3 to 0.1} then predictive power = "Somewhat Predictive"
+  \item \code{If information value is 0.1 to 0.3} then predictive power = "Meidum Predictive"
+  \item \code{If information value is >0.3} then predictive power = "Highly Predictive"
+}
 }
 \examples{
 # Example 1
