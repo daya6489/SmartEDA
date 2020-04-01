@@ -1,3 +1,10 @@
+# SmartEDA 0.3.4
+## Enhancements
+* Added mutliple standard devitaion options to treat oultier value in `ExpOutliers`
+
+## Bug fixes
+* Fixed error Centos 7 MRO, removed grDevices hcl.colours dependencies
+
 # SmartEDA 0.3.3
 ## New Features
 * Added function `ExpOutliers` to run univariate outlier analysis

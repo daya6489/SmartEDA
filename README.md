@@ -3,6 +3,9 @@
 [![Downloads](http://cranlogs.r-pkg.org/badges/SmartEDA)](https://cran.r-project.org/package=SmartEDA)
 [![Total Downloads](http://cranlogs.r-pkg.org/badges/grand-total/SmartEDA)](https://cran.r-project.org/package=SmartEDA)
 
+[![GitHub Stars](https://img.shields.io/github/stars/daya6489/SmartEDA.svg?style=social)](https://img.shields.io/github/stars/daya6489/SmartEDA)
+
+
 ---
 
 # Background
@@ -26,7 +29,7 @@ SmartEDA package with other similar packages available in CRAN for exploratory d
 ![SmartEDA](https://github.com/daya6489/SmartEDA/blob/master/man/figures/SmartEDA_comp.PNG)
 
 # Journal of Open Source Software Article
-An article describing SmartEDA pacakge for exploratory data analysis approach has been published in [arxiv](https://arxiv.org/pdf/1903.04754.pdf) and currently it is under review at The Journal of Open Source Software. Please cite the paper if you use SmartEDA in your work!
+An article describing SmartEDA pacakge for exploratory data analysis approach has been published in [arxiv](https://arxiv.org/pdf/1903.04754.pdf) and Journal of Open Source Software [JOSS](https://joss.theoj.org/papers/10.21105/joss.01509). Please cite the paper if you use SmartEDA in your work!
 
 # Installation
 
@@ -171,6 +174,10 @@ ExpOutliers(Carseats, varlist = c("Sales","CompPrice","Income"), method = "boxpl
 
 ##Identifying outliers mehtod - 3 Standard Deviation
 ExpOutliers(Carseats, varlist = c("Sales","CompPrice","Income"), method = "3xStDev",  capping = c(0.1, 0.9))
+
+##Identifying outliers mehtod - 2 Standard Deviation
+ExpOutliers(Carseats, varlist = c("Sales","CompPrice","Income"), method = "2xStDev",  capping = c(0.1, 0.9))
+
 
 ##Create outlier flag (1,0) if there are any outliers 
 ExpOutliers(Carseats, varlist = c("Sales","CompPrice","Income"), method = "3xStDev",  capping = c(0.1, 0.9), outflag = TRUE)

@@ -12,7 +12,7 @@ ExpOutliers(data, varlist = NULL, method = "boxplot",
 
 \item{varlist}{list of numeric variable to perform the univariate outlier analysis}
 
-\item{method}{detect outlier method boxplot or 3xStDev}
+\item{method}{detect outlier method boxplot or NxStDev (where N is 1 or 2 or 3 std deviations, like 1xStDev or 2xStDev or 3xStDev)}
 
 \item{treatment}{treating outlier value by mean or median. default NULL}
 
@@ -46,6 +46,10 @@ Univariate outlier analysis method
 \examples{
 ExpOutliers(mtcars, varlist = c("mpg","disp","wt", "qsec"), method = 'BoxPlot',
 capping = c(0.1, 0.9), outflag = TRUE)
+
+ExpOutliers(mtcars, varlist = c("mpg","disp","wt", "qsec"), method = '2xStDev',
+capping = c(0.1, 0.9), outflag = TRUE)
+
 # Mean imputation or 5th percentile or 95th percentile value capping
 ExpOutliers(mtcars, varlist = c("mpg","disp","wt", "qsec"), method = 'BoxPlot',
 treatment = "mean", capping = c(0.05, 0.95), outflag = TRUE)

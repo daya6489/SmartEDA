@@ -4,7 +4,7 @@
 #'
 #' @param data dataframe or matrix
 #' @param varlist list of numeric variable to perform the univariate outlier analysis
-#' @param method detect outlier method boxplot or 3xStDev
+#' @param method detect outlier method boxplot or NxStDev (where N is 1 or 2 or 3 std deviations, like 1xStDev or 2xStDev or 3xStDev)
 #' @param treatment treating outlier value by mean or median. default NULL
 #' @param capping default LL = 0.05 & UL = 0.95cap the outlier value by replacing those observations outside the lower limit with the value of 5th percentile and above the upper limit, with the value of 95th percentile value
 #' @param outflag add extreme value flag variable into output data
@@ -28,6 +28,10 @@
 #' @examples
 #' ExpOutliers(mtcars, varlist = c("mpg","disp","wt", "qsec"), method = 'BoxPlot',
 #' capping = c(0.1, 0.9), outflag = TRUE)
+#'
+#' ExpOutliers(mtcars, varlist = c("mpg","disp","wt", "qsec"), method = '2xStDev',
+#' capping = c(0.1, 0.9), outflag = TRUE)
+#'
 #' # Mean imputation or 5th percentile or 95th percentile value capping
 #' ExpOutliers(mtcars, varlist = c("mpg","disp","wt", "qsec"), method = 'BoxPlot',
 #' treatment = "mean", capping = c(0.05, 0.95), outflag = TRUE)
@@ -62,13 +66,15 @@ ExpOutliers <- function(data, varlist = NULL, method = "boxplot", treatment = NU
         Lower_bound <- round(qnt[[1]] - 1.5 * IQR(x, na.rm = TRUE), 2)
         Upper_bound <- round(qnt[[2]] + 1.5 * IQR(x, na.rm = TRUE), 2)
       } else
-        if(method == "3xstdev"){
+        {
+          sdv <- as.numeric(substr(method,1,1))
+          if(!is.numeric(sdv)) stop("selected outlier method is wrong")
           std_dev <- sd(x, na.rm = TRUE)
           mean_value <- mean(x, na.rm = TRUE)
-          anomaly_cut <- std_dev * 3
+          anomaly_cut <- std_dev * sdv
           Lower_bound <- round(mean_value - anomaly_cut, 2)
           Upper_bound <- round(mean_value + anomaly_cut, 2)
-        } else stop("selected outlier method is wrong")
+        }
       outrows_lower <-paste(which(x < Lower_bound), collapse = ",")
       outrows_upper <-paste(which(x > Upper_bound), collapse = ",")
       num_outlier <- length(x[x<Lower_bound | x>Upper_bound])

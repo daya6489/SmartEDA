@@ -65,7 +65,7 @@
 #'            Outlier=FALSE,round=2,dcast = TRUE,val = "IQR")
 #' @author dubrangala
 #' @importFrom stats quantile median IQR var reorder sd cor
-#' @importFrom data.table dcast
+#' @importFrom data.table dcast.data.table setDT
 #' @export ExpNumStat
 
 ExpNumStat <- function(data, by = "A", gp = NULL, Qnt = NULL, Nlim = 10, MesofShape = 2,
@@ -172,7 +172,8 @@ ExpNumStat <- function(data, by = "A", gp = NULL, Qnt = NULL, Nlim = 10, MesofSh
       }
      if (isTRUE(dcast)){
       cf <- formula(paste("Vname", "Group", sep = "~"))
-      cp <- data.frame(Stat = val, dcast(tb_op, cf, value.var = val))
+      setDT(tb_op)
+      cp <- data.frame(Stat = val, dcast.data.table(tb_op, cf, value.var = val))
       return(cp)
     } else return(tb_op)
   }
