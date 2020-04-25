@@ -21,7 +21,7 @@ ExpData <- function(data, type = 1){
   if (!is.data.frame(data)) stop("data must be a numeric vector or data.frame")
   xx <- as.data.frame(data)
   dd <- sapply( sapply(xx, function(x){
-    round(length(x[is.na(x)]) / length(x), 2)
+    round((length(x[is.na(x)]) + length(x[x=='']))/ length(x), 5)
     }),
     function(y) {
       if (y == 0.0) xx <- 1
@@ -38,6 +38,7 @@ ExpData <- function(data, type = 1){
 
   Date_cnt <- length(names(xx)[unlist(sapply(xx, function(x) class(x) %in% c("Date", "POSIXct", "POSIXt")))])
   Unif_cnt <- length(names(xx)[unlist(sapply(xx, function(x) length(unique(x[!is.na(x)])) == 1))])
+  Unvar_cnt <- length(names(xx)[unlist(sapply(xx, function(x) length(unique(x)) == length(x)))])
 
      if (type == 1){
        Out_put <- data.frame (rbind(
@@ -47,6 +48,7 @@ ExpData <- function(data, type = 1){
             c("No. of Factor Variables", length(names(xx)[sapply(xx, is.factor)])),
             c("No. of Text Variables", length(names(xx)[sapply(xx, is.character)])),
             c("No. of Logical Variables", length(names(xx)[sapply(xx, is.logical)])),
+            c("No. of Unique Variables", Unvar_cnt),
             c("No. of Date Variables", Date_cnt),
             c("No. of Zero variance Variables (Uniform)", Unif_cnt),
             c("%. of Variables having complete cases", p4),
@@ -64,16 +66,8 @@ ExpData <- function(data, type = 1){
             tt <- sapply(name_var, function(x){
               Xvar <- xx[, x]
               cla_var <- as.character(paste0(class(xx[, x]), collapse = ":"))
-              Per_missing <- round(length(Xvar[is.na(Xvar)]) / length(Xvar), 2)
+              Per_missing <- round((length(Xvar[is.na(Xvar)]) + length(Xvar[Xvar=='']))/ length(Xvar), 5)
               Per_Unique <- length(unique(Xvar))
-              if (class(xx[, x]) %in% c("factor", "character")){
-                x <- paste0(x, "*")
-                } else
-              if (class(xx[, x]) %in% c("Date", "POSIXct", "POSIXt")) {
-                x <- paste0(x, "**")
-              } else {
-                  x <- x
-                  }
               mydata <- c(S.no = 1, VarName = x, VarClass = cla_var, Per_mis = Per_missing,
                           Unique = Per_Unique, VarDescriptions = NULL)
               return(mydata)
@@ -84,6 +78,10 @@ ExpData <- function(data, type = 1){
             op$S.no <- seq(1, length(name_var), 1)
             rownames(op) <- NULL
             names(op) <- c("S.no", "Variable Name", "Variable Type", "% of Missing", "No. of Unique values")
+            op[, 2] <- as.character(paste0(op[, 2]))
+            op[, 3] <- as.character(paste0(op[, 3]))
+            op[, 4] <- as.numeric(paste0(op[, 4]))
+            op[, 5] <- as.integer(paste0(op[, 5]))
             return(op)
         }
 }

@@ -1,3 +1,14 @@
+# SmartEDA 0.3.5
+## Bug fixes
+* Fixed a bug in `ExpCatStat`, Corrected odds ratio calculation for mutliclass
+* Fixed a bug in `ExpData`, for Type = 2 changed output variable structure - previously all columns are factors and now changed to character and interger values. 
+
+## Enhancements
+* Removed asterik mark from factor and date variables in `ExpData` type = 2
+* Added unique variable count in `ExpData` type = 1
+* Missing value percentage will be calculated based on NA value and no. of blanks
+* Added Target column in `ExpCatStat` output where stat = "IV"
+
 # SmartEDA 0.3.4
 ## Enhancements
 * Added mutliple standard devitaion options to treat oultier value in `ExpOutliers`

@@ -1,7 +1,7 @@
 Package: SmartEDA
 Type: Package
 Title: Summarize and Explore the Data
-Version: 0.3.4
+Version: 0.3.5
 Authors@R: c(person("Dayanand Ubrangala", role = c("aut", "cre"), email = "daya6489@gmail.com"),
              person("Kiran", "R", role = c("aut","ctb")),
              person("Ravi", "Prasad Kondapalli", role = c("aut","ctb")),

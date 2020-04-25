@@ -228,7 +228,7 @@ ExpWoeTable <- function (X, Y, valueOfGood = NULL, print = FALSE, Round = 2) {
         })
       odv <- round(t[[1]] / t[[2]], Round)
       if (is.infinite(odv)) odv <- 0
-      odsvalue <- rbind(c(t, od = odv), odsvalue)
+      odsvalue <- rbind(odsvalue, c(t, od = odv))
     }
     woeTable$Per_1 <- round(woeTable$Out_1 / sum(woeTable$Out_1, na.rm = T), Round)
     woeTable$Per_0 <- round(woeTable$Out_0 / sum(woeTable$Out_0, na.rm = T), Round)
@@ -241,7 +241,7 @@ ExpWoeTable <- function (X, Y, valueOfGood = NULL, print = FALSE, Round = 2) {
     attr(woeTable, "iValue") <- sum(woeTable$IV, na.rm = T)
     ref_1 <- valueOfGood
     ref_0 <- yClasses[!yClasses %in% valueOfGood]
-    woeTable$Ref_1 <- ref_1
+    woeTable$Ref_1 <- paste0(ref_1)
     woeTable$Ref_0 <- paste0(ref_0, collapse = ", ")
     return(woeTable)
   }
@@ -534,6 +534,7 @@ ExpCatStat <- function(data, Target=NULL, result="Stat", clim=10,
       })
     outp_dat <- do.call("rbind", tab1)
     outp_dat <- data.frame(Variable = rownames(outp_dat), outp_dat)
+    outp_dat$Target <- Target
     rownames(outp_dat) <- NULL
     class(outp_dat) <- c("SmartEDA", "data.frame")
     return(outp_dat)
