@@ -165,7 +165,7 @@ In statistics, an outlier is a data point that differs significantly from other 
 
 Identifying outliers: There are several methods we can use to identify outliers. In ExpOutliers used two methods (1) Boxplot and (2) Standard Deviation
 
-![SmartEDA](https://github.com/daya6489/SmartEDA/blob/master/man/figures/outlierPlot_image.PNG)
+![SmartEDA](https://github.com/daya6489/SmartEDA/blob/master/man/figures/outlierPlot_image.png)
 
 
 ```R
