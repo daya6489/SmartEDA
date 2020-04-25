@@ -52,7 +52,7 @@
 #'
 #' @export ExpCustomStat
 #' @import data.table
-#' @importFrom data.table dcast .N
+#' @importFrom data.table dcast .N setDT
 #' @importFrom stats formula
 
 ExpCustomStat <- function(data, Cvar=NULL, Nvar=NULL, stat=NULL, gpby=TRUE,

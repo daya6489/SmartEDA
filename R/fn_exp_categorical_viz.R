@@ -196,7 +196,7 @@ ExpCatViz <- function (data, target = NULL, fname = NULL, clim = 10, col = NULL,
     nr <- Page[1]
     if ( (nc * nr) > pn + 3) stop("reduce the matrix dimension from Page(r,c)")
     gspl <- split(plot_l, (seq_along(plot_l) - 1) %/% pn)
-    gplt <- lapply(gspl, function(g) marrangeGrob(grobs = g, layout_matrix = matrix(data = seq(1, pn), nrow = nr, ncol = nc)))
+    gplt <- lapply(gspl, function(g) marrangeGrob(grobs = g, nrow = nr, ncol = nc))
     return(gplt)
   } else {
       return(plot_l)

@@ -4,8 +4,16 @@
 \alias{ExpCTable}
 \title{Function to create frequency and custom tables}
 \usage{
-ExpCTable(data, Target = NULL, margin = 1, clim = 10, nlim = 10,
-  round = 2, bin = 3, per = FALSE)
+ExpCTable(
+  data,
+  Target = NULL,
+  margin = 1,
+  clim = 10,
+  nlim = 10,
+  round = 2,
+  bin = 3,
+  per = FALSE
+)
 }
 \arguments{
 \item{data}{dataframe or matrix}

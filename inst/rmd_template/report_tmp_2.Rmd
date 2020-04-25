@@ -23,6 +23,7 @@ library(knitr)
 library(scales)
 library(gridExtra)
 library(ggplot2)
+knit_hooks$set(optipng = hook_optipng)
 
 data <- params$data
 
@@ -35,7 +36,7 @@ Analyzing the data sets to summarize their main characteristics of variables, of
 Understanding the dimensions of the dataset, variable names, overall missing summary and data types of each variables
 
 ```{r od_1,warning=FALSE,eval=F,include=T}
-# Overiview of the data
+# Overview of the data
 ExpData(data=data,type=1)
 # Structure of the data
 ExpData(data=data,type=2)

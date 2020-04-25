@@ -1,6 +1,6 @@
 #' Distributions of numeric variables
 #'
-#' This function automatically scans through each variable and creates density plot, scatter plot and box plot for continuous variable.
+#' This function automatically scans through each variable and creates density plot, scatter plot and box plot for continuous variable using ggplot2 functions.
 #'
 #' @param data dataframe or matrix
 #' @param target target variable
@@ -21,6 +21,10 @@
 #'
 #' @details
 #' This function automatically scan each variables and generate a graph based on the user inputs. Graphical representation includes scatter plot, box plot and density plots.
+#'
+#' All the plots are generated using ggplot2 pacakge function (geom_boxplot, geom_density, geom_point)
+#'
+#' The plots are combined using gridExtra pacakge functions
 #'
 #' \itemize{
 #'   \item \code{target} is continuous then output is scatter plots
@@ -210,9 +214,7 @@ ExpNumViz <- function (data, target = NULL, type = 1, nlim = 3, fname = NULL,
       if ( (nc * nr) > pn + 3)
         stop("reduce the matrix dimension from Page(r,c)")
       gspl <- split(plot_l, (seq_along(plot_l) - 1) %/% pn)
-      gplt <- lapply(gspl, function(g) marrangeGrob(grobs = g,
-                                                    layout_matrix = matrix(data = seq(1, pn),
-                                                                           nrow = nr, ncol = nc)))
+      gplt <- lapply(gspl, function(g) marrangeGrob(grobs = g, nrow = nr, ncol = nc))
       return(gplt)
       } else {
         return(plot_l)
