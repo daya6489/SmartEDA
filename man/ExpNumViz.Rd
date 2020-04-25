@@ -4,9 +4,19 @@
 \alias{ExpNumViz}
 \title{Distributions of numeric variables}
 \usage{
-ExpNumViz(data, target = NULL, type = 1, nlim = 3, fname = NULL,
-  col = NULL, Page = NULL, sample = NULL, scatter = FALSE,
-  gtitle = NULL, theme = "Default")
+ExpNumViz(
+  data,
+  target = NULL,
+  type = 1,
+  nlim = 3,
+  fname = NULL,
+  col = NULL,
+  Page = NULL,
+  sample = NULL,
+  scatter = FALSE,
+  gtitle = NULL,
+  theme = "Default"
+)
 }
 \arguments{
 \item{data}{dataframe or matrix}
@@ -43,10 +53,14 @@ returns collated graphs in PDF or JPEG format
 }
 }
 \description{
-This function automatically scans through each variable and creates density plot, scatter plot and box plot for continuous variable.
+This function automatically scans through each variable and creates density plot, scatter plot and box plot for continuous variable using ggplot2 functions.
 }
 \details{
 This function automatically scan each variables and generate a graph based on the user inputs. Graphical representation includes scatter plot, box plot and density plots.
+
+All the plots are generated using ggplot2 pacakge function (geom_boxplot, geom_density, geom_point)
+
+The plots are combined using gridExtra pacakge functions
 
 \itemize{
   \item \code{target} is continuous then output is scatter plots

@@ -4,9 +4,18 @@
 \alias{ExpCatStat}
 \title{Function provides summary statistics for all character or categorical columns in the dataframe}
 \usage{
-ExpCatStat(data, Target = NULL, result = "Stat", clim = 10,
-  nlim = 10, bins = 10, Pclass = NULL, plot = FALSE, top = 20,
-  Round = 2)
+ExpCatStat(
+  data,
+  Target = NULL,
+  result = "Stat",
+  clim = 10,
+  nlim = 10,
+  bins = 10,
+  Pclass = NULL,
+  plot = FALSE,
+  top = 20,
+  Round = 2
+)
 }
 \arguments{
 \item{data}{dataframe or matrix}

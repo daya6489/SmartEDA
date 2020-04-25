@@ -4,9 +4,21 @@
 \alias{ExpCatViz}
 \title{Distributions of categorical variables}
 \usage{
-ExpCatViz(data, target = NULL, fname = NULL, clim = 10, col = NULL,
-  margin = 1, Page = NULL, Flip = F, sample = NULL,
-  rdata = FALSE, value = NULL, gtitle = NULL, theme = "Default")
+ExpCatViz(
+  data,
+  target = NULL,
+  fname = NULL,
+  clim = 10,
+  col = NULL,
+  margin = 1,
+  Page = NULL,
+  Flip = F,
+  sample = NULL,
+  rdata = FALSE,
+  value = NULL,
+  gtitle = NULL,
+  theme = "Default"
+)
 }
 \arguments{
 \item{data}{dataframe or matrix}

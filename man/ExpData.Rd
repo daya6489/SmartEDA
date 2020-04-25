@@ -2,28 +2,28 @@
 % Please edit documentation in R/fn_Overview_data.R
 \name{ExpData}
 \alias{ExpData}
-\title{Function to generate the overview of a data frame}
+\title{Function to generate data dictionary of a data frame}
 \usage{
 ExpData(data, type = 1)
 }
 \arguments{
 \item{data}{a data frame}
 
-\item{type}{Type 1 is overview of the data; Type 2 is structure of the data}
+\item{type}{Type 1 is overall data summary; Type 2 is variable level summary}
 }
 \description{
-This function used to produce summaries of data structure and overview of the data frame.
+This function used to produce summary of data frame.
 }
 \details{
-This function provides overview and structure of the data frames.
+This function provides overall and variable level data summary like percentage of missings, variable types etc..
 \itemize{
-\item Type = 1, overeview of the data (column names are "Descriptions", "Obs")
-\item Type = 2, structure of the data (column names are "S.no", "Variable Name", "Variable Type", "% of Missing", "No. of Unique values")
+\item Type = 1, overall data summary (column names are "Descriptions Value")
+\item Type = 2, variable level summary (column names are "Index Variable_Name  Variable_Type Per_of_Missing No_of_distinct_values")
 }
 }
 \examples{
-# Overview of the data
+# Overall data summary
 ExpData(data=mtcars,type=1)
-# Structure of the data
+# Variable level data summary
 ExpData(data=mtcars,type=2)
 }

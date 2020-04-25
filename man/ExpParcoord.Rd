@@ -4,8 +4,14 @@
 \alias{ExpParcoord}
 \title{Parallel Co ordinate plots}
 \usage{
-ExpParcoord(data, Group = NULL, Stsize = NULL, Nvar = NULL,
-  Cvar = NULL, scale = NULL)
+ExpParcoord(
+  data,
+  Group = NULL,
+  Stsize = NULL,
+  Nvar = NULL,
+  Cvar = NULL,
+  scale = NULL
+)
 }
 \arguments{
 \item{data}{Input dataframe or data.table}

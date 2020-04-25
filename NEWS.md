@@ -1,3 +1,15 @@
+# SmartEDA 0.3.6
+## Bug fixes
+* Problem with date format. Fixed a bug in `ExpData()`, function is now supporting for all types of columns. Previously this function were not supporting to data types POSIXlt or date format
+* Fixed `ExpNumViz()` code in the README file. Previously it contains arguments that are not (anymore) present in the function
+
+## Enhancements
+* Added new outcome for `ExpOutliers()` called outlier index value. Outlier index for both upper and lower outliers
+* Column name changed from returned output of `ExpData()` type 1 - "Obs" to new name "Value"
+* Column name changed from returned output of `ExpData()` type 2 - "S.no" to new name "Index", "% of Missing" as "Per_of_Missing"
+* Corrected few spell mistakes from `ExpData()` help file
+* Corrected output readings from `ExpData()` - Unqiue variable replaced as identifier variables
+
 # SmartEDA 0.3.5
 ## Bug fixes
 * Fixed a bug in `ExpCatStat`, Corrected odds ratio calculation for mutliclass

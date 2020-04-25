@@ -74,9 +74,9 @@ Data Source [ISLR package](https://www.rdocumentation.org/packages/ISLR/versions
 Install the package "ISLR" to get the example data set.
 
 ```{r eda-c3-r, warning=FALSE,eval=F}
-install.packages("ISLR")
+#install.packages("ISLR")
 library("ISLR")
-install.packages("SmartEDA")
+#install.packages("SmartEDA")
 library("SmartEDA")
 ## Load sample dataset from ISLR pacakge
 Carseats= ISLR::Carseats
@@ -477,7 +477,7 @@ kable(e1du2,"html")
 
 In statistics, an outlier is a data point that differs significantly from other observations. An outlier may be due to variability in the measurement or it may indicate experimental error; the latter are sometimes excluded from the data set.An outlier can cause serious problems in statistical analyses.
 
- Function `ExpOutliers` can run univariate outlier analysis based on boxplot or SD method. The function returns the summary of oultlier for selected numeric features and adding new features if there is any outlers
+ Function `ExpOutliers` can run univariate outlier analysis based on boxplot or SD method. The function returns the summary of oultlier for selected numeric features and adding new features if there are any outlers
 
 Identifying outliers: There are several methods we can use to identify outliers. In `ExpOutliers` used two methods (1) Boxplot and (2) Standard Deviation
 
@@ -493,7 +493,7 @@ outlier_data1 <- ana2[[2]]
 ```
 
 
-### 7.1 Identifying outliers mehtod - Boxplot
+### 7.1 Identifying outliers using Boxplot method
 
 ```{r out1, warning=FALSE,eval=F,include=T}
 ExpOutliers(Carseats, varlist = c("Sales","CompPrice","Income"), method = "boxplot",  treatment = "mean", capping = c(0.1, 0.9))
@@ -512,7 +512,7 @@ kable(head(outlier_data),"html")
 ```
 
 
-### 7.2 Identifying outliers mehtod - 3 Standard Deviation
+### 7.2 Identifying outliers using 3 Standard Deviation method
 
 ```{r out2, warning=FALSE,eval=F,include=T}
 ExpOutliers(Carseats, varlist = c("Sales","CompPrice","Income"), method = "3xStDev",  treatment = "medain", capping = c(0.1, 0.9))

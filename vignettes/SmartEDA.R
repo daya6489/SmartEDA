@@ -9,9 +9,9 @@ library(ggplot2)
 
 
 ## ----eda-c3-r, warning=FALSE,eval=F--------------------------------------
-#  install.packages("ISLR")
+#  #install.packages("ISLR")
 #  library("ISLR")
-#  install.packages("SmartEDA")
+#  #install.packages("SmartEDA")
 #  library("SmartEDA")
 #  ## Load sample dataset from ISLR pacakge
 #  Carseats= ISLR::Carseats

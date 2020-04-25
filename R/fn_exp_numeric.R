@@ -63,7 +63,6 @@
 #' # Summary by specific statistics for all numeric variables
 #' ExpNumStat(mtcars,by="GA",gp="gear",Qnt=c(0.1,0.2),MesofShape=2,
 #'            Outlier=FALSE,round=2,dcast = TRUE,val = "IQR")
-#' @author dubrangala
 #' @importFrom stats quantile median IQR var reorder sd cor
 #' @importFrom data.table dcast.data.table setDT
 #' @export ExpNumStat

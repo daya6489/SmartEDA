@@ -4,8 +4,14 @@
 \alias{ExpOutliers}
 \title{Univariate outlier analysis}
 \usage{
-ExpOutliers(data, varlist = NULL, method = "boxplot",
-  treatment = NULL, capping = c(0.05, 0.95), outflag = FALSE)
+ExpOutliers(
+  data,
+  varlist = NULL,
+  method = "boxplot",
+  treatment = NULL,
+  capping = c(0.05, 0.95),
+  outflag = FALSE
+)
 }
 \arguments{
 \item{data}{dataframe or matrix}
