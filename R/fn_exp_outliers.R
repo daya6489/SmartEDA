@@ -133,7 +133,9 @@ ExpOutliers <- function(data, varlist = NULL, method = "boxplot", treatment = NU
             flag_function(x, y = "impute")
           }),  .SDcols = varlist_new]
         }
-        return(list("outlier_summary" = cpval, "outlier_data" = data))
+        uoi <- lapply(cpval[7, -1], function(x) {as.numeric(strsplit(x, ",", fixed = TRUE)[[1]])})
+        loi <- lapply(cpval[6, -1], function(x) {as.numeric(strsplit(x, ",", fixed = TRUE)[[1]])})
+        return(list("outlier_summary" = cpval, "outlier_data" = data, "outlier_index" = list("upper_out_index" = uoi, "lower_out_index" = loi)))
       } else {
         return(cpval)
       }

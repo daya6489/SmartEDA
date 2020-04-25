@@ -4,8 +4,16 @@
 \alias{ExpCustomStat}
 \title{Customized summary statistics}
 \usage{
-ExpCustomStat(data, Cvar = NULL, Nvar = NULL, stat = NULL,
-  gpby = TRUE, filt = NULL, dcast = FALSE, value = NULL)
+ExpCustomStat(
+  data,
+  Cvar = NULL,
+  Nvar = NULL,
+  stat = NULL,
+  gpby = TRUE,
+  filt = NULL,
+  dcast = FALSE,
+  value = NULL
+)
 }
 \arguments{
 \item{data}{dataframe or Matrix}

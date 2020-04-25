@@ -35,7 +35,7 @@ Understanding the dimensions of the dataset, variable names, overall missing sum
 
 
 ```{r od_1,warning=FALSE,eval=F,include=T}
-# Overiview of the data
+# Overview of the data
 ExpData(data=data,type=1)
 # Structure of the data
 ExpData(data=data,type=2)

@@ -1,6 +1,9 @@
 # SmartEDA [![CRAN status](https://www.r-pkg.org/badges/version/SmartEDA)](https://cran.r-project.org/package=SmartEDA)
 
 [![Downloads](http://cranlogs.r-pkg.org/badges/SmartEDA)](https://cran.r-project.org/package=SmartEDA)
+
+[![status](https://joss.theoj.org/papers/10.21105/joss.01509/status.svg)](https://joss.theoj.org/papers/10.21105/joss.01509)
+
 [![Total Downloads](http://cranlogs.r-pkg.org/badges/grand-total/SmartEDA)](https://cran.r-project.org/package=SmartEDA)
 
 [![GitHub Stars](https://img.shields.io/github/stars/daya6489/SmartEDA.svg?style=social)](https://img.shields.io/github/stars/daya6489/SmartEDA)
@@ -90,11 +93,11 @@ To summarise the numeric variables, you can use following r codes from this paca
 
 ```R
 ## Generate Boxplot by category
-ExpNumViz(mtcars,gp="gear",type=2,nlim=25,fname = file.path(tempdir(),"Mtcars2"),Page = c(2,2))
+ExpNumViz(mtcars,target="gear",type=2,nlim=25,fname = file.path(tempdir(),"Mtcars2"),Page = c(2,2))
 ## Generate Density plot
-ExpNumViz(mtcars,gp=NULL,type=3,nlim=25,fname = file.path(tempdir(),"Mtcars3"),Page = c(2,2))
+ExpNumViz(mtcars,target=NULL,type=3,nlim=25,fname = file.path(tempdir(),"Mtcars3"),Page = c(2,2))
 ## Generate Scatter plot
-ExpNumViz(mtcars,gp="carb",type=3,nlim=25,fname = file.path(tempdir(),"Mtcars4"),Page = c(2,2))
+ExpNumViz(mtcars,target="carb",type=3,nlim=25,fname = file.path(tempdir(),"Mtcars4"),Page = c(2,2))
 
 ```
 
@@ -156,6 +159,29 @@ Create a exploratory data analysis report in HTML format
   ExpParcoord(CData,Group="ShelveLoc",Stsize=c(10,15,20),Nvar=c("Price","Income","Advertising","Population","Age","Education"))
 ## Selected categorical variables
   ExpParcoord(CData,Group="US",Stsize=c(15,50),Cvar=c("ShelveLoc","Urban"))
+```
+
+## Two independent plots side by side for the same variable
+
+To plot graph from same variable when Target=NULL vs. when Target = categorical variable (binary or multi-class variable)
+
+```R
+target = "gear"
+categorical_features <- c("vs", "am", "carb")
+numeircal_features <- c("mpg", "cyl", "disp", "hp", "drat", "wt", "qsec")
+
+num_1 <- ExpTwoPlots(mtcars, 
+                     plot_type = "numeric",
+                     iv_variables = numeircal_features,
+                     target = "gear",
+                     lp_arg_list = list(alpha=0.5, color = "red", fill= "white", binwidth=1),
+                     lp_geom_type = 'histogram',
+                     rp_arg_list = list(alpha=0.5, fill = c("red", "orange", "pink"),  binwidth=1),
+                     rp_geom_type = 'histogram',
+                     fname = "dub2.pdf",
+                     page = c(2,1),
+                     theme = "Default")
+
 ```
 
 

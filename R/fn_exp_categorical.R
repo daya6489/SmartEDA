@@ -39,7 +39,7 @@
 #' # Crosstbale for Mtcars data
 #' ExpCTable(mtcars, Target = "gear", margin = 1, clim = 10, nlim = 3, bin = NULL, per = FALSE)
 #'
-#' @importFrom stats na.omit
+#' @importFrom stats na.omit complete.cases
 #' @export ExpCTable
 
 ExpCTable <- function(data, Target = NULL, margin = 1, clim = 10, nlim = 10, round = 2, bin = 3, per = FALSE){
@@ -479,7 +479,7 @@ ExpCatStat <- function(data, Target=NULL, result="Stat", clim=10,
     bin_data <- lapply(xx[, num_var2], function(x){
       q <- quantile(x, probs = c(1 : (bins - 1) / bins), na.rm = TRUE, type = 3)
       cuts <- unique(c(min(x), unique(q), max(x)))
-      tp <- cut(x, cuts, include.lowest = T)
+      tp <- cut(x, cuts, include.lowest = T, dig.lab=6)
       return(tp)
     })
     bin_data <- cbind.data.frame(bin_data)

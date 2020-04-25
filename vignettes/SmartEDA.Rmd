@@ -74,9 +74,9 @@ Data Source [ISLR package](https://www.rdocumentation.org/packages/ISLR/versions
 Install the package "ISLR" to get the example data set.
 
 ```{r eda-c3-r, warning=FALSE,eval=F}
-install.packages("ISLR")
+#install.packages("ISLR")
 library("ISLR")
-install.packages("SmartEDA")
+#install.packages("SmartEDA")
 library("SmartEDA")
 ## Load sample dataset from ISLR pacakge
 Carseats= ISLR::Carseats
@@ -109,6 +109,42 @@ kable(ovw_tabl, "html")
 kable(ovw_tab2, "html")
 ```
 
+
+### 2.2 Add summary statistics into Metadata ouput
+
+```{r od_du2,warning=FALSE,eval=T,include=F}
+ovw_tabl_du <- ExpData(data=Carseats,type=2, fun = c("mean", "median", "var"))
+```
+
+  * Metadata Information with additional statistics like mean, median and variance
+  
+```{r od_du1,warning=FALSE,eval=F,include=T}
+# Metadata Information with additional statistics like mean, median and variance
+ExpData(data=Carseats,type=2, fun = c("mean", "median", "var"))
+```
+
+```{r od_du3,warning=FALSE,eval=T,render=ovw_tabl_du,echo=F}
+kable(ovw_tabl_du, "html")
+```
+
+  * Adding custom function like 10th percentile or 90th percentile
+  
+```{r od_du4,warning=FALSE,eval=T,include=T}
+# Derive Quantile 
+quantile_10 = function(x){
+  quantile_10 = quantile(x, na.rm = TRUE, 0.1)
+}
+
+quantile_90 = function(x){
+  quantile_90 = quantile(x, na.rm = TRUE, 0.9)
+}
+
+output_e1 <- ExpData(data=Carseats, type=2, fun=c("quantile_10", "quantile_90"))
+```  
+
+```{r od_du5,warning=FALSE,eval=T,render=output_e1,echo=F}
+kable(output_e1, "html")
+```
 
 ## 3. Exploratory data analysis (EDA)
 This function shows the EDA output for 3 different cases
@@ -477,7 +513,7 @@ kable(e1du2,"html")
 
 In statistics, an outlier is a data point that differs significantly from other observations. An outlier may be due to variability in the measurement or it may indicate experimental error; the latter are sometimes excluded from the data set.An outlier can cause serious problems in statistical analyses.
 
- Function `ExpOutliers` can run univariate outlier analysis based on boxplot or SD method. The function returns the summary of oultlier for selected numeric features and adding new features if there is any outlers
+ Function `ExpOutliers` can run univariate outlier analysis based on boxplot or SD method. The function returns the summary of oultlier for selected numeric features and adding new features if there are any outlers
 
 Identifying outliers: There are several methods we can use to identify outliers. In `ExpOutliers` used two methods (1) Boxplot and (2) Standard Deviation
 
@@ -493,13 +529,13 @@ outlier_data1 <- ana2[[2]]
 ```
 
 
-### 7.1 Identifying outliers mehtod - Boxplot
+### 7.1 Identifying outliers using Boxplot method
 
 ```{r out1, warning=FALSE,eval=F,include=T}
 ExpOutliers(Carseats, varlist = c("Sales","CompPrice","Income"), method = "boxplot",  treatment = "mean", capping = c(0.1, 0.9))
 ```
 
-**Outlier summary**
+**Summary**
 
 ```{r out11,warning=FALSE,eval=T,render=outlier_summ,echo=F,out.height=8,out.width=8}
 kable(outlier_summ,"html")
@@ -512,13 +548,13 @@ kable(head(outlier_data),"html")
 ```
 
 
-### 7.2 Identifying outliers mehtod - 3 Standard Deviation
+### 7.2 Identifying outliers using 3 Standard Deviation method
 
 ```{r out2, warning=FALSE,eval=F,include=T}
 ExpOutliers(Carseats, varlist = c("Sales","CompPrice","Income"), method = "3xStDev",  treatment = "medain", capping = c(0.1, 0.9))
 
 ```
-**Outlier summary**
+**Summary**
 
 ```{r out21,warning=FALSE,eval=T,render=outlier_summ1,echo=F,out.height=8,out.width=8}
 kable(outlier_summ1,"html")

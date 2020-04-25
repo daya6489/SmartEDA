@@ -1,4 +1,4 @@
-# defualt ggplot theme used in SmartEDA
+# default ggplot theme used in SmartEDA
 
 smtheme <- function(theme){
   themedf <- theme(axis.text.x = element_text(angle = 90, vjust = .5, hjust = 0.95, size = 8, colour = "grey20"),
@@ -90,14 +90,14 @@ ds_fun <- function(x, r, MesofShape, Qnt, Outlier){
               PosInf = length(which(x == Inf)),
               NA_Value = length(x[is.na(x)]),
               Per_of_Missing = round( (length(x[is.na(x)]) / length(x)) * 100, r),
-              sum = round(sum(x, na.rm = T), r),
-              min = round(min(x, na.rm = T), r),
-              max = round(max(x, na.rm = T), r),
-              mean = round(mean(x, na.rm = T), r),
-              median = round(median(x, na.rm = T), r),
-              SD = round(sd(x, na.rm = T), r),
-              CV = round(sd(x, na.rm = T) / mean(x, na.rm = T), r),
-              IQR = round(IQR(x, na.rm = T), r))
+              sum = round(sum(x, na.rm = TRUE), r),
+              min = round(min(x, na.rm = TRUE), r),
+              max = round(max(x, na.rm = TRUE), r),
+              mean = round(mean(x, na.rm = TRUE), r),
+              median = round(median(x, na.rm = TRUE), r),
+              SD = round(sd(x, na.rm = TRUE), r),
+              CV = round(sd(x, na.rm = TRUE) / mean(x, na.rm = TRUE), r),
+              IQR = round(IQR(x, na.rm = TRUE), r))
   Skw_kurt <- c(
     Skewness = round(ExpSkew(x, type = "moment"), r),
     Kurtosis = round(ExpKurtosis(x, type = "excess"), r)
@@ -128,17 +128,17 @@ ds_fun <- function(x, r, MesofShape, Qnt, Outlier){
                         }
          }
        if (MesofShape == 2){
-         if (Outlier == F & !is.null(Qnt)){
-            qntil <- round(quantile(x, prob = Qnt, na.rm = T), r)
+         if (Outlier == FALSE & !is.null(Qnt)){
+            qntil <- round(quantile(x, prob = Qnt, na.rm = TRUE), r)
             vect_value <- c(BasDST, Skw_kurt, qntil)
             return(vect_value)
             } else
-              if (Outlier == T & !is.null(Qnt)){
-                qntil <- round(quantile(x, prob = Qnt, na.rm = T), r)
+              if (Outlier == TRUE & !is.null(Qnt)){
+                qntil <- round(quantile(x, prob = Qnt, na.rm = TRUE), r)
                 vect_value <- c(BasDST, Skw_kurt, qntil, Out_rp)
                 return(vect_value)
               } else
-                if (Outlier == T & is.null(Qnt)){
+                if (Outlier == TRUE & is.null(Qnt)){
                 vect_value <- c(BasDST, Skw_kurt, Out_rp)
                 return(vect_value)
                 } else {
@@ -271,3 +271,187 @@ ctab_filter <- function(data, filt, fk, k) {
 }
 
 "%ni%" <- Negate("%in%")
+
+# Expdata support function
+expdatatype2 <- function(xx, x, myfun=NULL){
+  Xvar <- xx[, x]
+  if(is.null(myfun)) ccd <- NULL
+  cla_var <- as.character(paste0(class(xx[, x]), collapse = ":"))
+
+  if(!is.numeric(Xvar)) {
+    if(is.character(Xvar)){
+      Xvar[Xvar==''] <- "missing_row"
+      Xvar1 <- Xvar[complete.cases(Xvar)]
+      missing_count <- length(Xvar[is.na(Xvar)]) + length(Xvar1[Xvar1 == "missing_row"])
+      Per_missing <- round(missing_count / length(Xvar), 3)
+      sample_n <- length(Xvar) - missing_count
+    } else
+      {
+      missing_count <- length(Xvar[is.na(Xvar)])
+      Per_missing <- round(missing_count / length(Xvar), 3)
+      sample_n <- length(Xvar) - missing_count
+    }
+    if(!is.null(myfun)) {
+      ccd = sapply(myfun, function(x){
+        return(0)
+      })
+    }
+  } else {
+    missing_count <- length(Xvar[is.na(Xvar)])
+    Per_missing <- round(missing_count / length(Xvar), 3)
+    sample_n <- length(Xvar) - missing_count
+    if(!is.null(myfun)) {
+      ccd = sapply(myfun, function(x){
+        return(round(get(x)(Xvar[complete.cases(Xvar)]), 2))
+      })
+    }
+  }
+
+  Per_Unique <- length(unique(Xvar[!is.na(Xvar)]))
+  mydata <- c(Index = 1, VarName = x, VarClass = cla_var, sample_n=sample_n,
+              missing_count = missing_count, Per_mis = Per_missing, Unique = Per_Unique, ccd)
+  return(mydata)
+}
+
+### Univariate Numeirc plots
+# data - data frame
+# var - independent numeric variable
+# arg_list - ggplot argument list
+# geom_type - type of ggplot (histogram, density, boxplot)
+
+univariate_num_plot <- function(data, var, arg_list, geom_type){
+  wrap_40 <- wrap_format(40)
+  if(geom_type == 'boxplot') {
+    ggplotd <- ggplot(data, aes(x = "", y = get(var))) + xlab(" ") + ylab(var)+ ggtitle(paste0("Boxplot for ", var))
+  } else
+    if(geom_type == 'qqplot'){
+      ggplotd <- ggplot(data, aes(sample = get(var))) +
+        xlab("theoretical quantiles") +
+        ylab("sample quantiles") +
+        ggtitle(paste0("quantile-quantile plot : ", var)) +
+        stat_qq() + stat_qq_line()
+      return(ggplotd)
+    } else
+      {
+    ggplotd <- ggplot(data, aes(x = get(var))) + xlab(var) + ggtitle(paste0(geom_type, " for ", var))
+  }
+  my_rplot <- do.call(paste0("geom_",geom_type), c(arg_list))
+  return(ggplotd + my_rplot)
+}
+
+univariate_cat_plot <- function(data, var, arg_list, geom_type){
+  setDT(data)
+  tot_sample <- nrow(data)
+  wrap_40 <- wrap_format(40)
+  myinput <- data[, .(count = .N, fraction = .N/tot_sample), .(group_by = get(var))]
+  geom_type1 <- copy(geom_type)
+  if(geom_type %in% c("bar", "barh")) {
+    ggplotd <- ggplot(myinput, aes(x = reorder(group_by,-count), y = count, fill = group_by)) +
+      geom_text(aes(label = paste(count)), size = 3, check_overlap = F,  position = position_stack(vjust = 1.1) ) +
+      xlab(var) +
+      theme(legend.position = "none") +
+      ylab("Frequency")+
+      ggtitle(paste0("Distributions of ", var))
+    if(geom_type == "barh") ggplotd <- ggplotd + coord_flip()
+    geom_type1 <- "bar"
+  } else
+    if(geom_type == 'donut') {
+      geom_type1 <- "rect"
+      myinput[, ymax := cumsum(fraction)]
+      myinput[, ymin := c(0, head(ymax, n=-1))]
+      myinput[, labelPosition := (ymax + ymin) / 2]
+      myinput[, label1 := paste0(group_by, "\n ", round(fraction * 100,1), "%")]
+      ggplotd <- ggplot(myinput, aes(ymax=ymax, ymin=ymin, xmax=4, xmin=3, fill=group_by)) +
+        geom_rect() +
+        geom_label( x=3.5, aes(y=labelPosition, label=label1), size=3) +
+        scale_fill_brewer(palette=4) +
+        coord_polar(theta="y") +
+        xlim(c(2, 4)) +
+        theme_void() +
+        ggtitle(var) +
+        theme(legend.position = "none")
+      return(ggplotd)
+  } else
+    if(geom_type == 'pie') {
+      ggplotd <- ggplot(myinput, aes(x="", y=count, fill=group_by)) +
+        geom_bar(stat="identity", width=1, color="white") +
+        coord_polar("y", start=0) +
+        theme_void() +
+        ggtitle(var) +
+        scale_fill_discrete(name = var)
+      return(ggplotd)
+        } else stop("selected chart option is not found")
+  my_rplot <- do.call(paste0("geom_", geom_type1), c(arg_list))
+  return(ggplotd + my_rplot)
+}
+
+globalVariables(c("group_by", "count", "wrap_40", "ymax", "fraction", "ymin", "label1", "labelPosition"))
+
+# library(data.table)
+#univariate_cat_plot(Carseats, var = "ShelveLoc", arg_list = list(stat = 'identity'), geom_type="pie")
+
+### Bivariate plots with Categorical target
+# data - data frame
+# target - categorical dependent variable
+# var - independent numeric variable
+# arg_list - ggplot argument list
+# geom_type - type of ggplot (histogram, density, boxplot)
+# col - fill color for each category from target
+
+bivariate_num_plot <- function(data, target, var, arg_list, geom_type, col=NULL){
+  data <- as.data.frame(data)
+  nlevel <- length(unique(data[, target]))
+  fill_1 <- scolorsel(col, nlevel)
+  wrap_40 <- wrap_format(40)
+  if (! "fill" %in% names(arg_list)) arg_list[['fill']] <- fill_1
+  if (geom_type %in% c("histogram", "density", "qqplot") & "fill" %in% names(arg_list)) {
+    fill_1 <- arg_list[['fill']] # manual fill
+    arg_list[['fill']] <- NULL # remove fill from argument list for histogram
+    }
+
+  if (geom_type %in% c('boxplot', 'violin')) {
+     ggplotd <- ggplot(data, aes(x = get(target), y = get(var))) +
+      xlab(target) +
+      ylab(var) +
+      ggtitle(wrap_40(paste0(geom_type, " for ", var, " Vs ", target)))
+  } else
+    if(geom_type == 'qqplot'){
+    ggplotd <- ggplot(data, aes(sample = get(var), colour = get(target))) +
+      xlab("theoretical quantiles") +
+      ylab("sample quantiles") +
+      ggtitle(paste0("qq plot : ", var, " Vs ", target)) +
+      stat_qq() + stat_qq_line() +
+      scale_color_manual(target, values=fill_1)
+    return(ggplotd)
+  } else {
+    ggplotd <- ggplot(data, aes(x = get(var), fill=get(target))) +
+      xlab(var) +
+      ggtitle(wrap_40(paste0(geom_type, " for ", var, " Vs ", target)))+
+      scale_fill_manual(target, values=fill_1)
+  }
+  my_rplot <- do.call(paste0("geom_",geom_type), c(arg_list))
+  return(ggplotd + my_rplot)
+}
+
+bivariate_cat_plot <- function(data, target, var, arg_list, geom_type, col=NULL){
+  setDT(data)
+  tot_sample <- nrow(data)
+  wrap_40 <- wrap_format(40)
+  myinput <- data[, .(count = .N, fraction = .N/tot_sample), .(group_by = get(var), target = get(target))]
+  geom_type1 <- copy(geom_type)
+  if(geom_type %in% c("bar", "barh")) {
+    ggplotd <- ggplot(myinput, aes(x = reorder(group_by,-count), y = count, fill = target)) +
+      geom_bar(stat = "identity") +
+      geom_text(aes(label = paste(count)), size = 3, check_overlap = T,  position = position_stack(vjust = 0.5) ) +
+      xlab(var) +
+      scale_fill_discrete(name = target) +
+      ylab("Frequency") +
+      ggtitle(paste0("Distributions of ", var, " Vs ", target))
+    if(geom_type == "barh") ggplotd <- ggplotd + coord_flip()
+    geom_type1 <- "bar"
+  } else stop("selected geom plot is not available")
+  # my_rplot <- do.call(paste0("geom_", geom_type1), c(arg_list))
+  return(ggplotd)
+}
+
+

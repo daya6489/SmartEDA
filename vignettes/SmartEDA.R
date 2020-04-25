@@ -1,4 +1,4 @@
-## ----setup, include=FALSE------------------------------------------------
+## ----setup, include=FALSE-----------------------------------------------------
 library(rmarkdown)
 library(SmartEDA)
 library(knitr)
@@ -8,40 +8,65 @@ library(gridExtra)
 library(ggplot2)
 
 
-## ----eda-c3-r, warning=FALSE,eval=F--------------------------------------
-#  install.packages("ISLR")
+## ----eda-c3-r, warning=FALSE,eval=F-------------------------------------------
+#  #install.packages("ISLR")
 #  library("ISLR")
-#  install.packages("SmartEDA")
+#  #install.packages("SmartEDA")
 #  library("SmartEDA")
 #  ## Load sample dataset from ISLR pacakge
 #  Carseats= ISLR::Carseats
 
-## ----od_1,warning=FALSE,eval=F,include=T---------------------------------
+## ----od_1,warning=FALSE,eval=F,include=T--------------------------------------
 #  # Overview of the data - Type = 1
 #  ExpData(data=Carseats,type=1)
 #  
 #  # Structure of the data - Type = 2
 #  ExpData(data=Carseats,type=2)
 
-## ----od_2,warning=FALSE,eval=T,include=F---------------------------------
+## ----od_2,warning=FALSE,eval=T,include=F--------------------------------------
 ovw_tabl <- ExpData(data=Carseats,type=1)
 ovw_tab2 <- ExpData(data=Carseats,type=2)
 
-## ----od_3,warning=FALSE,eval=T,render=ovw_tabl,echo=F--------------------
+## ----od_3,warning=FALSE,eval=T,render=ovw_tabl,echo=F-------------------------
 kable(ovw_tabl, "html")
 
-## ----od_31,warning=FALSE,eval=T,render=ovw_tab2,echo=F-------------------
+## ----od_31,warning=FALSE,eval=T,render=ovw_tab2,echo=F------------------------
 kable(ovw_tab2, "html")
 
-## ----c1.1,warning=FALSE,eval=T,include=F---------------------------------
+## ----od_du2,warning=FALSE,eval=T,include=F------------------------------------
+ovw_tabl_du <- ExpData(data=Carseats,type=2, fun = c("mean", "median", "var"))
+
+## ----od_du1,warning=FALSE,eval=F,include=T------------------------------------
+#  # Metadata Information with additional statistics like mean, median and variance
+#  ExpData(data=Carseats,type=2, fun = c("mean", "median", "var"))
+
+## ----od_du3,warning=FALSE,eval=T,render=ovw_tabl_du,echo=F--------------------
+kable(ovw_tabl_du, "html")
+
+## ----od_du4,warning=FALSE,eval=T,include=T------------------------------------
+# Derive Quantile 
+quantile_10 = function(x){
+  quantile_10 = quantile(x, na.rm = TRUE, 0.1)
+}
+
+quantile_90 = function(x){
+  quantile_90 = quantile(x, na.rm = TRUE, 0.9)
+}
+
+output_e1 <- ExpData(data=Carseats, type=2, fun=c("quantile_10", "quantile_90"))
+
+## ----od_du5,warning=FALSE,eval=T,render=output_e1,echo=F----------------------
+kable(output_e1, "html")
+
+## ----c1.1,warning=FALSE,eval=T,include=F--------------------------------------
 ec1 = ExpNumStat(Carseats,by="A",gp=NULL,Qnt=seq(0,1,0.1),MesofShape=2,Outlier=TRUE,round=2,Nlim=3)
 rownames(ec1)<-NULL
 
-## ----c1.11, warning=FALSE,eval=F,include=T-------------------------------
+## ----c1.11, warning=FALSE,eval=F,include=T------------------------------------
 #  ExpNumStat(Carseats,by="A",gp=NULL,Qnt=seq(0,1,0.1),MesofShape=2,Outlier=TRUE,round=2,Nlim=10)
 #  
 
-## ----c1.12,warning=FALSE,eval=T,render=ec1,echo=F------------------------
+## ----c1.12,warning=FALSE,eval=T,render=ec1,echo=F-----------------------------
 paged_table(ec1)
 
 ## ----c1.2 ,warning=FALSE,eval=T,include=T,fig.align='center',fig.height=7,fig.width=7----
@@ -49,31 +74,31 @@ paged_table(ec1)
 plot1 <- ExpNumViz(Carseats,target=NULL,nlim=10,Page=c(2,2),sample=4)
 plot1[[1]]
 
-## ----ec13, eval=T,include=F----------------------------------------------
+## ----ec13, eval=T,include=F---------------------------------------------------
 et1 <- ExpCTable(Carseats,Target=NULL,margin=1,clim=10,nlim=5,round=2,bin=NULL,per=T)
 rownames(et1)<-NULL
 
-## ----ec14, warning=FALSE,eval=F,include=T--------------------------------
+## ----ec14, warning=FALSE,eval=F,include=T-------------------------------------
 #  ExpCTable(Carseats,Target=NULL,margin=1,clim=10,nlim=3,round=2,bin=NULL,per=T)
 
-## ----ec14.1,warning=FALSE,eval=T,render=et1,echo=F-----------------------
+## ----ec14.1,warning=FALSE,eval=T,render=et1,echo=F----------------------------
 kable(et1,"html")
 
 ## ----bp1,warning=FALSE,eval=T,include=T,fig.align='center',fig.height=7,fig.width=7----
 plot2 <- ExpCatViz(Carseats,target=NULL,col ="slateblue4",clim=10,margin=2,Page = c(2,1),sample=4)
 plot2[[1]]
 
-## ----tbd0,warning=FALSE,eval=T,include=T---------------------------------
+## ----tbd0,warning=FALSE,eval=T,include=T--------------------------------------
 summary(Carseats[,"Price"])
 
-## ----con_1,warning=FALSE,eval=T,include=F--------------------------------
+## ----con_1,warning=FALSE,eval=T,include=F-------------------------------------
 cpp = ExpNumStat(Carseats,by="A",gp="Price",Qnt=seq(0,1,0.1),MesofShape=1,Outlier=TRUE,round=2)
 rownames(cpp)<-NULL
 
-## ----con_2, warning=FALSE,eval=F,include=T-------------------------------
+## ----con_2, warning=FALSE,eval=F,include=T------------------------------------
 #  ExpNumStat(Carseats,by="A",gp="Price",Qnt=seq(0,1,0.1),MesofShape=1,Outlier=TRUE,round=2)
 
-## ----con_3,warning=FALSE,eval=T,render=cpp,echo=F------------------------
+## ----con_3,warning=FALSE,eval=T,render=cpp,echo=F-----------------------------
 paged_table(cpp)
 
 ## ----snv1,warning=FALSE,eval=T,include=T,fig.align='center',fig.height=7,fig.width=7----
@@ -88,41 +113,41 @@ plot3[[1]]
 plot31 <- ExpNumViz(Carseats,target="US",nlim=4,scatter=TRUE,fname=NULL,Page=c(2,1),sample=4)
 plot31[[1]]
 
-## ----eda_41, eval=T,include=F--------------------------------------------
+## ----eda_41, eval=T,include=F-------------------------------------------------
 et11 <- ExpCTable(Carseats,Target="Price",margin=1,clim=10,round=2,bin=4,per=F)
 rownames(et11)<-NULL
 
-## ----e4.2, warning=FALSE,eval=F,include=T--------------------------------
+## ----e4.2, warning=FALSE,eval=F,include=T-------------------------------------
 #  ##bin=4, descretized 4 categories based on quantiles
 #  ExpCTable(Carseats,Target="Price",margin=1,clim=10,round=2,bin=4,per=F)
 
-## ----e4.2.1,warning=FALSE,eval=T,render=et11,echo=F----------------------
+## ----e4.2.1,warning=FALSE,eval=T,render=et11,echo=F---------------------------
 paged_table(et11)
 
-## ----dd,warning=FALSE,eval=T,include=F-----------------------------------
+## ----dd,warning=FALSE,eval=T,include=F----------------------------------------
 tab_tar <- data.frame(table(Carseats[,"Urban"]))
 tab_tar$Descriptions <- "Store location"
 names(tab_tar) <- c("Urban","Frequency","Descriptions")
 rownames(tab_tar)<-NULL
 
-## ----dv-r,warning=FALSE,eval=T,render=tab_tar,echo=F---------------------
+## ----dv-r,warning=FALSE,eval=T,render=tab_tar,echo=F--------------------------
 kable(tab_tar, "html")
 
-## ----snc1,warning=FALSE,eval=T,include=F---------------------------------
+## ----snc1,warning=FALSE,eval=T,include=F--------------------------------------
 snc = ExpNumStat(Carseats,by="GA",gp="Urban",Qnt=seq(0,1,0.1),MesofShape=2,Outlier=TRUE,round=2)
 rownames(snc)<-NULL
 
-## ----snc2, warning=FALSE,eval=F,include=T--------------------------------
+## ----snc2, warning=FALSE,eval=F,include=T-------------------------------------
 #  ExpNumStat(Carseats,by="GA",gp="Urban",Qnt=seq(0,1,0.1),MesofShape=2,Outlier=TRUE,round=2)
 
-## ----snc3,warning=FALSE,eval=T,render=snc,echo=F-------------------------
+## ----snc3,warning=FALSE,eval=T,render=snc,echo=F------------------------------
 paged_table(snc)
 
 ## ----bp3.1,warning=FALSE,eval=T,include=T,fig.align='center',fig.height=7,fig.width=7----
 plot4 <- ExpNumViz(Carseats,target="Urban",type=1,nlim=3,fname=NULL,col=c("darkgreen","springgreen3","springgreen1"),Page=c(2,2),sample=8)
 plot4[[1]]
 
-## ----ed3.3, eval=T,include=F---------------------------------------------
+## ----ed3.3, eval=T,include=F--------------------------------------------------
 et100 <- ExpCTable(Carseats,Target="Urban",margin=1,clim=10,nlim=3,round=2,bin=NULL,per=F)
 rownames(et100)<-NULL
 
@@ -134,20 +159,20 @@ et5 <- ExpCatStat(Carseats,Target="Urban",result = "IV",clim=10,nlim=5,bins=10,P
 rownames(et5)<-NULL
 et5 <- et5[1:15,]
 
-## ----ed3.4, warning=FALSE,eval=F,include=T-------------------------------
+## ----ed3.4, warning=FALSE,eval=F,include=T------------------------------------
 #  ExpCTable(Carseats,Target="Urban",margin=1,clim=10,nlim=3,round=2,bin=NULL,per=F)
 
 ## ----ed3.5,warning=FALSE,eval=T,render=et100,echo=F,out.height=8,out.width=8----
 kable(et100,"html")
 
-## ----ed3.6, warning=FALSE,eval=F,include=T-------------------------------
+## ----ed3.6, warning=FALSE,eval=F,include=T------------------------------------
 #  ExpCatStat(Carseats,Target="Urban",result = "IV",clim=10,nlim=5,bins=10,Pclass="Yes",plot=FALSE,top=20,Round=2)
 #  
 
 ## ----ed3.7,warning=FALSE,eval=T,render=et5,echo=F,out.height=8,out.width=8----
 kable(et5,"html")
 
-## ----ed3.8, warning=FALSE,eval=F,include=T-------------------------------
+## ----ed3.8, warning=FALSE,eval=F,include=T------------------------------------
 #  et4 <- ExpCatStat(Carseats,Target="Urban",result = "Stat",clim=10,nlim=5,bins=10,Pclass="Yes",plot=FALSE,top=20,Round=2)
 
 ## ----ed3.9,warning=FALSE,eval=T,render=et4,echo=F,out.height=8,out.width=8----

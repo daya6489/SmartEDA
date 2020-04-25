@@ -4,9 +4,18 @@
 \alias{ExpReport}
 \title{Function to create HTML EDA report}
 \usage{
-ExpReport(data, Template = NULL, Target = NULL, label = NULL,
-  theme = "Default", op_file = NULL, op_dir = getwd(), sc = NULL,
-  sn = NULL, Rc = NULL)
+ExpReport(
+  data,
+  Template = NULL,
+  Target = NULL,
+  label = NULL,
+  theme = "Default",
+  op_file = NULL,
+  op_dir = getwd(),
+  sc = NULL,
+  sn = NULL,
+  Rc = NULL
+)
 }
 \arguments{
 \item{data}{a data frame}

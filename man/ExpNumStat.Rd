@@ -4,9 +4,18 @@
 \alias{ExpNumStat}
 \title{Summary statistics for numerical variables}
 \usage{
-ExpNumStat(data, by = "A", gp = NULL, Qnt = NULL, Nlim = 10,
-  MesofShape = 2, Outlier = FALSE, round = 3, dcast = FALSE,
-  val = NULL)
+ExpNumStat(
+  data,
+  by = "A",
+  gp = NULL,
+  Qnt = NULL,
+  Nlim = 10,
+  MesofShape = 2,
+  Outlier = FALSE,
+  round = 3,
+  dcast = FALSE,
+  val = NULL
+)
 }
 \arguments{
 \item{data}{dataframe or matrix}
@@ -85,7 +94,4 @@ ExpNumStat(mtcars,by="GA",gp="gear",Qnt=c(0.1,0.2),MesofShape=2,
 }
 \seealso{
 \code{\link[psych:describe.by]{describe.by}}
-}
-\author{
-dubrangala
 }
