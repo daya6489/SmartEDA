@@ -4,7 +4,7 @@
 \alias{ExpKurtosis}
 \title{Measures of Shape - Kurtosis}
 \usage{
-ExpKurtosis(x,type)
+ExpKurtosis(x, type)
 }
 \arguments{
 \item{x}{A numeric object or data.frame}

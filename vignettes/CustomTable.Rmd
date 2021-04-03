@@ -18,7 +18,7 @@ library(ggplot2)
 
 ```
 
-## Exploratory analysis - Custom tables, summary statistics
+## 1. Exploratory analysis - Custom tables, summary statistics
 
 In this vignette we will discuss about how to customize the summary statistics using *ExpCustomStat* function from `SmartEDA`. The output of this function returns matrix object containing descriptive information on all input variables for each level/combination of levels in categorical/group variable. Also, while running the analysis we can filter row/cases of the data. We can apply the filters at individual variable level or complete data like base subsetting.
 
@@ -34,7 +34,8 @@ Key functionalities of `ExpCustomStat` are:
 4. Filter rows/cases where conditions are true. Options to apply filters at variable level or complete data set like base subsetting
 5. Options to calculate basic statistics like Mean, Median, Std.Dev, Variance, Count, Proportions, Quantiles, IQR, Percentages of Shares (PS) for numerical data
 
-### Usage of `ExpCustomStat` function
+### 1.1 Usage of `ExpCustomStat` function
+
 Will open the carseats data from ISLR package and drive different types of use cases using `ExpCustomStat` function. 
 
 In this vignette, we will be using a simulated data set containing sales of child car seats at 400 different stores. 
@@ -49,14 +50,14 @@ options(width = 150)
 CData = ISLR::Carseats
 head(CData,5)
 ```
-##### 1. Categorical summaries
+## 2. Categorical summaries
 Categorical summaries to describe the distribution for a qualitative variables.
 
 * Count (Frequency) the number of subjects in each group
 * The proportions in each group (Relative frequency)
 * Tabulation or custom tables for more than two categorical variables
 
-###### a. Frequency table
+### 2.1. Frequency table
 The number of observations for particular category
 
 * Base: All carseats data
@@ -78,7 +79,7 @@ ExpCTable(Carseats,Target=NULL,clim=5,nlim=15,round=2,bin=NULL,per=F)
 ExpCustomStat(Carseats,Cvar=c("US","Urban","ShelveLoc"),gpby=FALSE)
 ```
 
-###### b. Crosstabulation (more than one categorical variable)
+### 2.2. Crosstabulation (more than one categorical variable)
 To produce cross tables which calculate counts and proportions for each combination of categorical variables we can use *ExpCustomStat*
 
 NOTE: For crosstabulation change input `gpby`=TRUE
@@ -96,7 +97,7 @@ We can also produce multidimensional tables based on three or more categorical v
 ```{r}
 ExpCustomStat(Carseats,Cvar=c("US","Urban","ShelveLoc"),gpby=TRUE,filt=NULL)
 ```
-###### c. Adding filters to tables
+### 2.3. Adding filters to tables
 If we want to understand the number of stores in `US` and location is `Urban` for `Population` size greater than 150
 
 * Base: Those stores having their average age of the local `Population` is > 150 
@@ -111,7 +112,7 @@ ExpCustomStat(Carseats,Cvar=c("US","Urban"),gpby=TRUE,filt="Population>150")
 ExpCustomStat(Carseats,Cvar=c("US","ShelveLoc"),gpby=TRUE,filt="Urban=='Yes' & Population>150")
 ```
 
-##### 2. Numerical summaries
+## 3. Numerical summaries
 Numerical summaries to describe the distribution for quantitative variables.
 
 * Measure of location (Mean, median)
@@ -119,7 +120,7 @@ Numerical summaries to describe the distribution for quantitative variables.
 * Measure of shapes (Skewness and Kurtosis)
 * Other summary statistics
 
-###### a. Numerical variable summary 
+### 3.1. Numerical variable summary 
 * Base: All carseats data
 * Table: Descriptive summary for Price, Population, Sales, CompPrice, Income
 
@@ -135,7 +136,7 @@ ExpCustomStat(Carseats,Nvar=c("Population","Sales","CompPrice","Income"),stat = 
 ExpCustomStat(Carseats,Nvar=c("Population","Sales","CompPrice","Income"),stat = c('min','p0.25','median','p0.75','max'))
 ```
 
-###### b. Adding filters to complete data (like base subset)
+### 3.2. Adding filters to complete data (like base subset)
 Filter rows/cases of complete dataset where conditions are true
 
 * Base: Whether the store is in urban (Urban ==Yes)
@@ -154,7 +155,7 @@ options(width=150)
 ExpCustomStat(Carseats,Nvar=c("Population","Sales","CompPrice","Income"),stat = c('Count','mean','sum','median','IQR'),filt="Urban=='Yes' & Population>150")
 ```
 
-###### c. Filter out unique value from all the numeric variables
+### 3.3. Filter out unique value from all the numeric variables
 This will be useful when we need to exclude redundant values like '999' or '9999' or '-9' or '-1111', or '888' etc from each selected variable.
 
 Eg:dat = data.frame(x = c(23,24,34,999,12,12,23,999,45),
@@ -173,7 +174,7 @@ data_sam[sample(1:400,45),"Income"] <- 999
 ExpCustomStat(data_sam,Nvar=c("Population","Sales","CompPrice","Income"),stat = c('Count','mean','sum','min'),filt="All %ni% c(999,-9)")
 ```
 
-###### d. Adding filters at variable level
+### 3.4. Adding filters at variable level
 Different filters for each numeric variable. For example, below are the conditions (logic) for each variable summary analysis.
 
 `"Population" - Consider only Good ShelveLoc (the quality of the shelving location for the car seats at each site) ShelveLoc=='Good'`
@@ -192,10 +193,10 @@ Table: Descriptive summary for Price, Population, Sales, CompPrice, Income based
 options(width = 150)
 ExpCustomStat(Carseats,Nvar=c("Population","Sales","CompPrice","Education","Income"),stat = c('Count','mean','sum','var','sd','IQR','median'),filt=c("ShelveLoc=='Good'^Urban=='Yes'^Price>=150^All^US=='Yes'"))
 ```
-##### 3. Numerical summaries by category
+## 4. Numerical summaries by category
 Descriptive summary for numerical variable by group level. 
 
-###### a. Variable summary report (One group variable)
+### 4.1. Variable summary report (One group variable)
 * Base: All carseats data
 * Table: Descriptive summary for Price, Population, Sales by group (Urban, ShelveLoc)
 
@@ -203,7 +204,7 @@ Descriptive summary for numerical variable by group level.
 options(width = 150)
 ExpCustomStat(Carseats,Cvar = c("Urban","ShelveLoc"), Nvar=c("Population","Sales"), stat = c('Count','Prop','mean','min','P0.25','median','p0.75','max'),gpby=FALSE)
 ```
-###### b. Variable summary report (More than One group variable)
+### 4.2. Variable summary report (More than One group variable)
 * Base: All carseats data
 * Table: Descriptive summary for CompPrice, Income by group (Urban){PS: Percentages of shares}
 
@@ -211,7 +212,7 @@ ExpCustomStat(Carseats,Cvar = c("Urban","ShelveLoc"), Nvar=c("Population","Sales
 options(width = 150)
 ExpCustomStat(Carseats,Cvar = c("Urban","US","ShelveLoc"), Nvar=c("CompPrice","Income"), stat = c('Count','Prop','mean','sum','PS','min','max','IQR','sd'), gpby = TRUE)
 ```
-###### c. Variable summary report (More than One group variable) with filter
+### 4.3. Variable summary report (More than One group variable) with filter
 * Base: Stores in Urban location only
 * Table: Descriptive summary for CompPrice, Income by group (Urban){PS: Percentages of shares}
 
@@ -243,7 +244,7 @@ Different base for each numeric variable.
 ExpCustomStat(Carseats,Cvar = c("Urban","US"), Nvar=c("Population","Sales","CompPrice"), stat = c('Count','Prop','mean','sum','var','IQR'), filt=c("ShelveLoc=='Good'^Urban=='Yes'^Price>=150"))
 ```
 
-##### 4. Resahpe data 
+## 5. Resahpe data 
 Reshapes a grouped data
 
 ```{r}
@@ -251,8 +252,7 @@ options(width = 150)
 ExpCustomStat(Carseats,Cvar = c("Urban"), Nvar=c("Population","Sales"), stat = c('Count','Prop'),gpby=TRUE,dcast=TRUE)
 ```
 
-
-Example scripts
+##### Example scripts
 
 ```{r, warning=FALSE,eval=F,include=T}
 ##Frequency table for categorical variables
