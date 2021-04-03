@@ -8,21 +8,29 @@
 
 <title>Distributions of categorical variables — ExpCatViz • SmartEDA</title>
 
+
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,10 +38,10 @@
 
 
 
-<meta property="og:title" content="Distributions of categorical variables — ExpCatViz" />
 
+<meta property="og:title" content="Distributions of categorical variables — ExpCatViz" />
 <meta property="og:description" content="This function automatically scans through each variable and creates bar plot for categorical variable." />
-<meta name="twitter:card" content="summary" />
+
 
 
 
@@ -47,9 +55,10 @@
 <![endif]-->
 
 
+
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -63,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SmartEDA</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.7</span>
       </span>
     </div>
 
@@ -71,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -91,15 +100,22 @@
     <li>
       <a href="../articles/CustomTable.html">Custom table summarizing outcomes</a>
     </li>
+    <li>
+      <a href="../articles/SmartTwoPlots.html">Two independent plots side by side for the same variable</a>
+    </li>
   </ul>
 </li>
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/daya6489/SmartEDA/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -107,25 +123,37 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Distributions of categorical variables</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/daya6489/SmartEDA/blob/master/R/fn_exp_categorical_viz.R'><code>R/fn_exp_categorical_viz.R</code></a></small>
     <div class="hidden name"><code>ExpCatViz.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    
     <p>This function automatically scans through each variable and creates bar plot for categorical variable.</p>
-    
     </div>
 
-    <pre class="usage"><span class='fu'>ExpCatViz</span>(<span class='no'>data</span>,<span class='kw'>target</span><span class='kw'>=</span><span class='kw'>NULL</span>,<span class='kw'>fname</span><span class='kw'>=</span><span class='kw'>NULL</span>,<span class='kw'>clim</span><span class='kw'>=</span><span class='fl'>10</span>,<span class='kw'>col</span><span class='kw'>=</span><span class='kw'>NULL</span>,<span class='kw'>margin</span><span class='kw'>=</span><span class='fl'>1</span>,<span class='kw'>Page</span><span class='kw'>=</span><span class='kw'>NULL</span>,
-<span class='kw'>Flip</span><span class='kw'>=</span><span class='no'>F</span>,<span class='kw'>sample</span><span class='kw'>=</span><span class='kw'>NULL</span>,<span class='kw'>rdata</span><span class='kw'>=</span><span class='fl'>FALSE</span>,<span class='kw'>value</span><span class='kw'>=</span><span class='kw'>NULL</span>,<span class='kw'>gtitle</span><span class='kw'>=</span><span class='kw'>NULL</span>,<span class='kw'>theme</span><span class='kw'>=</span><span class='st'>"Default"</span>)</pre>
-    
+    <pre class="usage"><span class='fu'>ExpCatViz</span><span class='op'>(</span>
+  <span class='va'>data</span>,
+  target <span class='op'>=</span> <span class='cn'>NULL</span>,
+  fname <span class='op'>=</span> <span class='cn'>NULL</span>,
+  clim <span class='op'>=</span> <span class='fl'>10</span>,
+  col <span class='op'>=</span> <span class='cn'>NULL</span>,
+  margin <span class='op'>=</span> <span class='fl'>1</span>,
+  Page <span class='op'>=</span> <span class='cn'>NULL</span>,
+  Flip <span class='op'>=</span> <span class='cn'>F</span>,
+  sample <span class='op'>=</span> <span class='cn'>NULL</span>,
+  rdata <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  value <span class='op'>=</span> <span class='cn'>NULL</span>,
+  gtitle <span class='op'>=</span> <span class='cn'>NULL</span>,
+  theme <span class='op'>=</span> <span class='st'>"Default"</span>
+<span class='op'>)</span></pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -135,7 +163,7 @@
     </tr>
     <tr>
       <th>target</th>
-      <td><p>target variable. This is not a mandatory field.</p></td>
+      <td><p>target variable. This is not a mandatory field</p></td>
     </tr>
     <tr>
       <th>fname</th>
@@ -143,11 +171,11 @@
     </tr>
     <tr>
       <th>clim</th>
-      <td><p>maximum categories to be considered to include in bar graphs.</p></td>
+      <td><p>maximum categories to be considered to include in bar graphs</p></td>
     </tr>
     <tr>
       <th>col</th>
-      <td><p>define the colors to fill the bars, default it will take sample colours.</p></td>
+      <td><p>define the colors to fill the bars, default it will take sample colours</p></td>
     </tr>
     <tr>
       <th>margin</th>
@@ -179,56 +207,76 @@
     </tr>
     <tr>
       <th>theme</th>
-      <td><p>extra themes, geoms, and scales for 'ggplot2' (use theme from ggthemes package)</p></td>
+      <td><p>adding extra themes, geoms, and scales for 'ggplot2' (eg: themes options from ggthemes package)</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>This function returns collated graphs in grid format in PDF or JPEG format. All the files will be stored in the working directory</p>
-<p>Bar graph - for raw data(this function will dynamically pick all the categorical variable and plot the bar chart)</p>
-<p>Bar graph - aggregated data</p>
-<p>Stacked Bar graph by target variable</p>
-    
+<ul>
+<li><p><code>Bar graph</code> for raw data(this function will dynamically pick all the categorical variable and plot the bar chart)</p></li>
+<li><p><code>Bar graph</code> for aggregated data</p></li>
+<li><p><code>Bar graph</code> is a Stacked Bar graph by target variable</p></li>
+</ul>
+
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://www.rdocumentation.org/packages/ggplot2/topics/geom_bar'>geom_bar</a></code></p></div>
-    
+    <div class='dont-index'><p><code><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_bar</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## Bar graph for specified variable</span>
-<span class='no'>mtdata</span> <span class='kw'>&lt;-</span> <span class='no'>mtcars</span>
-<span class='no'>mtdata</span>$<span class='no'>carname</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/colnames'>rownames</a></span>(<span class='no'>mtcars</span>)
-<span class='fu'>ExpCatViz</span>(<span class='kw'>data</span><span class='kw'>=</span><span class='no'>mtdata</span>,<span class='kw'>target</span><span class='kw'>=</span><span class='st'>"carname"</span>,<span class='kw'>col</span><span class='kw'>=</span><span class='st'>"blue"</span>,<span class='kw'>rdata</span><span class='kw'>=</span><span class='fl'>TRUE</span>,<span class='kw'>value</span><span class='kw'>=</span><span class='st'>"mpg"</span>)</div><div class='output co'>#&gt; [[1]]</div><div class='img'><img src='ExpCatViz-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div></pre>
+<span class='va'>mtdata</span> <span class='op'>=</span> <span class='va'>mtcars</span>
+<span class='va'>mtdata</span><span class='op'>$</span><span class='va'>carname</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>rownames</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>)</span>
+<span class='fu'>ExpCatViz</span><span class='op'>(</span>data<span class='op'>=</span><span class='va'>mtdata</span>,target<span class='op'>=</span><span class='st'>"carname"</span>,col<span class='op'>=</span><span class='st'>"blue"</span>,rdata<span class='op'>=</span><span class='cn'>TRUE</span>,value<span class='op'>=</span><span class='st'>"mpg"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [[1]]</div><div class='img'><img src='ExpCatViz-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div><div class='input'><span class='va'>n</span><span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>mtdata</span><span class='op'>)</span>
+<span class='fu'>ExpCatViz</span><span class='op'>(</span>data<span class='op'>=</span><span class='va'>mtdata</span>,target<span class='op'>=</span><span class='st'>"carname"</span>,col<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/grDevices/palettes.html'>rainbow</a></span><span class='op'>(</span><span class='va'>n</span><span class='op'>)</span>,rdata<span class='op'>=</span><span class='cn'>TRUE</span>,value<span class='op'>=</span><span class='st'>"mpg"</span><span class='op'>)</span> <span class='co'>## Ranibow colour</span>
+</div><div class='output co'>#&gt; [[1]]</div><div class='img'><img src='ExpCatViz-2.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div><div class='input'><span class='co'># Stacked bar chart</span>
+<span class='fu'>ExpCatViz</span><span class='op'>(</span>data<span class='op'>=</span><span class='va'>mtdata</span>,target <span class='op'>=</span> <span class='st'>"gear"</span>,col<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/grDevices/palettes.html'>hcl.colors</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='st'>"Set 2"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [[1]]</div><div class='img'><img src='ExpCatViz-3.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
+#&gt; [[2]]</div><div class='img'><img src='ExpCatViz-4.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
+#&gt; [[3]]</div><div class='img'><img src='ExpCatViz-5.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
+#&gt; [[4]]</div><div class='img'><img src='ExpCatViz-6.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div><div class='input'><span class='fu'>ExpCatViz</span><span class='op'>(</span>data<span class='op'>=</span><span class='va'>mtdata</span>,target <span class='op'>=</span> <span class='st'>"gear"</span>,col<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"red"</span>, <span class='st'>"green"</span>, <span class='st'>"blue"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [[1]]</div><div class='img'><img src='ExpCatViz-7.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
+#&gt; [[2]]</div><div class='img'><img src='ExpCatViz-8.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
+#&gt; [[3]]</div><div class='img'><img src='ExpCatViz-9.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
+#&gt; [[4]]</div><div class='img'><img src='ExpCatViz-10.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div><div class='input'><span class='co'># Bar chart</span>
+<span class='fu'>ExpCatViz</span><span class='op'>(</span>data<span class='op'>=</span><span class='va'>mtdata</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [[1]]</div><div class='img'><img src='ExpCatViz-11.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
+#&gt; [[2]]</div><div class='img'><img src='ExpCatViz-12.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
+#&gt; [[3]]</div><div class='img'><img src='ExpCatViz-13.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
+#&gt; [[4]]</div><div class='img'><img src='ExpCatViz-14.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
+#&gt; [[5]]</div><div class='img'><img src='ExpCatViz-15.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div><div class='input'><span class='fu'>ExpCatViz</span><span class='op'>(</span>data<span class='op'>=</span><span class='va'>mtdata</span>,col<span class='op'>=</span><span class='st'>"blue"</span>,gtitle <span class='op'>=</span> <span class='st'>"Barplot"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [[1]]</div><div class='img'><img src='ExpCatViz-16.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
+#&gt; [[2]]</div><div class='img'><img src='ExpCatViz-17.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
+#&gt; [[3]]</div><div class='img'><img src='ExpCatViz-18.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
+#&gt; [[4]]</div><div class='img'><img src='ExpCatViz-19.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
+#&gt; [[5]]</div><div class='img'><img src='ExpCatViz-20.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-
-      <li><a href="#see-also">See also</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
-  <p>Developed by Dayanand Ubrangala.</p>
+  <p>Developed by Dayanand Ubrangala, Kiran R, Ravi Prasad Kondapalli, Sayan Putatunda.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

@@ -39,7 +39,11 @@
 #' # Crosstbale for Mtcars data
 #' ExpCTable(mtcars, Target = "gear", margin = 1, clim = 10, nlim = 3, bin = NULL, per = FALSE)
 #'
+<<<<<<< HEAD
 #' @importFrom stats na.omit
+=======
+#' @importFrom stats na.omit complete.cases
+>>>>>>> master
 #' @export ExpCTable
 
 ExpCTable <- function(data, Target = NULL, margin = 1, clim = 10, nlim = 10, round = 2, bin = 3, per = FALSE){
@@ -228,7 +232,11 @@ ExpWoeTable <- function (X, Y, valueOfGood = NULL, print = FALSE, Round = 2) {
         })
       odv <- round(t[[1]] / t[[2]], Round)
       if (is.infinite(odv)) odv <- 0
+<<<<<<< HEAD
       odsvalue <- rbind(c(t, od = odv), odsvalue)
+=======
+      odsvalue <- rbind(odsvalue, c(t, od = odv))
+>>>>>>> master
     }
     woeTable$Per_1 <- round(woeTable$Out_1 / sum(woeTable$Out_1, na.rm = T), Round)
     woeTable$Per_0 <- round(woeTable$Out_0 / sum(woeTable$Out_0, na.rm = T), Round)
@@ -241,7 +249,11 @@ ExpWoeTable <- function (X, Y, valueOfGood = NULL, print = FALSE, Round = 2) {
     attr(woeTable, "iValue") <- sum(woeTable$IV, na.rm = T)
     ref_1 <- valueOfGood
     ref_0 <- yClasses[!yClasses %in% valueOfGood]
+<<<<<<< HEAD
     woeTable$Ref_1 <- ref_1
+=======
+    woeTable$Ref_1 <- paste0(ref_1)
+>>>>>>> master
     woeTable$Ref_0 <- paste0(ref_0, collapse = ", ")
     return(woeTable)
   }
@@ -479,7 +491,11 @@ ExpCatStat <- function(data, Target=NULL, result="Stat", clim=10,
     bin_data <- lapply(xx[, num_var2], function(x){
       q <- quantile(x, probs = c(1 : (bins - 1) / bins), na.rm = TRUE, type = 3)
       cuts <- unique(c(min(x), unique(q), max(x)))
+<<<<<<< HEAD
       tp <- cut(x, cuts, include.lowest = T)
+=======
+      tp <- cut(x, cuts, include.lowest = T, dig.lab=6)
+>>>>>>> master
       return(tp)
     })
     bin_data <- cbind.data.frame(bin_data)
@@ -534,6 +550,10 @@ ExpCatStat <- function(data, Target=NULL, result="Stat", clim=10,
       })
     outp_dat <- do.call("rbind", tab1)
     outp_dat <- data.frame(Variable = rownames(outp_dat), outp_dat)
+<<<<<<< HEAD
+=======
+    outp_dat$Target <- Target
+>>>>>>> master
     rownames(outp_dat) <- NULL
     class(outp_dat) <- c("SmartEDA", "data.frame")
     return(outp_dat)

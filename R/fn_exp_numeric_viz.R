@@ -1,6 +1,10 @@
 #' Distributions of numeric variables
 #'
+<<<<<<< HEAD
 #' This function automatically scans through each variable and creates density plot, scatter plot and box plot for continuous variable.
+=======
+#' This function automatically scans through each variable and creates density plot, scatter plot and box plot for continuous variable using ggplot2 functions.
+>>>>>>> master
 #'
 #' @param data dataframe or matrix
 #' @param target target variable
@@ -22,6 +26,13 @@
 #' @details
 #' This function automatically scan each variables and generate a graph based on the user inputs. Graphical representation includes scatter plot, box plot and density plots.
 #'
+<<<<<<< HEAD
+=======
+#' All the plots are generated using ggplot2 pacakge function (geom_boxplot, geom_density, geom_point)
+#'
+#' The plots are combined using gridExtra pacakge functions
+#'
+>>>>>>> master
 #' \itemize{
 #'   \item \code{target} is continuous then output is scatter plots
 #'   \item \code{target} is categorical then output is box plot
@@ -38,7 +49,11 @@
 #'   \item \code{Box plot} by overall sample
 #'   \item \code{Box plot} by stratified sample
 #'}
+<<<<<<< HEAD
 #' @importFrom grDevices colors hcl.colors
+=======
+#' @importFrom grDevices colors
+>>>>>>> master
 #' @importFrom gridExtra marrangeGrob
 #' @importFrom sampling srswor
 #' @importFrom utils combn

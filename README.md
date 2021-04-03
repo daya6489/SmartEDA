@@ -1,7 +1,13 @@
 # SmartEDA [![CRAN status](https://www.r-pkg.org/badges/version/SmartEDA)](https://cran.r-project.org/package=SmartEDA)
 
 [![Downloads](http://cranlogs.r-pkg.org/badges/SmartEDA)](https://cran.r-project.org/package=SmartEDA)
+
+[![status](https://joss.theoj.org/papers/10.21105/joss.01509/status.svg)](https://joss.theoj.org/papers/10.21105/joss.01509)
+
 [![Total Downloads](http://cranlogs.r-pkg.org/badges/grand-total/SmartEDA)](https://cran.r-project.org/package=SmartEDA)
+
+[![GitHub Stars](https://img.shields.io/github/stars/daya6489/SmartEDA.svg?style=social)](https://img.shields.io/github/stars/daya6489/SmartEDA)
+
 
 ---
 
@@ -26,7 +32,7 @@ SmartEDA package with other similar packages available in CRAN for exploratory d
 ![SmartEDA](https://github.com/daya6489/SmartEDA/blob/master/man/figures/SmartEDA_comp.PNG)
 
 # Journal of Open Source Software Article
-An article describing SmartEDA pacakge for exploratory data analysis approach has been published in [arxiv](https://arxiv.org/pdf/1903.04754.pdf) and currently it is under review at The Journal of Open Source Software. Please cite the paper if you use SmartEDA in your work!
+An article describing SmartEDA pacakge for exploratory data analysis approach has been published in [arxiv](https://arxiv.org/pdf/1903.04754.pdf) and Journal of Open Source Software [JOSS](https://joss.theoj.org/papers/10.21105/joss.01509). Please cite the paper if you use SmartEDA in your work!
 
 # Installation
 
@@ -87,11 +93,11 @@ To summarise the numeric variables, you can use following r codes from this paca
 
 ```R
 ## Generate Boxplot by category
-ExpNumViz(mtcars,gp="gear",type=2,nlim=25,fname = file.path(tempdir(),"Mtcars2"),Page = c(2,2))
+ExpNumViz(mtcars,target="gear",type=2,nlim=25,fname = file.path(tempdir(),"Mtcars2"),Page = c(2,2))
 ## Generate Density plot
-ExpNumViz(mtcars,gp=NULL,type=3,nlim=25,fname = file.path(tempdir(),"Mtcars3"),Page = c(2,2))
+ExpNumViz(mtcars,target=NULL,type=3,nlim=25,fname = file.path(tempdir(),"Mtcars3"),Page = c(2,2))
 ## Generate Scatter plot
-ExpNumViz(mtcars,gp="carb",type=3,nlim=25,fname = file.path(tempdir(),"Mtcars4"),Page = c(2,2))
+ExpNumViz(mtcars,target="carb",type=3,nlim=25,fname = file.path(tempdir(),"Mtcars4"),Page = c(2,2))
 
 ```
 
@@ -155,6 +161,57 @@ Create a exploratory data analysis report in HTML format
   ExpParcoord(CData,Group="US",Stsize=c(15,50),Cvar=c("ShelveLoc","Urban"))
 ```
 
+## Two independent plots side by side for the same variable
+
+To plot graph from same variable when Target=NULL vs. when Target = categorical variable (binary or multi-class variable)
+
+```R
+target = "gear"
+categorical_features <- c("vs", "am", "carb")
+numeircal_features <- c("mpg", "cyl", "disp", "hp", "drat", "wt", "qsec")
+
+num_1 <- ExpTwoPlots(mtcars, 
+                     plot_type = "numeric",
+                     iv_variables = numeircal_features,
+                     target = "gear",
+                     lp_arg_list = list(alpha=0.5, color = "red", fill= "white", binwidth=1),
+                     lp_geom_type = 'histogram',
+                     rp_arg_list = list(alpha=0.5, fill = c("red", "orange", "pink"),  binwidth=1),
+                     rp_geom_type = 'histogram',
+                     fname = "dub2.pdf",
+                     page = c(2,1),
+                     theme = "Default")
+
+```
+
+
+## Univariate Outlier analysis
+
+In statistics, an outlier is a data point that differs significantly from other observations. An outlier may be due to variability in the measurement or it may indicate experimental error; the latter are sometimes excluded from the data set.An outlier can cause serious problems in statistical analyses.
+
+Identifying outliers: There are several methods we can use to identify outliers. In ExpOutliers used two methods (1) Boxplot and (2) Standard Deviation
+
+![SmartEDA](https://github.com/daya6489/SmartEDA/blob/master/man/figures/outlierPlot_image.png)
+
+
+```R
+##Identifying outliers mehtod - Boxplot
+ExpOutliers(Carseats, varlist = c("Sales","CompPrice","Income"), method = "boxplot",  capping = c(0.1, 0.9))
+
+##Identifying outliers mehtod - 3 Standard Deviation
+ExpOutliers(Carseats, varlist = c("Sales","CompPrice","Income"), method = "3xStDev",  capping = c(0.1, 0.9))
+
+##Identifying outliers mehtod - 2 Standard Deviation
+ExpOutliers(Carseats, varlist = c("Sales","CompPrice","Income"), method = "2xStDev",  capping = c(0.1, 0.9))
+
+
+##Create outlier flag (1,0) if there are any outliers 
+ExpOutliers(Carseats, varlist = c("Sales","CompPrice","Income"), method = "3xStDev",  capping = c(0.1, 0.9), outflag = TRUE)
+
+##Impute outlier value by mean or median valie
+ExpOutliers(Carseats, varlist = c("Sales","CompPrice","Income"), method = "3xStDev", treatment = "mean", capping = c(0.1, 0.9), outflag = TRUE)
+
+```
 
 ## Univariate Outlier analysis
 

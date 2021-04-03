@@ -1,16 +1,21 @@
 Package: SmartEDA
 Type: Package
 Title: Summarize and Explore the Data
-Version: 0.3.2
-Author: Dayanand Ubrangala; Kiran R; Ravi Prasad Kondapalli; Sayan Putatunda
-Maintainer: Dayanand Ubrangala<daya6489@gmail.com>
+Version: 0.3.7
+Authors@R: c(person("Dayanand Ubrangala", role = c("aut", "cre"), email = "daya6489@gmail.com"),
+             person("Kiran", "R", role = c("aut","ctb")),
+             person("Ravi", "Prasad Kondapalli", role = c("aut","ctb")),
+             person("Sayan", "Putatunda", role = c("aut","ctb")))
+Maintainer: Dayanand Ubrangala <daya6489@gmail.com>
 Depends: R (>= 3.3.0)
-Imports: ggplot2(>= 2.2.1),sampling(>= 2.8),scales(>= 0.5.0),rmarkdown(>= 1.9),ISLR(>= 1.2),data.table(>= 1.10.4-3),gridExtra(>= 2.3),GGally(>= 1.4.0)
+Imports: ggplot2, sampling, scales, rmarkdown, ISLR(>= 1.0), data.table, gridExtra, GGally, qpdf
 Description: Exploratory analysis on any input data describing the structure and the relationships present in the data. The package automatically select the variable and does related descriptive statistics. Analyzing information value, weight of evidence, custom tables, summary statistics, graphical techniques will be performed for both numeric and categorical predictors.
-License: GPL-3
-Suggests: psych, Hmisc, smbinning,testthat,knitr,covr
+License: MIT + file LICENSE
+Suggests: testthat,knitr,covr,psych,DataExplorer
 Encoding: UTF-8
 LazyData: true
+URL: https://daya6489.github.io/SmartEDA/
+BugReports: https://github.com/daya6489/SmartEDA/issues
 Repository: CRAN
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.1
 VignetteBuilder: knitr

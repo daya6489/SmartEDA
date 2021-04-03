@@ -8,21 +8,29 @@
 
 <title>Summary statistics for numerical variables — ExpNumStat • SmartEDA</title>
 
+
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,10 +38,10 @@
 
 
 
-<meta property="og:title" content="Summary statistics for numerical variables — ExpNumStat" />
 
+<meta property="og:title" content="Summary statistics for numerical variables — ExpNumStat" />
 <meta property="og:description" content="Function provides summary statistics for all numerical variable. This function automatically scans through each variable and select only numeric/integer variables. Also if we know the target variable, function will generate relationship between target variable and each independent variable." />
-<meta name="twitter:card" content="summary" />
+
 
 
 
@@ -47,9 +55,10 @@
 <![endif]-->
 
 
+
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -63,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SmartEDA</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.7</span>
       </span>
     </div>
 
@@ -71,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -91,15 +100,22 @@
     <li>
       <a href="../articles/CustomTable.html">Custom table summarizing outcomes</a>
     </li>
+    <li>
+      <a href="../articles/SmartTwoPlots.html">Two independent plots side by side for the same variable</a>
+    </li>
   </ul>
 </li>
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/daya6489/SmartEDA/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -107,25 +123,34 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Summary statistics for numerical variables</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/daya6489/SmartEDA/blob/master/R/fn_exp_numeric.R'><code>R/fn_exp_numeric.R</code></a></small>
     <div class="hidden name"><code>ExpNumStat.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    
     <p>Function provides summary statistics for all numerical variable. This function automatically scans through each variable and select only numeric/integer variables. Also if we know the target variable, function will generate relationship between target variable and each independent variable.</p>
-    
     </div>
 
-    <pre class="usage"><span class='fu'>ExpNumStat</span>(<span class='no'>data</span>,<span class='kw'>by</span><span class='kw'>=</span><span class='kw'>NULL</span>,<span class='kw'>gp</span><span class='kw'>=</span><span class='kw'>NULL</span>,<span class='kw'>Qnt</span><span class='kw'>=</span><span class='kw'>NULL</span>,<span class='kw'>Nlim</span><span class='kw'>=</span><span class='fl'>10</span>,<span class='kw'>MesofShape</span><span class='kw'>=</span><span class='fl'>2</span>,
-<span class='kw'>Outlier</span><span class='kw'>=</span><span class='fl'>FALSE</span>,<span class='kw'>round</span><span class='kw'>=</span><span class='fl'>3</span>,<span class='kw'>dcast</span><span class='kw'>=</span><span class='fl'>FALSE</span>,<span class='kw'>val</span><span class='kw'>=</span><span class='kw'>NULL</span>)</pre>
-    
+    <pre class="usage"><span class='fu'>ExpNumStat</span><span class='op'>(</span>
+  <span class='va'>data</span>,
+  by <span class='op'>=</span> <span class='st'>"A"</span>,
+  gp <span class='op'>=</span> <span class='cn'>NULL</span>,
+  Qnt <span class='op'>=</span> <span class='cn'>NULL</span>,
+  Nlim <span class='op'>=</span> <span class='fl'>10</span>,
+  MesofShape <span class='op'>=</span> <span class='fl'>2</span>,
+  Outlier <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  round <span class='op'>=</span> <span class='fl'>3</span>,
+  dcast <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  val <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -143,7 +168,7 @@
     </tr>
     <tr>
       <th>Qnt</th>
-      <td><p>default NULL. Specified quantiles [c(.25,0.75) will find 25th and 75th percentiles]</p></td>
+      <td><p>default NULL. Specified quantiles is c(.25,0.75) will find 25th and 75th percentiles</p></td>
     </tr>
     <tr>
       <th>Nlim</th>
@@ -170,48 +195,52 @@
       <td><p>Name of the column whose values will be filled to cast (see Detials sections for list of column names)</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>summary statistics for numeric independent variables</p>
-    
+<p>Summary by:</p>
+<ul>
+<li><p><code>Only overall level</code></p></li>
+<li><p><code>Only group level</code></p></li>
+<li><p><code>Both overall and group level</code></p></li>
+</ul>
+
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Summary by – overall</p>
-<p>Summary by – group (target variable)</p>
-<p>Summary by – overall and group (target variable)</p>
-<p>coloumn descriptions</p>
-<p>•	Vname – Variable name</p>
-<p>•	Group – Target variable</p>
-<p>•	TN – Total sample (inculded NA observations)</p>
-<p>•	nNeg – Total negative observations</p>
-<p>•	nZero – Total zero observations</p>
-<p>•	nPos – Total positive observations</p>
-<p>•	NegInf – Negative infinite count</p>
-<p>•	PosInf – Positive infinite count</p>
-<p>•	NA_value – Not Applicable count</p>
-<p>•	Per_of_Missing – Percentage of missings</p>
-<p>•	Min – minimum value</p>
-<p>•	Max – maximum value</p>
-<p>•	Mean – average value</p>
-<p>•	Median – median value</p>
-<p>•	SD – Standard deviation</p>
-<p>•	CV – coefficient of variations (SD/mean)*100</p>
-<p>•	IQR – Inter quartile range</p>
-<p>•	Qnt – Specified quantiles</p>
-<p>•	MesofShape – Skewness and Kurtosis</p>
-<p>•	Outlier – Number of outliers</p>
-<p>•	Cor – Correlation b/w target and independent variables</p>
-    
+    <p>coloumn descriptions</p><ul>
+<li><p><code>Vname</code> is Variable name</p></li>
+<li><p><code>Group</code> is Target variable</p></li>
+<li><p><code>TN</code> is Total sample (inculded NA observations)</p></li>
+<li><p><code>nNeg</code> is Total negative observations</p></li>
+<li><p><code>nPos</code> is Total positive observations</p></li>
+<li><p><code>nZero</code> is Total zero observations</p></li>
+<li><p><code>NegInf</code> is Negative infinite count</p></li>
+<li><p><code>PosInf</code> is Positive infinite count</p></li>
+<li><p><code>NA_value</code> is Not Applicable count</p></li>
+<li><p><code>Per_of_Missing</code> is Percentage of missings</p></li>
+<li><p><code>Min</code> is minimum value</p></li>
+<li><p><code>Max</code> is maximum value</p></li>
+<li><p><code>Mean</code> is average value</p></li>
+<li><p><code>Median</code> is median value</p></li>
+<li><p><code>SD</code> is Standard deviation</p></li>
+<li><p><code>CV</code> is coefficient of variations (SD/mean)*100</p></li>
+<li><p><code>IQR</code> is Inter quartile range</p></li>
+<li><p><code>Qnt</code> is quantile values</p></li>
+<li><p><code>MesofShape</code> is Skewness and Kurtosis</p></li>
+<li><p><code>Outlier</code> is Number of outliers</p></li>
+<li><p><code>Cor</code> is Correlation b/w target and independent variables</p></li>
+</ul>
+
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='https://www.rdocumentation.org/packages/psych/topics/describe.by'>describe.by</a></code></p></div>
-    
+    <div class='dont-index'><p><code><a href='https://rdrr.io/pkg/psych/man/describe.by.html'>describe.by</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## Descriptive summary of numeric variables - Summary by Target variables</span>
-<span class='fu'>ExpNumStat</span>(<span class='no'>mtcars</span>,<span class='kw'>by</span><span class='kw'>=</span><span class='st'>"G"</span>,<span class='kw'>gp</span><span class='kw'>=</span><span class='st'>"gear"</span>,<span class='kw'>Qnt</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0.1</span>,<span class='fl'>0.2</span>),<span class='kw'>MesofShape</span><span class='kw'>=</span><span class='fl'>2</span>,
-<span class='kw'>Outlier</span><span class='kw'>=</span><span class='fl'>TRUE</span>,<span class='kw'>round</span><span class='kw'>=</span><span class='fl'>3</span>)</div><div class='output co'>#&gt;    Vname  Group TN nNeg nZero nPos NegInf PosInf NA_Value Per_of_Missing
+    <pre class="examples"><div class='input'><span class='co'># Descriptive summary of numeric variables is Summary by Target variables</span>
+<span class='fu'>ExpNumStat</span><span class='op'>(</span><span class='va'>mtcars</span>,by<span class='op'>=</span><span class='st'>"G"</span>,gp<span class='op'>=</span><span class='st'>"gear"</span>,Qnt<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.1</span>,<span class='fl'>0.2</span><span class='op'>)</span>,MesofShape<span class='op'>=</span><span class='fl'>2</span>,
+           Outlier<span class='op'>=</span><span class='cn'>TRUE</span>,round<span class='op'>=</span><span class='fl'>3</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;    Vname  Group TN nNeg nZero nPos NegInf PosInf NA_Value Per_of_Missing
 #&gt; 2   disp gear:4 12    0     0   12      0      0        0              0
 #&gt; 8   disp gear:3 15    0     0   15      0      0        0              0
 #&gt; 14  disp gear:5  5    0     0    5      0      0        0              0
@@ -250,7 +279,7 @@
 #&gt; 11   58.389   2.465   5.424   3.893   3.730   0.833 0.214   0.508    0.714
 #&gt; 17   13.163   1.513   3.570   2.633   2.770   0.819 0.311   1.030   -0.276
 #&gt;    Kurtosis     10%     20%   LB.25%  UB.75% nOutliers
-#&gt; 2    -1.615  76.000  78.760  -42.688 281.613         0
+#&gt; 2    -1.615  76.000  78.760  -42.688 281.612         0
 #&gt; 8    -0.235 238.200 272.240  119.500 536.300         0
 #&gt; 14   -1.647 105.180 115.260 -150.750 572.050         0
 #&gt; 4     3.640   3.855   3.900    3.619   4.369         1
@@ -267,9 +296,10 @@
 #&gt; 18   -1.729  14.540  14.580   11.450  19.850         0
 #&gt; 5    -1.300   1.845   1.988    0.594   4.699         0
 #&gt; 11   -0.161   3.303   3.439    2.689   4.719         4
-#&gt; 17   -1.273   1.764   2.015    0.595   4.715         0</div><div class='input'><span class='co'>## Descriptive summary of numeric variables - Summary by Overall</span>
-<span class='fu'>ExpNumStat</span>(<span class='no'>mtcars</span>,<span class='kw'>by</span><span class='kw'>=</span><span class='st'>"A"</span>,<span class='kw'>gp</span><span class='kw'>=</span><span class='st'>"gear"</span>,<span class='kw'>Qnt</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0.1</span>,<span class='fl'>0.2</span>),<span class='kw'>MesofShape</span><span class='kw'>=</span><span class='fl'>2</span>,
-<span class='kw'>Outlier</span><span class='kw'>=</span><span class='fl'>TRUE</span>,<span class='kw'>round</span><span class='kw'>=</span><span class='fl'>3</span>)</div><div class='output co'>#&gt;   Vname Group TN nNeg nZero nPos NegInf PosInf NA_Value Per_of_Missing      sum
+#&gt; 17   -1.273   1.764   2.015    0.595   4.715         0</div><div class='input'><span class='co'># Descriptive summary of numeric variables is Summary by Overall</span>
+<span class='fu'>ExpNumStat</span><span class='op'>(</span><span class='va'>mtcars</span>,by<span class='op'>=</span><span class='st'>"A"</span>,gp<span class='op'>=</span><span class='st'>"gear"</span>,Qnt<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.1</span>,<span class='fl'>0.2</span><span class='op'>)</span>,MesofShape<span class='op'>=</span><span class='fl'>2</span>,
+           Outlier<span class='op'>=</span><span class='cn'>TRUE</span>,round<span class='op'>=</span><span class='fl'>3</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   Vname Group TN nNeg nZero nPos NegInf PosInf NA_Value Per_of_Missing      sum
 #&gt; 2  disp   All 32    0     0   32      0      0        0              0 7383.100
 #&gt; 4  drat   All 32    0     0   32      0      0        0              0  115.090
 #&gt; 3    hp   All 32    0     0   32      0      0        0              0 4694.000
@@ -289,9 +319,10 @@
 #&gt; 3  93.400  -28.750 305.250         1
 #&gt; 1  15.200    4.363  33.862         1
 #&gt; 6  16.734   13.881  21.911         1
-#&gt; 5   2.349    1.038   5.153         3</div><div class='input'><span class='co'>## Descriptive summary of numeric variables - Summary by Overall and Group</span>
-<span class='fu'>ExpNumStat</span>(<span class='no'>mtcars</span>,<span class='kw'>by</span><span class='kw'>=</span><span class='st'>"GA"</span>,<span class='kw'>gp</span><span class='kw'>=</span><span class='st'>"gear"</span>,<span class='kw'>Qnt</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/seq'>seq</a></span>(<span class='fl'>0</span>,<span class='fl'>1</span>,<span class='fl'>.1</span>),<span class='kw'>MesofShape</span><span class='kw'>=</span><span class='fl'>1</span>,
-<span class='kw'>Outlier</span><span class='kw'>=</span><span class='fl'>TRUE</span>,<span class='kw'>round</span><span class='kw'>=</span><span class='fl'>2</span>)</div><div class='output co'>#&gt;    Vname    Group TN nNeg nZero nPos NegInf PosInf NA_Value Per_of_Missing
+#&gt; 5   2.349    1.038   5.153         3</div><div class='input'><span class='co'># Descriptive summary of numeric variables is Summary by Overall and Group</span>
+<span class='fu'>ExpNumStat</span><span class='op'>(</span><span class='va'>mtcars</span>,by<span class='op'>=</span><span class='st'>"GA"</span>,gp<span class='op'>=</span><span class='st'>"gear"</span>,Qnt<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>1</span>,<span class='fl'>.1</span><span class='op'>)</span>,MesofShape<span class='op'>=</span><span class='fl'>1</span>,
+           Outlier<span class='op'>=</span><span class='cn'>TRUE</span>,round<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;    Vname    Group TN nNeg nZero nPos NegInf PosInf NA_Value Per_of_Missing
 #&gt; 2   disp gear:All 32    0     0   32      0      0        0              0
 #&gt; 8   disp   gear:4 12    0     0   12      0      0        0              0
 #&gt; 14  disp   gear:3 15    0     0   15      0      0        0              0
@@ -338,7 +369,7 @@
 #&gt; 18  265.38  15.41  20.22  17.69  17.42   1.35 0.08   0.96  15.41  16.25  16.99
 #&gt; 24   78.20  14.50  16.90  15.64  15.50   1.13 0.07   2.10  14.50  14.54  14.58
 #&gt; 5   102.95   1.51   5.42   3.22   3.33   0.98 0.30   1.03   1.51   1.96   2.35
-#&gt; 11   31.40   1.62   3.44   2.62   2.70   0.63 0.24   1.03   1.62   1.84   1.99
+#&gt; 11   31.40   1.61   3.44   2.62   2.70   0.63 0.24   1.03   1.61   1.84   1.99
 #&gt; 17   58.39   2.46   5.42   3.89   3.73   0.83 0.21   0.51   2.46   3.30   3.44
 #&gt; 23   13.16   1.51   3.57   2.63   2.77   0.82 0.31   1.03   1.51   1.76   2.01
 #&gt;       30%    40%    50%    60%    70%    80%    90%   100%  LB.25% UB.75%
@@ -365,7 +396,7 @@
 #&gt; 5    2.77   3.16   3.33   3.44   3.55   3.77   4.05   5.42    1.04   5.15
 #&gt; 11   2.24   2.44   2.70   2.84   3.07   3.18   3.42   3.44    0.59   4.70
 #&gt; 17   3.47   3.55   3.73   3.80   3.84   4.31   5.31   5.42    2.69   4.72
-#&gt; 23   2.27   2.52   2.77   2.93   3.09   3.25   3.41   3.57    0.60   4.71
+#&gt; 23   2.27   2.52   2.77   2.93   3.09   3.25   3.41   3.57    0.60   4.72
 #&gt;    nOutliers
 #&gt; 2          0
 #&gt; 8          0
@@ -390,48 +421,41 @@
 #&gt; 5          3
 #&gt; 11         0
 #&gt; 17         4
-#&gt; 23         0</div><div class='input'><span class='co'>## Summary by specific statistics for all numeric variables</span>
-<span class='fu'>ExpNumStat</span>(<span class='no'>mtcars</span>,<span class='kw'>by</span><span class='kw'>=</span><span class='st'>"GA"</span>,<span class='kw'>gp</span><span class='kw'>=</span><span class='st'>"gear"</span>,<span class='kw'>Qnt</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0.1</span>,<span class='fl'>0.2</span>),<span class='kw'>MesofShape</span><span class='kw'>=</span><span class='fl'>2</span>,
-<span class='kw'>Outlier</span><span class='kw'>=</span><span class='fl'>FALSE</span>,<span class='kw'>round</span><span class='kw'>=</span><span class='fl'>2</span>,<span class='kw'>dcast</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,<span class='kw'>val</span> <span class='kw'>=</span> <span class='st'>"IQR"</span>)</div><div class='output co'>#&gt;   Stat Vname gear.All gear.4 gear.3 gear.5
-#&gt; 1  IQR  disp   205.18  81.08 104.20 180.70
-#&gt; 2  IQR  drat     0.84   0.19   0.14   0.60
-#&gt; 3  IQR    hp    83.50  44.25  60.00 151.00
-#&gt; 4  IQR   mpg     7.38   7.08   3.90  10.20
-#&gt; 5  IQR  qsec     2.01   1.11   0.96   2.10
-#&gt; 6  IQR    wt     1.03   1.03   0.51   1.03</div></pre>
+#&gt; 23         0</div><div class='input'><span class='co'># Summary by specific statistics for all numeric variables</span>
+<span class='fu'>ExpNumStat</span><span class='op'>(</span><span class='va'>mtcars</span>,by<span class='op'>=</span><span class='st'>"GA"</span>,gp<span class='op'>=</span><span class='st'>"gear"</span>,Qnt<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.1</span>,<span class='fl'>0.2</span><span class='op'>)</span>,MesofShape<span class='op'>=</span><span class='fl'>2</span>,
+           Outlier<span class='op'>=</span><span class='cn'>FALSE</span>,round<span class='op'>=</span><span class='fl'>2</span>,dcast <span class='op'>=</span> <span class='cn'>TRUE</span>,val <span class='op'>=</span> <span class='st'>"IQR"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   Stat Vname gear.3 gear.4 gear.5 gear.All
+#&gt; 1  IQR  disp 104.20  81.08 180.70   205.18
+#&gt; 2  IQR  drat   0.14   0.19   0.60     0.84
+#&gt; 3  IQR    hp  60.00  44.25 151.00    83.50
+#&gt; 4  IQR   mpg   3.90   7.08  10.20     7.38
+#&gt; 5  IQR  qsec   0.96   1.11   2.10     2.01
+#&gt; 6  IQR    wt   0.51   1.03   1.03     1.03</div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-
-      <li><a href="#details">Details</a></li>
-
-      <li><a href="#see-also">See also</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
-    <h2>Author</h2>
-    <p>dubrangala</p>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
-  <p>Developed by Dayanand Ubrangala.</p>
+  <p>Developed by Dayanand Ubrangala, Kiran R, Ravi Prasad Kondapalli, Sayan Putatunda.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

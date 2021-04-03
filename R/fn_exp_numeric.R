@@ -63,9 +63,14 @@
 #' # Summary by specific statistics for all numeric variables
 #' ExpNumStat(mtcars,by="GA",gp="gear",Qnt=c(0.1,0.2),MesofShape=2,
 #'            Outlier=FALSE,round=2,dcast = TRUE,val = "IQR")
+<<<<<<< HEAD
 #' @author dubrangala
 #' @importFrom stats quantile median IQR var reorder sd cor
 #' @importFrom data.table dcast
+=======
+#' @importFrom stats quantile median IQR var reorder sd cor
+#' @importFrom data.table dcast.data.table setDT
+>>>>>>> master
 #' @export ExpNumStat
 
 ExpNumStat <- function(data, by = "A", gp = NULL, Qnt = NULL, Nlim = 10, MesofShape = 2,
@@ -172,7 +177,12 @@ ExpNumStat <- function(data, by = "A", gp = NULL, Qnt = NULL, Nlim = 10, MesofSh
       }
      if (isTRUE(dcast)){
       cf <- formula(paste("Vname", "Group", sep = "~"))
+<<<<<<< HEAD
       cp <- data.frame(Stat = val, dcast(tb_op, cf, value.var = val))
+=======
+      setDT(tb_op)
+      cp <- data.frame(Stat = val, dcast.data.table(tb_op, cf, value.var = val))
+>>>>>>> master
       return(cp)
     } else return(tb_op)
   }

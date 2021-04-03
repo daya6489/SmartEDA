@@ -4,7 +4,11 @@
 #'
 #' @param data dataframe or matrix
 #' @param varlist list of numeric variable to perform the univariate outlier analysis
+<<<<<<< HEAD
 #' @param method detect outlier method boxplot or 3xStDev
+=======
+#' @param method detect outlier method boxplot or NxStDev (where N is 1 or 2 or 3 std deviations, like 1xStDev or 2xStDev or 3xStDev)
+>>>>>>> master
 #' @param treatment treating outlier value by mean or median. default NULL
 #' @param capping default LL = 0.05 & UL = 0.95cap the outlier value by replacing those observations outside the lower limit with the value of 5th percentile and above the upper limit, with the value of 95th percentile value
 #' @param outflag add extreme value flag variable into output data
@@ -28,6 +32,13 @@
 #' @examples
 #' ExpOutliers(mtcars, varlist = c("mpg","disp","wt", "qsec"), method = 'BoxPlot',
 #' capping = c(0.1, 0.9), outflag = TRUE)
+<<<<<<< HEAD
+=======
+#'
+#' ExpOutliers(mtcars, varlist = c("mpg","disp","wt", "qsec"), method = '2xStDev',
+#' capping = c(0.1, 0.9), outflag = TRUE)
+#'
+>>>>>>> master
 #' # Mean imputation or 5th percentile or 95th percentile value capping
 #' ExpOutliers(mtcars, varlist = c("mpg","disp","wt", "qsec"), method = 'BoxPlot',
 #' treatment = "mean", capping = c(0.05, 0.95), outflag = TRUE)
@@ -62,6 +73,7 @@ ExpOutliers <- function(data, varlist = NULL, method = "boxplot", treatment = NU
         Lower_bound <- round(qnt[[1]] - 1.5 * IQR(x, na.rm = TRUE), 2)
         Upper_bound <- round(qnt[[2]] + 1.5 * IQR(x, na.rm = TRUE), 2)
       } else
+<<<<<<< HEAD
         if(method == "3xstdev"){
           std_dev <- sd(x, na.rm = TRUE)
           mean_value <- mean(x, na.rm = TRUE)
@@ -69,6 +81,17 @@ ExpOutliers <- function(data, varlist = NULL, method = "boxplot", treatment = NU
           Lower_bound <- round(mean_value - anomaly_cut, 2)
           Upper_bound <- round(mean_value + anomaly_cut, 2)
         } else stop("selected outlier method is wrong")
+=======
+        {
+          sdv <- as.numeric(substr(method,1,1))
+          if(!is.numeric(sdv)) stop("selected outlier method is wrong")
+          std_dev <- sd(x, na.rm = TRUE)
+          mean_value <- mean(x, na.rm = TRUE)
+          anomaly_cut <- std_dev * sdv
+          Lower_bound <- round(mean_value - anomaly_cut, 2)
+          Upper_bound <- round(mean_value + anomaly_cut, 2)
+        }
+>>>>>>> master
       outrows_lower <-paste(which(x < Lower_bound), collapse = ",")
       outrows_upper <-paste(which(x > Upper_bound), collapse = ",")
       num_outlier <- length(x[x<Lower_bound | x>Upper_bound])
@@ -127,7 +150,13 @@ ExpOutliers <- function(data, varlist = NULL, method = "boxplot", treatment = NU
             flag_function(x, y = "impute")
           }),  .SDcols = varlist_new]
         }
+<<<<<<< HEAD
         return(list("outlier_summary" = cpval, "outlier_data" = data))
+=======
+        uoi <- lapply(cpval[7, -1], function(x) {as.numeric(strsplit(x, ",", fixed = TRUE)[[1]])})
+        loi <- lapply(cpval[6, -1], function(x) {as.numeric(strsplit(x, ",", fixed = TRUE)[[1]])})
+        return(list("outlier_summary" = cpval, "outlier_data" = data, "outlier_index" = list("upper_out_index" = uoi, "lower_out_index" = loi)))
+>>>>>>> master
       } else {
         return(cpval)
       }

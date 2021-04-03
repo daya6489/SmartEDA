@@ -8,21 +8,29 @@
 
 <title>Function provides summary statistics for all character or categorical columns in the dataframe — ExpCatStat • SmartEDA</title>
 
+
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,10 +38,10 @@
 
 
 
-<meta property="og:title" content="Function provides summary statistics for all character or categorical columns in the dataframe — ExpCatStat" />
 
+<meta property="og:title" content="Function provides summary statistics for all character or categorical columns in the dataframe — ExpCatStat" />
 <meta property="og:description" content="This function combines results from weight of evidence, information value and summary statistics." />
-<meta name="twitter:card" content="summary" />
+
 
 
 
@@ -47,9 +55,10 @@
 <![endif]-->
 
 
+
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -63,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">SmartEDA</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.7</span>
       </span>
     </div>
 
@@ -71,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -91,15 +100,22 @@
     <li>
       <a href="../articles/CustomTable.html">Custom table summarizing outcomes</a>
     </li>
+    <li>
+      <a href="../articles/SmartTwoPlots.html">Two independent plots side by side for the same variable</a>
+    </li>
   </ul>
 </li>
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/daya6489/SmartEDA/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -107,25 +123,34 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Function provides summary statistics for all character or categorical columns in the dataframe</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/daya6489/SmartEDA/blob/master/R/fn_exp_categorical.R'><code>R/fn_exp_categorical.R</code></a></small>
     <div class="hidden name"><code>ExpCatStat.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    
     <p>This function combines results from weight of evidence, information value and summary statistics.</p>
-    
     </div>
 
-    <pre class="usage"><span class='fu'>ExpCatStat</span>(<span class='no'>data</span>,<span class='kw'>Target</span><span class='kw'>=</span><span class='kw'>NULL</span>,<span class='kw'>result</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"Stat"</span>,<span class='st'>"IV"</span>),<span class='kw'>clim</span><span class='kw'>=</span><span class='fl'>10</span>,<span class='kw'>nlim</span><span class='kw'>=</span><span class='fl'>10</span>,<span class='kw'>bins</span><span class='kw'>=</span><span class='fl'>10</span>,
-<span class='kw'>Pclass</span><span class='kw'>=</span><span class='kw'>NULL</span>,<span class='kw'>plot</span><span class='kw'>=</span><span class='fl'>FALSE</span>,<span class='kw'>top</span><span class='kw'>=</span><span class='fl'>20</span>,<span class='kw'>Round</span><span class='kw'>=</span><span class='fl'>2</span>)</pre>
-    
+    <pre class="usage"><span class='fu'>ExpCatStat</span><span class='op'>(</span>
+  <span class='va'>data</span>,
+  Target <span class='op'>=</span> <span class='cn'>NULL</span>,
+  result <span class='op'>=</span> <span class='st'>"Stat"</span>,
+  clim <span class='op'>=</span> <span class='fl'>10</span>,
+  nlim <span class='op'>=</span> <span class='fl'>10</span>,
+  bins <span class='op'>=</span> <span class='fl'>10</span>,
+  Pclass <span class='op'>=</span> <span class='cn'>NULL</span>,
+  plot <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  top <span class='op'>=</span> <span class='fl'>20</span>,
+  Round <span class='op'>=</span> <span class='fl'>2</span>
+<span class='op'>)</span></pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -159,7 +184,7 @@
     </tr>
     <tr>
       <th>plot</th>
-      <td><p>Inforamtion value barplot (default False)</p></td>
+      <td><p>Inforamtion value barplot (default FALSE)</p></td>
     </tr>
     <tr>
       <th>top</th>
@@ -170,41 +195,49 @@
       <td><p>round of value</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>This function provides summary statistics for categorical variable</p>
-<p>Stat-Summary statistics includes Chi square test scores, p value, Information values, Cramers V and Degree if association</p>
-<p>IV- Weight of evidence and Information values</p>
-<p>Columns description:</p>
-<p>•	Variable – variable name</p>
-<p>•	Target -  Target variable label</p>
-<p>•	class – name of bin (variable value otherwise)</p>
-<p>•	out0 – number of good observations</p>
-<p>•	out1 – number of bad observations</p>
-<p>•	Total – Total values for each category</p>
-<p>•	pct1 – good observations / total good observations</p>
-<p>•	pct0 – bad observations / total bad observations</p>
-<p>•	odds – Odds ratio [(a/b)/(c/d)]</p>
-<p>•	woe – Weight of Evidence – calculated as ln(odds)</p>
-<p>•	iv – Information Value  - ln(odds) * (pct0 – pct1)</p>
-    
+    <p>This function provides summary statistics for categorical variable</p><ul>
+<li><p><code>Stat</code> - Summary statistics includes Chi square test scores, p value, Information values, Cramers V and Degree if association</p></li>
+<li><p><code>IV</code> - Weight of evidence and Information values</p></li>
+</ul>
+
+<p>Columns description:</p><ul>
+<li><p><code>Variable</code> variable name</p></li>
+<li><p><code>Target</code> - Target variable</p></li>
+<li><p><code>class</code> - name of bin (variable value otherwise)</p></li>
+<li><p><code>out0</code> - number of good observations</p></li>
+<li><p><code>out1</code> - number of bad observations</p></li>
+<li><p><code>Total</code> - Total values for each category</p></li>
+<li><p><code>pct1</code> - good observations / total good observations</p></li>
+<li><p><code>pct0</code> - bad observations / total bad observations</p></li>
+<li><p><code>odds</code> - Odds ratio [(a/b)/(c/d)]</p></li>
+<li><p><code>woe</code> - Weight of Evidence – calculated as ln(odds)</p></li>
+<li><p><code>iv</code> - Information Value  - ln(odds) * (pct0 – pct1)</p></li>
+</ul>
+
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Criteria used for categorical variable predictive power classification are</p>
-<p>If information value is &lt; 0.03 then predictive power = "Not Predictive"</p>
-<p>If information value is 0.3 to 0.1 then predictive power = "Somewhat Predictive"</p>
-<p>If information value is 0.1 to 0.3 then predictive power = "Meidum Predictive"</p>
-<p>If information value is &gt;0.3 then predictive power = "Highly Predictive"</p>
-    
+    <p>Criteria used for categorical variable predictive power classification are</p><ul>
+<li><p><code>If information value is &lt; 0.03</code> then predictive power = "Not Predictive"</p></li>
+<li><p><code>If information value is 0.3 to 0.1</code> then predictive power = "Somewhat Predictive"</p></li>
+<li><p><code>If information value is 0.1 to 0.3</code> then predictive power = "Meidum Predictive"</p></li>
+<li><p><code>If information value is &gt;0.3</code> then predictive power = "Highly Predictive"</p></li>
+</ul>
+
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>dubrangala</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Example 1</span>
 <span class='co'>## Read mtcars data</span>
 <span class='co'># Target variable "am" - Transmission (0 = automatic, 1 = manual)</span>
 <span class='co'># Summary statistics</span>
-<span class='fu'>ExpCatStat</span>(<span class='no'>mtcars</span>,<span class='kw'>Target</span><span class='kw'>=</span><span class='st'>"am"</span>,<span class='kw'>result</span> <span class='kw'>=</span> <span class='st'>"Stat"</span>,<span class='kw'>clim</span><span class='kw'>=</span><span class='fl'>10</span>,<span class='kw'>nlim</span><span class='kw'>=</span><span class='fl'>10</span>,<span class='kw'>bins</span><span class='kw'>=</span><span class='fl'>10</span>,
-<span class='kw'>Pclass</span><span class='kw'>=</span><span class='fl'>1</span>,<span class='kw'>plot</span><span class='kw'>=</span><span class='fl'>FALSE</span>,<span class='kw'>top</span><span class='kw'>=</span><span class='fl'>20</span>,<span class='kw'>Round</span><span class='kw'>=</span><span class='fl'>2</span>)</div><div class='output co'>#&gt;    Variable Target Unique Chi-squared p-value df IV Value Cramers V
+<span class='fu'>ExpCatStat</span><span class='op'>(</span><span class='va'>mtcars</span>,Target<span class='op'>=</span><span class='st'>"am"</span>,result <span class='op'>=</span> <span class='st'>"Stat"</span>,clim<span class='op'>=</span><span class='fl'>10</span>,nlim<span class='op'>=</span><span class='fl'>10</span>,bins<span class='op'>=</span><span class='fl'>10</span>,
+Pclass<span class='op'>=</span><span class='fl'>1</span>,plot<span class='op'>=</span><span class='cn'>FALSE</span>,top<span class='op'>=</span><span class='fl'>20</span>,Round<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Chi-squared approximation may be incorrect</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Chi-squared approximation may be incorrect</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Chi-squared approximation may be incorrect</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Chi-squared approximation may be incorrect</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Chi-squared approximation may be incorrect</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Chi-squared approximation may be incorrect</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Chi-squared approximation may be incorrect</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Chi-squared approximation may be incorrect</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Chi-squared approximation may be incorrect</span></div><div class='output co'>#&gt;    Variable Target Unique Chi-squared p-value df IV Value Cramers V
 #&gt; 1       cyl     am      3       8.741   0.013  2     1.32      0.52
 #&gt; 2        vs     am      2       0.348   0.556  1     0.11      0.10
 #&gt; 3      gear     am      3      20.945   0.000  2     0.44      0.81
@@ -226,8 +259,9 @@
 #&gt; 8                 Strong Somewhat Predictive
 #&gt; 9                 Strong   Highly Predictive
 #&gt; 10                Strong   Highly Predictive</div><div class='input'><span class='co'># Information value plot</span>
-<span class='fu'>ExpCatStat</span>(<span class='no'>mtcars</span>,<span class='kw'>Target</span><span class='kw'>=</span><span class='st'>"am"</span>,<span class='kw'>result</span> <span class='kw'>=</span> <span class='st'>"Stat"</span>,<span class='kw'>clim</span><span class='kw'>=</span><span class='fl'>10</span>,<span class='kw'>nlim</span><span class='kw'>=</span><span class='fl'>10</span>,<span class='kw'>bins</span><span class='kw'>=</span><span class='fl'>10</span>,
-<span class='kw'>Pclass</span><span class='kw'>=</span><span class='fl'>1</span>,<span class='kw'>plot</span><span class='kw'>=</span><span class='fl'>TRUE</span>,<span class='kw'>top</span><span class='kw'>=</span><span class='fl'>20</span>,<span class='kw'>Round</span><span class='kw'>=</span><span class='fl'>2</span>)</div><div class='img'><img src='ExpCatStat-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt;    Variable Target Unique Chi-squared p-value df IV Value Cramers V
+<span class='fu'>ExpCatStat</span><span class='op'>(</span><span class='va'>mtcars</span>,Target<span class='op'>=</span><span class='st'>"am"</span>,result <span class='op'>=</span> <span class='st'>"Stat"</span>,clim<span class='op'>=</span><span class='fl'>10</span>,nlim<span class='op'>=</span><span class='fl'>10</span>,bins<span class='op'>=</span><span class='fl'>10</span>,
+Pclass<span class='op'>=</span><span class='fl'>1</span>,plot<span class='op'>=</span><span class='cn'>TRUE</span>,top<span class='op'>=</span><span class='fl'>20</span>,Round<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Chi-squared approximation may be incorrect</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Chi-squared approximation may be incorrect</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Chi-squared approximation may be incorrect</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Chi-squared approximation may be incorrect</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Chi-squared approximation may be incorrect</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Chi-squared approximation may be incorrect</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Chi-squared approximation may be incorrect</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Chi-squared approximation may be incorrect</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Chi-squared approximation may be incorrect</span></div><div class='img'><img src='ExpCatStat-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt;    Variable Target Unique Chi-squared p-value df IV Value Cramers V
 #&gt; 1       cyl     am      3       8.741   0.013  2     1.32      0.52
 #&gt; 2        vs     am      2       0.348   0.556  1     0.11      0.10
 #&gt; 3      gear     am      3      20.945   0.000  2     0.44      0.81
@@ -249,188 +283,183 @@
 #&gt; 8                 Strong Somewhat Predictive
 #&gt; 9                 Strong   Highly Predictive
 #&gt; 10                Strong   Highly Predictive</div><div class='input'><span class='co'># Inforamtion value for categorical Independent variables</span>
-<span class='fu'>ExpCatStat</span>(<span class='no'>mtcars</span>,<span class='kw'>Target</span><span class='kw'>=</span><span class='st'>"am"</span>,<span class='kw'>result</span> <span class='kw'>=</span> <span class='st'>"IV"</span>,<span class='kw'>clim</span><span class='kw'>=</span><span class='fl'>10</span>,<span class='kw'>nlim</span><span class='kw'>=</span><span class='fl'>10</span>,<span class='kw'>bins</span><span class='kw'>=</span><span class='fl'>10</span>,
-<span class='kw'>Pclass</span><span class='kw'>=</span><span class='fl'>1</span>,<span class='kw'>plot</span><span class='kw'>=</span><span class='fl'>FALSE</span>,<span class='kw'>top</span><span class='kw'>=</span><span class='fl'>20</span>,<span class='kw'>Round</span><span class='kw'>=</span><span class='fl'>2</span>)</div><div class='output co'>#&gt;    Variable       Class Out_1 Out_0 TOTAL Per_1 Per_0 Odds   WOE   IV Ref_1
-#&gt; 1     cyl.1           4     8     3    11  0.62  0.16 0.11  1.36 0.63     1
-#&gt; 2     cyl.2           6     3     4     7  0.23  0.21 1.12  0.10 0.00     1
-#&gt; 3     cyl.3           8     2    12    14  0.15  0.63 8.53 -1.43 0.69     1
-#&gt; 4      vs.1           0     6    12    18  0.46  0.63 2.00 -0.31 0.05     1
-#&gt; 5      vs.2           1     7     7    14  0.54  0.37 0.50  0.38 0.06     1
-#&gt; 6    gear.1           3     0    15    15  0.00  0.79 0.00  0.00 0.00     1
-#&gt; 7    gear.2           4     8     4    12  0.62  0.21 6.00  1.08 0.44     1
-#&gt; 8    gear.3           5     5     0     5  0.38  0.00 0.00  0.00 0.00     1
-#&gt; 9    carb.1           1     4     3     7  0.31  0.16 0.00  0.66 0.10     1
-#&gt; 10   carb.2           2     4     6    10  0.31  0.32 0.00 -0.03 0.00     1
-#&gt; 11   carb.3           3     0     3     3  0.00  0.16 0.51  0.00 0.00     1
-#&gt; 12   carb.4           4     3     7    10  0.23  0.37 0.00 -0.48 0.07     1
-#&gt; 13   carb.5           6     1     0     1  0.08  0.00 0.96  0.00 0.00     1
-#&gt; 14   carb.6           8     1     0     1  0.08  0.00 2.37  0.00 0.00     1
-#&gt; 15    mpg.1 [10.4,13.3]     0     3     3  0.00  0.16 0.00  0.00 0.00     1
-#&gt; 16    mpg.2   (13.3,15]     1     2     3  0.08  0.11 0.00 -0.31 0.01     1
-#&gt; 17    mpg.3   (15,15.8]     1     3     4  0.08  0.16 0.44 -0.69 0.06     1
-#&gt; 18    mpg.4 (15.8,17.8]     0     3     3  0.00  0.16 1.50  0.00 0.00     1
-#&gt; 19    mpg.5 (17.8,19.2]     0     4     4  0.00  0.21 0.00  0.00 0.00     1
-#&gt; 20    mpg.6   (19.2,21]     3     0     3  0.23  0.00 0.00  0.00 0.00     1
-#&gt; 21    mpg.7   (21,21.4]     1     1     2  0.08  0.05 0.00  0.47 0.01     1
-#&gt; 22    mpg.8 (21.4,24.4]     1     3     4  0.08  0.16 0.44 -0.69 0.06     1
-#&gt; 23    mpg.9 (24.4,30.4]     4     0     4  0.31  0.00 0.71  0.00 0.00     1
-#&gt; 24   mpg.10 (30.4,33.9]     2     0     2  0.15  0.00 0.00  0.00 0.00     1
-#&gt; 25   disp.1 [71.1,78.7]     3     0     3  0.23  0.00 0.00  0.00 0.00     1
-#&gt; 26   disp.2  (78.7,108]     3     0     3  0.23  0.00 0.00  0.00 0.00     1
-#&gt; 27   disp.3   (108,141]     2     2     4  0.15  0.11 0.44  0.31 0.01     1
-#&gt; 28   disp.4   (141,160]     3     1     4  0.23  0.05 0.00  1.53 0.28     1
-#&gt; 29   disp.5   (160,168]     0     2     2  0.00  0.11 0.00  0.00 0.00     1
-#&gt; 30   disp.6   (168,276]     0     5     5  0.00  0.26 0.00  0.00 0.00     1
-#&gt; 31   disp.7   (276,301]     1     0     1  0.08  0.00 5.40  0.00 0.00     1
-#&gt; 32   disp.8   (301,351]     1     3     4  0.08  0.16 1.55 -0.69 0.06     1
-#&gt; 33   disp.9   (351,400]     0     3     3  0.00  0.16 0.00  0.00 0.00     1
-#&gt; 34  disp.10   (400,472]     0     3     3  0.00  0.16 0.00  0.00 0.00     1
-#&gt; 35     hp.1     [52,65]     2     1     3  0.15  0.05 0.00  1.10 0.11     1
-#&gt; 36     hp.2     (65,91]     3     0     3  0.23  0.00 0.00  0.00 0.00     1
-#&gt; 37     hp.3    (91,105]     1     3     4  0.08  0.16 0.00 -0.69 0.06     1
-#&gt; 38     hp.4   (105,110]     3     1     4  0.23  0.05 0.71  1.53 0.28     1
-#&gt; 39     hp.5   (110,123]     1     2     3  0.08  0.11 0.00 -0.31 0.01     1
-#&gt; 40     hp.6   (123,150]     0     2     2  0.00  0.11 0.71  0.00 0.00     1
-#&gt; 41     hp.7   (150,175]     1     2     3  0.08  0.11 5.40 -0.31 0.01     1
-#&gt; 42     hp.8   (175,205]     0     4     4  0.00  0.21 0.44  0.00 0.00     1
-#&gt; 43     hp.9   (205,245]     0     4     4  0.00  0.21 0.00  0.00 0.00     1
-#&gt; 44    hp.10   (245,335]     2     0     2  0.15  0.00 3.27  0.00 0.00     1
-#&gt; 45   drat.1 [2.76,2.93]     0     3     3  0.00  0.16 0.00  0.00 0.00     1
-#&gt; 46   drat.2 (2.93,3.07]     0     4     4  0.00  0.21 0.00  0.00 0.00     1
-#&gt; 47   drat.3 (3.07,3.15]     0     4     4  0.00  0.21 0.97  0.00 0.00     1
-#&gt; 48   drat.4 (3.15,3.23]     0     2     2  0.00  0.11 0.00  0.00 0.00     1
-#&gt; 49   drat.5 (3.23,3.69]     2     1     3  0.15  0.05 0.71  1.10 0.11     1
-#&gt; 50   drat.6 (3.69,3.77]     1     2     3  0.08  0.11 3.27 -0.31 0.01     1
-#&gt; 51   drat.7  (3.77,3.9]     3     0     3  0.23  0.00 0.00  0.00 0.00     1
-#&gt; 52   drat.8  (3.9,4.08]     2     3     5  0.15  0.16 0.00 -0.06 0.00     1
-#&gt; 53   drat.9 (4.08,4.22]     3     0     3  0.23  0.00 0.00  0.00 0.00     1
-#&gt; 54  drat.10 (4.22,4.93]     2     0     2  0.15  0.00 0.00  0.00 0.00     1
-#&gt; 55     wt.1 [1.51,1.83]     3     0     3  0.23  0.00 0.00  0.00 0.00     1
-#&gt; 56     wt.2  (1.83,2.2]     3     0     3  0.23  0.00 0.00  0.00 0.00     1
-#&gt; 57     wt.3  (2.2,2.77]     3     1     4  0.23  0.05 0.44  1.53 0.28     1
-#&gt; 58     wt.4 (2.77,3.15]     2     1     3  0.15  0.05 0.00  1.10 0.11     1
-#&gt; 59     wt.5 (3.15,3.21]     1     2     3  0.08  0.11 0.00 -0.31 0.01     1
-#&gt; 60     wt.6 (3.21,3.44]     0     4     4  0.00  0.21 0.71  0.00 0.00     1
-#&gt; 61     wt.7 (3.44,3.52]     0     2     2  0.00  0.11 3.27  0.00 0.00     1
-#&gt; 62     wt.8 (3.52,3.78]     1     3     4  0.08  0.16 5.40 -0.69 0.06     1
-#&gt; 63     wt.9 (3.78,4.07]     0     3     3  0.00  0.16 0.00  0.00 0.00     1
-#&gt; 64    wt.10 (4.07,5.42]     0     3     3  0.00  0.16 0.00  0.00 0.00     1
-#&gt; 65   qsec.1 [14.5,15.4]     2     1     3  0.15  0.05 0.00  1.10 0.11     1
-#&gt; 66   qsec.2 (15.4,16.5]     2     1     3  0.15  0.05 3.27  1.10 0.11     1
-#&gt; 67   qsec.3   (16.5,17]     3     2     5  0.23  0.11 1.55  0.74 0.09     1
-#&gt; 68   qsec.4   (17,17.3]     0     2     2  0.00  0.11 3.27  0.00 0.00     1
-#&gt; 69   qsec.5 (17.3,17.6]     0     3     3  0.00  0.16 0.00  0.00 0.00     1
-#&gt; 70   qsec.6   (17.6,18]     0     3     3  0.00  0.16 0.00  0.00 0.00     1
-#&gt; 71   qsec.7   (18,18.6]     2     1     3  0.15  0.05 0.00  1.10 0.11     1
-#&gt; 72   qsec.8 (18.6,19.4]     2     2     4  0.15  0.11 2.55  0.31 0.01     1
-#&gt; 73   qsec.9   (19.4,20]     2     1     3  0.15  0.05 3.27  1.10 0.11     1
-#&gt; 74  qsec.10   (20,22.9]     0     3     3  0.00  0.16 3.27  0.00 0.00     1
-#&gt;    Ref_0
-#&gt; 1      0
-#&gt; 2      0
-#&gt; 3      0
-#&gt; 4      0
-#&gt; 5      0
-#&gt; 6      0
-#&gt; 7      0
-#&gt; 8      0
-#&gt; 9      0
-#&gt; 10     0
-#&gt; 11     0
-#&gt; 12     0
-#&gt; 13     0
-#&gt; 14     0
-#&gt; 15     0
-#&gt; 16     0
-#&gt; 17     0
-#&gt; 18     0
-#&gt; 19     0
-#&gt; 20     0
-#&gt; 21     0
-#&gt; 22     0
-#&gt; 23     0
-#&gt; 24     0
-#&gt; 25     0
-#&gt; 26     0
-#&gt; 27     0
-#&gt; 28     0
-#&gt; 29     0
-#&gt; 30     0
-#&gt; 31     0
-#&gt; 32     0
-#&gt; 33     0
-#&gt; 34     0
-#&gt; 35     0
-#&gt; 36     0
-#&gt; 37     0
-#&gt; 38     0
-#&gt; 39     0
-#&gt; 40     0
-#&gt; 41     0
-#&gt; 42     0
-#&gt; 43     0
-#&gt; 44     0
-#&gt; 45     0
-#&gt; 46     0
-#&gt; 47     0
-#&gt; 48     0
-#&gt; 49     0
-#&gt; 50     0
-#&gt; 51     0
-#&gt; 52     0
-#&gt; 53     0
-#&gt; 54     0
-#&gt; 55     0
-#&gt; 56     0
-#&gt; 57     0
-#&gt; 58     0
-#&gt; 59     0
-#&gt; 60     0
-#&gt; 61     0
-#&gt; 62     0
-#&gt; 63     0
-#&gt; 64     0
-#&gt; 65     0
-#&gt; 66     0
-#&gt; 67     0
-#&gt; 68     0
-#&gt; 69     0
-#&gt; 70     0
-#&gt; 71     0
-#&gt; 72     0
-#&gt; 73     0
-#&gt; 74     0</div></pre>
+<span class='fu'>ExpCatStat</span><span class='op'>(</span><span class='va'>mtcars</span>,Target<span class='op'>=</span><span class='st'>"am"</span>,result <span class='op'>=</span> <span class='st'>"IV"</span>,clim<span class='op'>=</span><span class='fl'>10</span>,nlim<span class='op'>=</span><span class='fl'>10</span>,bins<span class='op'>=</span><span class='fl'>10</span>,
+Pclass<span class='op'>=</span><span class='fl'>1</span>,plot<span class='op'>=</span><span class='cn'>FALSE</span>,top<span class='op'>=</span><span class='fl'>20</span>,Round<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;    Variable         Class Out_1 Out_0 TOTAL Per_1 Per_0 Odds   WOE   IV Ref_1
+#&gt; 1     cyl.1             4     8     3    11  0.62  0.16 8.53  1.36 0.63     1
+#&gt; 2     cyl.2             6     3     4     7  0.23  0.21 1.12  0.10 0.00     1
+#&gt; 3     cyl.3             8     2    12    14  0.15  0.63 0.11 -1.43 0.69     1
+#&gt; 4      vs.1             0     6    12    18  0.46  0.63 0.50 -0.31 0.05     1
+#&gt; 5      vs.2             1     7     7    14  0.54  0.37 2.00  0.38 0.06     1
+#&gt; 6    gear.1             3     0    15    15  0.00  0.79 0.00  0.00 0.00     1
+#&gt; 7    gear.2             4     8     4    12  0.62  0.21 6.00  1.08 0.44     1
+#&gt; 8    gear.3             5     5     0     5  0.38  0.00 0.00  0.00 0.00     1
+#&gt; 9    carb.1             1     4     3     7  0.31  0.16 2.37  0.66 0.10     1
+#&gt; 10   carb.2             2     4     6    10  0.31  0.32 0.96 -0.03 0.00     1
+#&gt; 11   carb.3             3     0     3     3  0.00  0.16 0.00  0.00 0.00     1
+#&gt; 12   carb.4             4     3     7    10  0.23  0.37 0.51 -0.48 0.07     1
+#&gt; 13   carb.5             6     1     0     1  0.08  0.00 0.00  0.00 0.00     1
+#&gt; 14   carb.6             8     1     0     1  0.08  0.00 0.00  0.00 0.00     1
+#&gt; 15    mpg.1   [10.4,13.3]     0     3     3  0.00  0.16 0.00  0.00 0.00     1
+#&gt; 16    mpg.2     (13.3,15]     1     2     3  0.08  0.11 0.71 -0.31 0.01     1
+#&gt; 17    mpg.3     (15,15.8]     1     3     4  0.08  0.16 0.44 -0.69 0.06     1
+#&gt; 18    mpg.4   (15.8,17.8]     0     3     3  0.00  0.16 0.00  0.00 0.00     1
+#&gt; 19    mpg.5   (17.8,19.2]     0     4     4  0.00  0.21 0.00  0.00 0.00     1
+#&gt; 20    mpg.6     (19.2,21]     3     0     3  0.23  0.00 0.00  0.00 0.00     1
+#&gt; 21    mpg.7     (21,21.4]     1     1     2  0.08  0.05 1.50  0.47 0.01     1
+#&gt; 22    mpg.8   (21.4,24.4]     1     3     4  0.08  0.16 0.44 -0.69 0.06     1
+#&gt; 23    mpg.9   (24.4,30.4]     4     0     4  0.31  0.00 0.00  0.00 0.00     1
+#&gt; 24   mpg.10   (30.4,33.9]     2     0     2  0.15  0.00 0.00  0.00 0.00     1
+#&gt; 25   disp.1   [71.1,78.7]     3     0     3  0.23  0.00 0.00  0.00 0.00     1
+#&gt; 26   disp.2    (78.7,108]     3     0     3  0.23  0.00 0.00  0.00 0.00     1
+#&gt; 27   disp.3   (108,140.8]     2     2     4  0.15  0.11 1.55  0.31 0.01     1
+#&gt; 28   disp.4   (140.8,160]     3     1     4  0.23  0.05 5.40  1.53 0.28     1
+#&gt; 29   disp.5   (160,167.6]     0     2     2  0.00  0.11 0.00  0.00 0.00     1
+#&gt; 30   disp.6 (167.6,275.8]     0     5     5  0.00  0.26 0.00  0.00 0.00     1
+#&gt; 31   disp.7   (275.8,301]     1     0     1  0.08  0.00 0.00  0.00 0.00     1
+#&gt; 32   disp.8     (301,351]     1     3     4  0.08  0.16 0.44 -0.69 0.06     1
+#&gt; 33   disp.9     (351,400]     0     3     3  0.00  0.16 0.00  0.00 0.00     1
+#&gt; 34  disp.10     (400,472]     0     3     3  0.00  0.16 0.00  0.00 0.00     1
+#&gt; 35     hp.1       [52,65]     2     1     3  0.15  0.05 3.27  1.10 0.11     1
+#&gt; 36     hp.2       (65,91]     3     0     3  0.23  0.00 0.00  0.00 0.00     1
+#&gt; 37     hp.3      (91,105]     1     3     4  0.08  0.16 0.44 -0.69 0.06     1
+#&gt; 38     hp.4     (105,110]     3     1     4  0.23  0.05 5.40  1.53 0.28     1
+#&gt; 39     hp.5     (110,123]     1     2     3  0.08  0.11 0.71 -0.31 0.01     1
+#&gt; 40     hp.6     (123,150]     0     2     2  0.00  0.11 0.00  0.00 0.00     1
+#&gt; 41     hp.7     (150,175]     1     2     3  0.08  0.11 0.71 -0.31 0.01     1
+#&gt; 42     hp.8     (175,205]     0     4     4  0.00  0.21 0.00  0.00 0.00     1
+#&gt; 43     hp.9     (205,245]     0     4     4  0.00  0.21 0.00  0.00 0.00     1
+#&gt; 44    hp.10     (245,335]     2     0     2  0.15  0.00 0.00  0.00 0.00     1
+#&gt; 45   drat.1   [2.76,2.93]     0     3     3  0.00  0.16 0.00  0.00 0.00     1
+#&gt; 46   drat.2   (2.93,3.07]     0     4     4  0.00  0.21 0.00  0.00 0.00     1
+#&gt; 47   drat.3   (3.07,3.15]     0     4     4  0.00  0.21 0.00  0.00 0.00     1
+#&gt; 48   drat.4   (3.15,3.23]     0     2     2  0.00  0.11 0.00  0.00 0.00     1
+#&gt; 49   drat.5   (3.23,3.69]     2     1     3  0.15  0.05 3.27  1.10 0.11     1
+#&gt; 50   drat.6   (3.69,3.77]     1     2     3  0.08  0.11 0.71 -0.31 0.01     1
+#&gt; 51   drat.7    (3.77,3.9]     3     0     3  0.23  0.00 0.00  0.00 0.00     1
+#&gt; 52   drat.8    (3.9,4.08]     2     3     5  0.15  0.16 0.97 -0.06 0.00     1
+#&gt; 53   drat.9   (4.08,4.22]     3     0     3  0.23  0.00 0.00  0.00 0.00     1
+#&gt; 54  drat.10   (4.22,4.93]     2     0     2  0.15  0.00 0.00  0.00 0.00     1
+#&gt; 55     wt.1 [1.513,1.835]     3     0     3  0.23  0.00 0.00  0.00 0.00     1
+#&gt; 56     wt.2   (1.835,2.2]     3     0     3  0.23  0.00 0.00  0.00 0.00     1
+#&gt; 57     wt.3    (2.2,2.77]     3     1     4  0.23  0.05 5.40  1.53 0.28     1
+#&gt; 58     wt.4   (2.77,3.15]     2     1     3  0.15  0.05 3.27  1.10 0.11     1
+#&gt; 59     wt.5  (3.15,3.215]     1     2     3  0.08  0.11 0.71 -0.31 0.01     1
+#&gt; 60     wt.6  (3.215,3.44]     0     4     4  0.00  0.21 0.00  0.00 0.00     1
+#&gt; 61     wt.7   (3.44,3.52]     0     2     2  0.00  0.11 0.00  0.00 0.00     1
+#&gt; 62     wt.8   (3.52,3.78]     1     3     4  0.08  0.16 0.44 -0.69 0.06     1
+#&gt; 63     wt.9   (3.78,4.07]     0     3     3  0.00  0.16 0.00  0.00 0.00     1
+#&gt; 64    wt.10  (4.07,5.424]     0     3     3  0.00  0.16 0.00  0.00 0.00     1
+#&gt; 65   qsec.1  [14.5,15.41]     2     1     3  0.15  0.05 3.27  1.10 0.11     1
+#&gt; 66   qsec.2 (15.41,16.46]     2     1     3  0.15  0.05 3.27  1.10 0.11     1
+#&gt; 67   qsec.3 (16.46,17.02]     3     2     5  0.23  0.11 2.55  0.74 0.09     1
+#&gt; 68   qsec.4  (17.02,17.3]     0     2     2  0.00  0.11 0.00  0.00 0.00     1
+#&gt; 69   qsec.5   (17.3,17.6]     0     3     3  0.00  0.16 0.00  0.00 0.00     1
+#&gt; 70   qsec.6     (17.6,18]     0     3     3  0.00  0.16 0.00  0.00 0.00     1
+#&gt; 71   qsec.7     (18,18.6]     2     1     3  0.15  0.05 3.27  1.10 0.11     1
+#&gt; 72   qsec.8  (18.6,19.44]     2     2     4  0.15  0.11 1.55  0.31 0.01     1
+#&gt; 73   qsec.9    (19.44,20]     2     1     3  0.15  0.05 3.27  1.10 0.11     1
+#&gt; 74  qsec.10     (20,22.9]     0     3     3  0.00  0.16 0.00  0.00 0.00     1
+#&gt;    Ref_0 Target
+#&gt; 1      0     am
+#&gt; 2      0     am
+#&gt; 3      0     am
+#&gt; 4      0     am
+#&gt; 5      0     am
+#&gt; 6      0     am
+#&gt; 7      0     am
+#&gt; 8      0     am
+#&gt; 9      0     am
+#&gt; 10     0     am
+#&gt; 11     0     am
+#&gt; 12     0     am
+#&gt; 13     0     am
+#&gt; 14     0     am
+#&gt; 15     0     am
+#&gt; 16     0     am
+#&gt; 17     0     am
+#&gt; 18     0     am
+#&gt; 19     0     am
+#&gt; 20     0     am
+#&gt; 21     0     am
+#&gt; 22     0     am
+#&gt; 23     0     am
+#&gt; 24     0     am
+#&gt; 25     0     am
+#&gt; 26     0     am
+#&gt; 27     0     am
+#&gt; 28     0     am
+#&gt; 29     0     am
+#&gt; 30     0     am
+#&gt; 31     0     am
+#&gt; 32     0     am
+#&gt; 33     0     am
+#&gt; 34     0     am
+#&gt; 35     0     am
+#&gt; 36     0     am
+#&gt; 37     0     am
+#&gt; 38     0     am
+#&gt; 39     0     am
+#&gt; 40     0     am
+#&gt; 41     0     am
+#&gt; 42     0     am
+#&gt; 43     0     am
+#&gt; 44     0     am
+#&gt; 45     0     am
+#&gt; 46     0     am
+#&gt; 47     0     am
+#&gt; 48     0     am
+#&gt; 49     0     am
+#&gt; 50     0     am
+#&gt; 51     0     am
+#&gt; 52     0     am
+#&gt; 53     0     am
+#&gt; 54     0     am
+#&gt; 55     0     am
+#&gt; 56     0     am
+#&gt; 57     0     am
+#&gt; 58     0     am
+#&gt; 59     0     am
+#&gt; 60     0     am
+#&gt; 61     0     am
+#&gt; 62     0     am
+#&gt; 63     0     am
+#&gt; 64     0     am
+#&gt; 65     0     am
+#&gt; 66     0     am
+#&gt; 67     0     am
+#&gt; 68     0     am
+#&gt; 69     0     am
+#&gt; 70     0     am
+#&gt; 71     0     am
+#&gt; 72     0     am
+#&gt; 73     0     am
+#&gt; 74     0     am</div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-
-      <li><a href="#details">Details</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
-    <h2>Author</h2>
-    <p>dubrangala</p>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
-  <p>Developed by Dayanand Ubrangala.</p>
+  <p>Developed by Dayanand Ubrangala, Kiran R, Ravi Prasad Kondapalli, Sayan Putatunda.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 
