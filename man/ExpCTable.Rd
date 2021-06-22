@@ -12,7 +12,8 @@ ExpCTable(
   nlim = 10,
   round = 2,
   bin = 3,
-  per = FALSE
+  per = FALSE,
+  weight = NULL
 )
 }
 \arguments{
@@ -30,7 +31,9 @@ ExpCTable(
 
 \item{bin}{number of cuts for continuous target variable}
 
-\item{per}{percentage values. Default table will give counts.}
+\item{per}{percentage values. Default table will give counts}
+
+\item{weight}{a vector of weights, it must be equal to the length of data}
 }
 \value{
 Frequency tables, Cross tables
@@ -66,5 +69,7 @@ this function provides both frequency and custom tables for all categorical feat
 ExpCTable(mtcars, Target = NULL, margin = 1, clim = 10, nlim = 3, bin = NULL, per = FALSE)
 # Crosstbale for Mtcars data
 ExpCTable(mtcars, Target = "gear", margin = 1, clim = 10, nlim = 3, bin = NULL, per = FALSE)
+# Weighted frequecncy for Mtcars data
+ExpCTable(mtcars,  margin = 1, clim = 10, nlim = 3, bin = NULL, per = FALSE, weight = "wt")
 
 }

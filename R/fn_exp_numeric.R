@@ -5,13 +5,14 @@
 #' @param data dataframe or matrix
 #' @param by group by A (summary statistics by All), G (summary statistics by group), GA (summary statistics by group and Overall)
 #' @param gp target variable if any, default NULL
-#' @param Qnt default NULL. Specified quantiles is c(.25,0.75) will find 25th and 75th percentiles
-#' @param Nlim numeric variable limit (default value is 10 which means it will only consider those variable having more than 10 unique values and variable type is numeric/integer)
+#' @param Qnt default NULL. Specified quantile is c(.25,0.75) will find 25th and 75th percentiles
+#' @param Nlim numeric variable limit (default value is 3 which means it will only consider those variable having more than 3 unique values and variable type is numeric/integer)
 #' @param MesofShape Measures of shapes (Skewness and kurtosis).
-#' @param Outlier Calculate the lower hinge, upper hinge and number of outliers
+#' @param Outlier Calculate the lower hinge, upper hinge and number of outlier
 #' @param round round off
+#' @param weight a vector of weights, it must be equal to the length of data
 #' @param dcast fast dcast from data.table
-#' @param val Name of the column whose values will be filled to cast (see Detials sections for list of column names)
+#' @param val Name of the column whose values will be filled to cast (see Details sections for list of column names)
 #' @return summary statistics for numeric independent variables
 #'
 #' Summary by:
@@ -24,18 +25,18 @@
 #'
 #'@details
 #'
-#' coloumn descriptions
+#' column descriptions
 #' \itemize{
 #'   \item \code{Vname} is Variable name
 #'   \item \code{Group} is Target variable
-#'   \item \code{TN} is Total sample (inculded NA observations)
+#'   \item \code{TN} is Total sample (included NA observations)
 #'   \item \code{nNeg} is Total negative observations
 #'   \item \code{nPos} is Total positive observations
 #'   \item \code{nZero} is Total zero observations
 #'   \item \code{NegInf} is Negative infinite count
 #'   \item \code{PosInf} is Positive infinite count
 #'   \item \code{NA_value} is Not Applicable count
-#'   \item \code{Per_of_Missing} is Percentage of missings
+#'   \item \code{Per_of_Missing} is Percentage of missing
 #'   \item \code{Min} is minimum value
 #'   \item \code{Max} is maximum value
 #'   \item \code{Mean} is average value
@@ -45,7 +46,7 @@
 #'   \item \code{IQR} is Inter quartile range
 #'   \item \code{Qnt} is quantile values
 #'   \item \code{MesofShape} is Skewness and Kurtosis
-#'   \item \code{Outlier} is Number of outliers
+#'   \item \code{Outlier} is Number of outlier
 #'   \item \code{Cor} is Correlation b/w target and independent variables
 #' }
 #'
@@ -63,17 +64,35 @@
 #' # Summary by specific statistics for all numeric variables
 #' ExpNumStat(mtcars,by="GA",gp="gear",Qnt=c(0.1,0.2),MesofShape=2,
 #'            Outlier=FALSE,round=2,dcast = TRUE,val = "IQR")
+#' # Weighted summary statistics
+#' ExpNumStat(mtcars,by="GA",gp="gear",Qnt=c(0.1,0.2),MesofShape=2,
+#'            Outlier=FALSE,round=2,dcast = TRUE,val = "IQR", weight = "wt")
+#'
 #' @importFrom stats quantile median IQR var reorder sd cor
 #' @importFrom data.table dcast.data.table setDT
 #' @export ExpNumStat
 
 ExpNumStat <- function(data, by = "A", gp = NULL, Qnt = NULL, Nlim = 10, MesofShape = 2,
-                      Outlier = FALSE, round = 3, dcast = FALSE, val = NULL) {
+                      Outlier = FALSE, round = 3, weight = NULL, dcast = FALSE, val = NULL) {
   if (is.data.frame(data) == is.numeric(data)) stop("data must be a numeric vector or data.frame")
   if (!MesofShape %in% c(1, 2)) stop("value of MesofShape should be either 1 or 2")
+
+  if (!is.null(weight)) {
+    if(length(intersect(colnames(data), weight))>0) {
+      if(!is.numeric(data[[weight]])) stop("Weight column is not numeric")
+      data$sm_9xy_1wt8 = data[[weight]]
+    } else
+      if((length(weight) == nrow(data))) {
+        data$sm_9xy_1wt8 = weight
+      } else
+        stop("length of weight vector should be equal to sample size 'n' OR specified weight column is not there in dataframe")
+
+  }
+
+  wt <- NULL
   r <- round
   if (is.numeric(data)) {
-    desc_sum <- ds_fun(x, r = r, MesofShape, Qnt, Outlier)
+    desc_sum <- ds_fun(x, r = r, MesofShape, Qnt, Outlier, weight)
     return(desc_sum)
     } else {
     xx <- as.data.frame(data)
@@ -105,9 +124,11 @@ ExpNumStat <- function(data, by = "A", gp = NULL, Qnt = NULL, Nlim = 10, MesofSh
         length(unique(na.omit(x))) >= Nlim
         })]
     }
+    num_var = setdiff(num_var, c("sm_9xy_1wt8", "wt"))
 
     if (by == "A"){
-      ccc <- sapply(xx[, num_var], function(x) ds_fun(x, r = r, MesofShape, Qnt, Outlier), USE.NAMES = TRUE)
+      if (!is.null(weight)) wt = xx$sm_9xy_1wt8
+      ccc <- sapply(xx[, num_var], function(x) ds_fun(x, r = r, MesofShape, Qnt, Outlier, weight = wt), USE.NAMES = TRUE)
       cname <- rownames(ccc)
       tb_op <- data.frame(t(ccc))
       names(tb_op) <- cname
@@ -118,8 +139,9 @@ ExpNumStat <- function(data, by = "A", gp = NULL, Qnt = NULL, Nlim = 10, MesofSh
       class(tb_op) <- c("SmartEDA", "ExpNumStat", "data.frame")
     }
     if (by == "corr"){
+      if (!is.null(weight)) wt = xx$sm_9xy_1wt8
         message(paste0("Note: Target variable is continuous", "\n", "Summary statistics excluded group by statement", "\n", "Results generated with correlation value against target variable"))
-        ccc <- sapply(xx[, num_var], function(x) ds_fun(x, r = r, MesofShape, Qnt, Outlier), USE.NAMES = TRUE)
+        ccc <- sapply(xx[, num_var], function(x) ds_fun(x, r = r, MesofShape, Qnt, Outlier, weight = wt), USE.NAMES = TRUE)
         cor <- round(cor(xx[, num_var])[, gp], r)
         ccc <- rbind(ccc, cor)
         cname <- rownames(ccc)
@@ -134,8 +156,9 @@ ExpNumStat <- function(data, by = "A", gp = NULL, Qnt = NULL, Nlim = 10, MesofSh
      if (by == "G") {
         tb_op <- data.frame()
         for (j in grp){
-          xx_1 <- subset(xx, xx[, gp] == j, select = num_var)
-          ccc <- sapply(xx_1, function(x) ds_fun(x, r = r, MesofShape, Qnt, Outlier), USE.NAMES = TRUE)
+          xx_1 <- subset(xx, xx[, gp] == j)
+          if (!is.null(weight)) wt = xx_1$sm_9xy_1wt8
+          ccc <- sapply(xx_1[, num_var], function(x) ds_fun(x, r = r, MesofShape, Qnt, Outlier, weight = wt), USE.NAMES = TRUE)
           tcc <- data.frame(t(ccc))
           varn_gp <- cbind(Vname = rownames(tcc), Group = paste0(gp, ":", j))
           rownames(tcc) <- NULL
@@ -152,11 +175,13 @@ ExpNumStat <- function(data, by = "A", gp = NULL, Qnt = NULL, Nlim = 10, MesofSh
           grp <- c("All", grp)
           for (j in grp) {
             if (j == "All") {
+              if (!is.null(weight)) wt = xx$sm_9xy_1wt8
               xx_1 <- subset(xx, select = num_var)
             } else {
-              xx_1 <- subset(xx, xx[, gp] == j, select = num_var)
+              xx_1 <- subset(xx, xx[, gp] == j)
+              if (!is.null(weight)) wt = xx_1$sm_9xy_1wt8
               }
-            ccc <- sapply(xx_1, function(x) ds_fun(x, r = r, MesofShape, Qnt, Outlier), USE.NAMES = TRUE)
+            ccc <- sapply(xx_1[, num_var], function(x) ds_fun(x, r = r, MesofShape, Qnt, Outlier, weight = wt), USE.NAMES = TRUE)
             tcc <- data.frame(t(ccc))
             varn_gp <- cbind(Vname = rownames(tcc), Group = paste0(gp, ":", j))
             rownames(tcc) <- NULL

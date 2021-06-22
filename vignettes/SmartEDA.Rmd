@@ -171,6 +171,22 @@ ExpNumStat(Carseats,by="A",gp=NULL,Qnt=seq(0,1,0.1),MesofShape=2,Outlier=TRUE,ro
 paged_table(ec1)
 ```
 
+##### Compute Weighted Summary Statistics for numerical variable
+
+```{r ,warning=FALSE,eval=T,include=T}
+carseat = ISLR::Carseats
+## Compute random weight
+carseat$wt = stats::runif( nrow(carseat), 0.5, 1.5 )
+wt_summary = ExpNumStat(carseat,by="A",gp=NULL,round=2,Nlim=10, weight = "wt")
+wt_summary[,c("Vname","TN","W_count","mean", "W_Mean", "SD","W_Sd")]
+```
+
+```{r ,warning=FALSE,eval=T,include=T}
+## With group by statement
+wt_summary = ExpNumStat(carseat,by="GA",gp="ShelveLoc",round=2,Nlim=10, weight = "wt")
+wt_summary[,c("Vname","Group","TN","W_count","mean", "W_Mean", "SD","W_Sd")]
+```
+
 #### 3.1.2 Distributions of numerical variables
 Graphical representation of all numeric features
 
@@ -281,6 +297,18 @@ ExpCTable(Carseats,Target="Price",margin=1,clim=10,round=2,bin=4,per=F)
 ```{r e4.2.1,warning=FALSE,eval=T,render=et11,echo=F}
 paged_table(et11)
 ```
+
+
+##### Compute Weighted Summary Statistics for categorical variable
+
+```{r ,warning=FALSE,eval=T,include=T}
+carseat = ISLR::Carseats
+## Compute random weight
+carseat$wt = stats::runif( nrow(carseat), 0.5, 1.5 )
+wt_summary = ExpCTable(carseat,margin=1,clim=10,round=2,bin=4,per=F, weight = "wt")
+wt_summary
+```
+
 
 ### 3.3 Example for case 3: Target variable is categorical
 

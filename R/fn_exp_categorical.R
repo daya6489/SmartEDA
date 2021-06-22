@@ -9,7 +9,8 @@
 #' @param nlim numeric variable unique limits. Default 'nlim' values is 3, table excludes the numeric variables which is having greater than 'nlim' unique values
 #' @param round round off
 #' @param bin number of cuts for continuous target variable
-#' @param per percentage values. Default table will give counts.
+#' @param per percentage values. Default table will give counts
+#' @param weight a vector of weights, it must be equal to the length of data
 #' @details this function provides both frequency and custom tables for all categorical features. And ouput will be generated in data frame
 #'
 #' @return Frequency tables, Cross tables
@@ -38,14 +39,29 @@
 #' ExpCTable(mtcars, Target = NULL, margin = 1, clim = 10, nlim = 3, bin = NULL, per = FALSE)
 #' # Crosstbale for Mtcars data
 #' ExpCTable(mtcars, Target = "gear", margin = 1, clim = 10, nlim = 3, bin = NULL, per = FALSE)
+#' # Weighted frequecncy for Mtcars data
+#' ExpCTable(mtcars,  margin = 1, clim = 10, nlim = 3, bin = NULL, per = FALSE, weight = "wt")
 #'
-#' @importFrom stats na.omit complete.cases
+#' @importFrom stats na.omit complete.cases aggregate xtabs
 #' @export ExpCTable
 
-ExpCTable <- function(data, Target = NULL, margin = 1, clim = 10, nlim = 10, round = 2, bin = 3, per = FALSE){
+ExpCTable <- function(data, Target = NULL, margin = 1, clim = 10, nlim = 10, round = 2, bin = 3, per = FALSE, weight = NULL){
   r <- round
   if (!is.data.frame(data)) stop("Input data is not a dataframe")
   xx <- as.data.frame(data)
+  sm_9xy_1wt8 <- NULL
+
+  if (!is.null(weight)) {
+    if(length(intersect(colnames(data), weight))>0) {
+      if(!is.numeric(data[[weight]])) stop("Weight column is not numeric")
+      sm_9xy_1wt8 = data[[weight]]
+    } else
+      if((length(weight) == nrow(data))) {
+        sm_9xy_1wt8 = weight
+      } else
+        stop("length of weight vector should be equal to sample size 'n' OR specified weight column is not there in dataframe")
+  }
+
   ### Variable selection
   num_var <- names(xx)[sapply(xx, is.numeric)]
   if (length(num_var) > 0){
@@ -92,13 +108,22 @@ ExpCTable <- function(data, Target = NULL, margin = 1, clim = 10, nlim = 10, rou
       FTable <- as.data.frame(matrix( numeric( (length(levels(Xvar)) + 1)),
                                      nrow = length(levels(Xvar)) + 1, ncol = 5))
       names(FTable) <- c("Variable", "Valid", "Frequency", "Percent", "CumPercent")
-      tbx <- table(Xvar)
-      tbxp <- round(prop.table(table(Xvar)) * 100, r)
-      tbxcp <- cumsum(tbxp)
 
-      FTable$Variable <- cat
-      FTable$Valid <- c(levels(Xvar), "TOTAL")
+      if(is.null(weight)) {
+        tbx <- table(Xvar)
+        tbxp <- round(prop.table(table(Xvar)) * 100, r)
+        tbxcp <- cumsum(tbxp)
 
+        FTable$Variable <- cat
+        FTable$Valid <- c(levels(Xvar), "TOTAL")
+      } else {
+        wt_table  = wtable(Xvar, sm_9xy_1wt8)
+        tbx <- round(wt_table[[2]], 0)
+        tbxp <- round(wt_table[[3]] * 100, r)
+        tbxcp <- cumsum(tbxp)
+        FTable$Variable <- cat
+        FTable$Valid <- c(levels(Xvar), "TOTAL")
+      }
       try(FTable[1 : nr, 3] <- tbx, silent = T)
       try(FTable[1 : nr, 4] <- tbxp, silent = T)
       try(FTable[1 : nr, 5] <- tbxcp, silent = T)
@@ -129,7 +154,7 @@ ExpCTable <- function(data, Target = NULL, margin = 1, clim = 10, nlim = 10, rou
         names(WTable) <- c("VARIABLE", "CATEGORY", paste0(Target, ":", levels(Yvar)), "TOTAL")
         WTable$VARIABLE <- cat
         WTable$CATEGORY <- c(levels(Xvar), "TOTAL")
-        nr <- length(levels(Xvar)); nr
+        nr <- length(levels(Xvar));
         nc <- length(levels(Yvar))
         tb <- table(Xvar, Yvar)
         tby <- prop.table(table(Yvar));
@@ -344,7 +369,7 @@ ExpStat <- function(X, Y, valueOfGood = NULL) {
   if (class(Y) != "factor") Y <- as.factor(Y)
   if (class(X) != "factor") X <- as.factor(X)
   tb <- table(X, Y)
-  CTest <- chisq.test(tb)
+  CTest <- chisq.test(tb, simulate.p.value = TRUE)
   ## Cramers V
   k <- min(dim(CTest$observed))
   N <- sum(CTest$observed)
@@ -381,7 +406,7 @@ ExpStat <- function(X, Y, valueOfGood = NULL) {
 #' @param nlim maximum unique values for numeric variable.
 #' @param bins number of bins (default is 10)
 #' @param Pclass reference category of target variable
-#' @param plot Inforamtion value barplot (default FALSE)
+#' @param plot Information value barplot (default FALSE)
 #' @param top for plotting top information values (default value is 20)
 #' @param Round round of value
 #' @details
@@ -425,7 +450,7 @@ ExpStat <- function(X, Y, valueOfGood = NULL) {
 #' # Information value plot
 #' ExpCatStat(mtcars,Target="am",result = "Stat",clim=10,nlim=10,bins=10,
 #' Pclass=1,plot=TRUE,top=20,Round=2)
-#' # Inforamtion value for categorical Independent variables
+#' # Information value for categorical Independent variables
 #' ExpCatStat(mtcars,Target="am",result = "IV",clim=10,nlim=10,bins=10,
 #' Pclass=1,plot=FALSE,top=20,Round=2)
 #' @author dubrangala
@@ -437,7 +462,7 @@ ExpCatStat <- function(data, Target=NULL, result="Stat", clim=10,
                        nlim=10, bins=10, Pclass=NULL, plot=FALSE, top=20, Round=2) {
   if (!is.data.frame(data)) stop("data must be a numeric vector or data.frame")
   if (is.null(Target)) stop("Target variable is missing")
-  if (is.null(result)) stop("Specify the result option either 'Stat' or 'IV' for inforamtion value")
+  if (is.null(result)) stop("Specify the result option either 'Stat' or 'IV' for Information Value")
   result <- toupper(result)
   xx <- as.data.frame(data)
   Yvar <- as.factor(xx[, Target])
@@ -513,7 +538,7 @@ ExpCatStat <- function(data, Target=NULL, result="Stat", clim=10,
                                   label = paste0(`IV Value`))) +
         geom_bar(stat = "identity", position = "dodge", fill = "tan3") +
         xlab("Variables") +
-        ylab("Inforamtion value") +
+        ylab("Information Value") +
         geom_text(size = 4, position = position_dodge(width = 0), vjust = 0.5, hjust = 0) +
         scale_x_discrete(labels = wrap_format(8)) +
         scale_y_continuous(labels = dollar_format(suffix = "", prefix = "")) +

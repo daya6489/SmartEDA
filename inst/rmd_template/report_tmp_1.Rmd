@@ -32,7 +32,7 @@ data <- params$data
 Analyzing the data sets to summarize their main characteristics of variables, often with visual graphs, without using a statistical model. 
 
 ### 1. Overview of the data
-Understanding the dimensions of the dataset, variable names, overall missing summary and data types of each variables
+Understanding the dimensions of the data set, variable names, overall missing summary and data types of each variables
 
 ```{r od_1,warning=FALSE,eval=F,include=T}
 # Overview of the data
@@ -107,7 +107,10 @@ ExpCTable(data,Target=NULL,margin=1,clim=10,nlim=5,round=2,bin=NULL,per=T)
 ```
 
 ```{r e4.1.1,warning=FALSE,eval=T,render=et1,echo=F}
-paged_table(et1)
+if(length(et1) == 5) {
+  paged_table(et1)} else {
+  print("Input data does'nt have any categorical columns to generate custom tables")
+}
 ```
 >*`NA` is Not Applicable*
 
@@ -118,7 +121,8 @@ paged_table(et1)
 #### Bar plots for all categorical variables
 Bar plot with vertical or horizontal bars for all categorical variables 
 
-```{r bp1,warning=FALSE,eval=T,include=T,fig.align='center',fig.height=10,fig.width=10}
-ExpCatViz(data,target=NULL,fname=NULL,clim=10,margin=2,theme=theme,Page = c(2,2),sample=sc)
+```{r bp1,warning=FALSE,eval=T,include=T,fig.align='center',fig.height=10,fig.width=10, render=ovw_tab2}
+test = nrow(ovw_tab2[ovw_tab2$No_of_distinct_values < 11,])
+if(test > 0)  ExpCatViz(data,target=NULL,fname=NULL,clim=10,margin=2,theme=theme,Page = c(2,2),sample=sc)
 ```
 

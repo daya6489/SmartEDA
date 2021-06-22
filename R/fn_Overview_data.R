@@ -22,9 +22,11 @@ ExpData <- function(data, type = 1, fun=NULL){
   if (!is.data.frame(data)) stop("data must be a numeric vector or data.frame")
   xx <- as.data.frame(data)
   dd <- sapply( sapply(xx, function(x){
-    #if(class(x) %in% c("Date", "POSIXct", "POSIXt")) {
       if(is.character(x)) {
-        round((length(x[is.na(x)]) + length(x[x == '']))/ length(x), 5)
+        x[x == ''] <- "missing_row"
+        x[is.na(x)] <- "missing_row"
+        #round((length(x[is.na(x)]) + length(x[x == '']))/ length(x), 5)
+        round(length(x[x == "missing_row"])/ length(x), 5)
       } else {
         round((length(x[is.na(x)]))/ length(x), 5)
       }

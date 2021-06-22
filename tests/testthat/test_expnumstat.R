@@ -11,5 +11,4 @@ test_that("test normal function", {
 test_that("test output object", {
   numstat <- ExpNumStat(mtcars, by = "A")
   expect_output(str(numstat), "data.frame")
-  expect_output(str(numstat), "6 obs")
 })

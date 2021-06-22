@@ -114,8 +114,8 @@ ExpNumViz <- function (data, target = NULL, type = 1, nlim = 3, fname = NULL,
       plot_l <- lapply(num_var, function(j) {
         x <- na.omit(subset(xx, select = j))
         y <- xx[, j]
-        p <- ggplot(data = x, aes_string(x = names(x))) +
-          geom_line (stat = "density", size = 1, alpha = 1) +
+        p <- ggplot(data = x, aes(x = !! sym(names(x)))) +
+          geom_line (stat = "density", linewidth = 1, alpha = 1) +
           xlab (paste0( (colnames(x)), "\n", "Skewness: ",
                       round(ExpSkew(y, type = "moment"), 2), " Kurtosis: ",
                       round(ExpKurtosis(y, type = "excess"), 2))) +
@@ -157,7 +157,7 @@ ExpNumViz <- function (data, target = NULL, type = 1, nlim = 3, fname = NULL,
         comma <- NULL
         plot_l <- lapply(num_var1, function(j) {
           x <- na.omit(subset(xx, select = c(j, target)))
-          ggplot(x, aes_string(x = names(x)[2], y = names(x)[1])) +
+          ggplot(x, aes(x = !! sym(names(x)[2]), y = !! sym(names(x)[1]))) +
             geom_point(colour = col, size = 2) + scale_x_continuous(labels = comma) +
             scale_y_continuous(labels = comma) + smtheme(theme)
           })

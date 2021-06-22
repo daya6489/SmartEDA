@@ -16,7 +16,7 @@ In a quality statistical data analysis the initial step has to be exploratory. E
 The SmartEDA R package has four unique functionalities as
 
 * Descriptive statistics
-* Data visualisation
+* Data visualization
 * Custom table
 * HTML EDA report
 
@@ -29,7 +29,7 @@ SmartEDA package with other similar packages available in CRAN for exploratory d
 ![SmartEDA](https://github.com/daya6489/SmartEDA/blob/master/man/figures/SmartEDA_comp.PNG)
 
 # Journal of Open Source Software Article
-An article describing SmartEDA pacakge for exploratory data analysis approach has been published in [arxiv](https://arxiv.org/pdf/1903.04754.pdf) and Journal of Open Source Software [JOSS](https://joss.theoj.org/papers/10.21105/joss.01509). Please cite the paper if you use SmartEDA in your work!
+An article describing SmartEDA package for exploratory data analysis approach has been published in [arxiv](https://arxiv.org/pdf/1903.04754.pdf) and Journal of Open Source Software [JOSS](https://joss.theoj.org/papers/10.21105/joss.01509). Please cite the paper if you use SmartEDA in your work!
 
 # Installation
 
@@ -65,7 +65,7 @@ Install the package "ISLR" to get the example data set.
 ```
 
 ## Overview of the data
-Understanding the dimensions of the dataset, variable names, overall missing summary and data types of each variables
+Understanding the dimensions of the data set, variable names, overall missing summary and data types of each variables
 
 ```R
 ## overview of the data; 
@@ -84,6 +84,11 @@ To summarise the numeric variables, you can use following r codes from this paca
 	ExpNumStat(Carseats,by="A",gp="Price",Qnt=seq(0,1,0.1),MesofShape=1,Outlier=TRUE,round=2)
 ## Summary statistics by – category
 	ExpNumStat(Carseats,by="GA",gp="Urban",Qnt=seq(0,1,0.1),MesofShape=2,Outlier=TRUE,round=2)
+```
+
+## weighted summary for numerical variables
+```R
+ExpNumStat(mtcars,by="A",round=2, weight = "wt")
 ```
 
 ## Graphical representation of all numeric features
@@ -110,6 +115,10 @@ ExpNumViz(mtcars,target="carb",type=3,nlim=25,fname = file.path(tempdir(),"Mtcar
 	ExpCatStat(Carseats,Target="Urban",result = "Stat",clim=10,nlim=5,Pclass="Yes")
 ## Inforamtion value and Odds value
 	ExpCatStat(Carseats,Target="Urban",result = "IV",clim=10,nlim=5,Pclass="Yes")
+```
+## weighted count for categorical variables
+```R
+ExpCTable(mtcars,  margin = 1, clim = 10, nlim = 3, bin = NULL, per = FALSE, weight = "wt"")
 ```
 
 ## Graphical representation of all categorical variables
@@ -182,8 +191,7 @@ num_1 <- ExpTwoPlots(mtcars,
                      theme = "Default")
 
 ```
-
-![](man/figures/c24 -1.png)<!-- -->
+![](man/figures/c24_1.png)<!-- -->
 
 ## Univariate Outlier analysis
 

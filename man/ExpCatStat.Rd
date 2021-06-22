@@ -32,7 +32,7 @@ ExpCatStat(
 
 \item{Pclass}{reference category of target variable}
 
-\item{plot}{Inforamtion value barplot (default FALSE)}
+\item{plot}{Information value barplot (default FALSE)}
 
 \item{top}{for plotting top information values (default value is 20)}
 
@@ -82,7 +82,7 @@ Pclass=1,plot=FALSE,top=20,Round=2)
 # Information value plot
 ExpCatStat(mtcars,Target="am",result = "Stat",clim=10,nlim=10,bins=10,
 Pclass=1,plot=TRUE,top=20,Round=2)
-# Inforamtion value for categorical Independent variables
+# Information value for categorical Independent variables
 ExpCatStat(mtcars,Target="am",result = "IV",clim=10,nlim=10,bins=10,
 Pclass=1,plot=FALSE,top=20,Round=2)
 }

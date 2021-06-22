@@ -1,3 +1,13 @@
+# SmartEDA 0.3.9
+## Bug Fixes
+* Typo correction - "Inforamtion Value" to "Information Value"
+* There was a issues in ExpReport() while running the attitude dataset, which is fixed
+* Issue with ExpData() when dealing with text data and tibbles - which is fixed
+
+## Enhancements
+* Added weight argument in `Expctable`, and `ExpNumStat` to compute weighted summary and counts
+
+
 # SmartEDA 0.3.8
 ## Bug Fixes
 * matrix warning has fixed

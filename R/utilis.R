@@ -4,7 +4,7 @@ smtheme <- function(theme){
   themedf <- theme(axis.text.x = element_text(angle = 90, vjust = .5, hjust = 0.95, size = 8, colour = "grey20"),
                    axis.text.y = element_text(vjust = .5, hjust = 0.95, size = 8, colour = "grey20"),
                    plot.title = element_text(hjust = 0.5, face = "bold", colour = "#5F9EA0", size = 12),
-                   axis.line = element_line(size = 1, colour = "black"),
+                   axis.line = element_line(linewidth = 1, colour = "black"),
                    panel.grid.major = element_line(colour = "#d3d3d3", linetype = "dashed"),
                    panel.grid.minor = element_blank(),
                    panel.border = element_blank(),
@@ -79,9 +79,38 @@ scolorsel <- function(col = NULL, nlevel = 0){
   return(fill_1)
 }
 
+## Weighted table
+wtable <- function(x, wt){
+  ft = aggregate(wt ~ x, FUN = sum)
+  v1 = ft[['x']]
+  v2 = ft[['wt']]
+  v3 = v2 / sum(v2)
+  return(list(v1, v2, v3))
+}
+
+wctable <- function(x, y, wt){
+  ft = xtabs(wt~., aggregate(wt ~ x + y, FUN=sum))
+  return(ft)
+}
+
+
+## Weighted summary statistics
+wstatistics <- function(x, wt, r){
+  #removeNA
+  nav <- !is.na(x + wt)
+  x <- x[nav]
+  wt <- wt[nav]
+
+  sw = sum(wt)
+  wmean = sum(wt * x)/sw
+  wsd = sum(wt * ((x - wmean)^2))/(sw - 1)
+  return(c(W_count = round(sw, r), W_Mean = round(wmean, r), W_Sd = round(sqrt(wsd),r)))
+}
+
+
 # Numerical variable summary statistics call function
 # descriptive statistics function
-ds_fun <- function(x, r, MesofShape, Qnt, Outlier){
+ds_fun <- function(x, r, MesofShape, Qnt, Outlier,weight){
   BasDST <- c(TN = length(x),
               nNeg = length(which(x < 0)),
               nZero = length(which(x == 0)),
@@ -98,6 +127,11 @@ ds_fun <- function(x, r, MesofShape, Qnt, Outlier){
               SD = round(sd(x, na.rm = TRUE), r),
               CV = round(sd(x, na.rm = TRUE) / mean(x, na.rm = TRUE), r),
               IQR = round(IQR(x, na.rm = TRUE), r))
+
+  if(!is.null(weight)){
+    BasDST <- c(BasDST, wstatistics(x, weight, r))
+  }
+
   Skw_kurt <- c(
     Skewness = round(ExpSkew(x, type = "moment"), r),
     Kurtosis = round(ExpKurtosis(x, type = "excess"), r)
@@ -280,9 +314,11 @@ expdatatype2 <- function(xx, x, myfun=NULL){
 
   if(!is.numeric(Xvar)) {
     if(is.character(Xvar)){
-      Xvar[Xvar==''] <- "missing_row"
-      Xvar1 <- Xvar[complete.cases(Xvar)]
-      missing_count <- length(Xvar[is.na(Xvar)]) + length(Xvar1[Xvar1 == "missing_row"])
+      Xvar[Xvar == ''] <- "missing_row"
+      Xvar[is.na(Xvar)] <- "missing_row"
+      #Xvar1 <- Xvar[complete.cases(Xvar)]
+      #missing_count <- length(Xvar[is.na(Xvar)]) + length(Xvar1[Xvar1 == "missing_row"])
+      missing_count <- length(Xvar[Xvar == "missing_row"])
       Per_missing <- round(missing_count / length(Xvar), 3)
       sample_n <- length(Xvar) - missing_count
     } else

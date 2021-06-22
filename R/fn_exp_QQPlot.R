@@ -49,7 +49,7 @@ ExpOutQQ <- function(data, nlim = 3, fname = NULL, Page = NULL, sample = NULL){
 
     p <- ggplot(data = x, aes(sample = varb)) +
       stat_qq(distribution = qnorm, size = 2, alpha = 0.3, color = "blue") +
-      geom_abline(intercept = int, slope = slope, col = "red", size = 0.5) +
+      geom_abline(intercept = int, slope = slope, col = "red", linewidth = 0.5) +
       theme_bw() +
       xlab("Normal Quantiles") +
       ylab(j)

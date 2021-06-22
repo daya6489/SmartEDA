@@ -1,7 +1,7 @@
 Package: SmartEDA
 Type: Package
 Title: Summarize and Explore the Data
-Version: 0.3.8
+Version: 0.3.9
 Authors@R: c(person("Dayanand Ubrangala", role = c("aut", "cre"), email = "daya6489@gmail.com"),
              person("Kiran", "R", role = c("aut","ctb")),
              person("Ravi", "Prasad Kondapalli", role = c("aut","ctb")),
@@ -11,11 +11,11 @@ Depends: R (>= 3.3.0)
 Imports: ggplot2, sampling, scales, rmarkdown, ISLR(>= 1.0), data.table, gridExtra, GGally, qpdf
 Description: Exploratory analysis on any input data describing the structure and the relationships present in the data. The package automatically select the variable and does related descriptive statistics. Analyzing information value, weight of evidence, custom tables, summary statistics, graphical techniques will be performed for both numeric and categorical predictors.
 License: MIT + file LICENSE
-Suggests: testthat,knitr,covr,psych,DataExplorer
+Suggests: testthat,knitr,covr,psych
 Encoding: UTF-8
 LazyData: false
 URL: https://daya6489.github.io/SmartEDA/
 BugReports: https://github.com/daya6489/SmartEDA/issues
 Repository: CRAN
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.2
 VignetteBuilder: knitr

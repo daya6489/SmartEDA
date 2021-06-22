@@ -13,6 +13,7 @@ ExpNumStat(
   MesofShape = 2,
   Outlier = FALSE,
   round = 3,
+  weight = NULL,
   dcast = FALSE,
   val = NULL
 )
@@ -24,19 +25,21 @@ ExpNumStat(
 
 \item{gp}{target variable if any, default NULL}
 
-\item{Qnt}{default NULL. Specified quantiles is c(.25,0.75) will find 25th and 75th percentiles}
+\item{Qnt}{default NULL. Specified quantile is c(.25,0.75) will find 25th and 75th percentiles}
 
-\item{Nlim}{numeric variable limit (default value is 10 which means it will only consider those variable having more than 10 unique values and variable type is numeric/integer)}
+\item{Nlim}{numeric variable limit (default value is 3 which means it will only consider those variable having more than 3 unique values and variable type is numeric/integer)}
 
 \item{MesofShape}{Measures of shapes (Skewness and kurtosis).}
 
-\item{Outlier}{Calculate the lower hinge, upper hinge and number of outliers}
+\item{Outlier}{Calculate the lower hinge, upper hinge and number of outlier}
 
 \item{round}{round off}
 
+\item{weight}{a vector of weights, it must be equal to the length of data}
+
 \item{dcast}{fast dcast from data.table}
 
-\item{val}{Name of the column whose values will be filled to cast (see Detials sections for list of column names)}
+\item{val}{Name of the column whose values will be filled to cast (see Details sections for list of column names)}
 }
 \value{
 summary statistics for numeric independent variables
@@ -53,18 +56,18 @@ Summary by:
 Function provides summary statistics for all numerical variable. This function automatically scans through each variable and select only numeric/integer variables. Also if we know the target variable, function will generate relationship between target variable and each independent variable.
 }
 \details{
-coloumn descriptions
+column descriptions
 \itemize{
   \item \code{Vname} is Variable name
   \item \code{Group} is Target variable
-  \item \code{TN} is Total sample (inculded NA observations)
+  \item \code{TN} is Total sample (included NA observations)
   \item \code{nNeg} is Total negative observations
   \item \code{nPos} is Total positive observations
   \item \code{nZero} is Total zero observations
   \item \code{NegInf} is Negative infinite count
   \item \code{PosInf} is Positive infinite count
   \item \code{NA_value} is Not Applicable count
-  \item \code{Per_of_Missing} is Percentage of missings
+  \item \code{Per_of_Missing} is Percentage of missing
   \item \code{Min} is minimum value
   \item \code{Max} is maximum value
   \item \code{Mean} is average value
@@ -74,7 +77,7 @@ coloumn descriptions
   \item \code{IQR} is Inter quartile range
   \item \code{Qnt} is quantile values
   \item \code{MesofShape} is Skewness and Kurtosis
-  \item \code{Outlier} is Number of outliers
+  \item \code{Outlier} is Number of outlier
   \item \code{Cor} is Correlation b/w target and independent variables
 }
 }
@@ -91,6 +94,10 @@ ExpNumStat(mtcars,by="GA",gp="gear",Qnt=seq(0,1,.1),MesofShape=1,
 # Summary by specific statistics for all numeric variables
 ExpNumStat(mtcars,by="GA",gp="gear",Qnt=c(0.1,0.2),MesofShape=2,
            Outlier=FALSE,round=2,dcast = TRUE,val = "IQR")
+# Weighted summary statistics
+ExpNumStat(mtcars,by="GA",gp="gear",Qnt=c(0.1,0.2),MesofShape=2,
+           Outlier=FALSE,round=2,dcast = TRUE,val = "IQR", weight = "wt")
+
 }
 \seealso{
 \code{\link[psych:describe.by]{describe.by}}
