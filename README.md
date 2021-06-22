@@ -182,8 +182,7 @@ num_1 <- ExpTwoPlots(mtcars,
                      theme = "Default")
 
 ```
-
-![](man/figures/c24 -1.png)<!-- -->
+![](man/figures/c24_1.png)<!-- -->
 
 ## Univariate Outlier analysis
 
