@@ -43,6 +43,3 @@ X = mtcars$gear
 Y = mtcars$am
 ExpInfoValue(X,Y,valueOfGood = 1)
 }
-\seealso{
-\code{\link[InformationValue:IV]{IV}}
-}
