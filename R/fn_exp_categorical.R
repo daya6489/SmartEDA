@@ -305,7 +305,6 @@ ExpWoeTable <- function (X, Y, valueOfGood = NULL, print = FALSE, Round = 2) {
 #' X = mtcars$gear
 #' Y = mtcars$am
 #' ExpInfoValue(X,Y,valueOfGood = 1)
-#' @seealso \code{\link[InformationValue:IV]{IV}}
 #' @export ExpInfoValue
 
 ExpInfoValue <- function (X, Y, valueOfGood = NULL) {
@@ -365,9 +364,9 @@ ExpInfoValue <- function (X, Y, valueOfGood = NULL) {
 
 ExpStat <- function(X, Y, valueOfGood = NULL) {
   if (is.null(valueOfGood)) stop("Specify reference category for target variable")
-  if (anyNA(Y) == T) stop("Treat NA value from Target varible")
-  if (class(Y) != "factor") Y <- as.factor(Y)
-  if (class(X) != "factor") X <- as.factor(X)
+  if (anyNA(Y)) stop("Treat NA value from Target varible")
+  if (!inherits(Y, "factor")) Y <- as.factor(Y)
+  if (!inherits(X, "factor")) X <- as.factor(X)
   tb <- table(X, Y)
   CTest <- chisq.test(tb, simulate.p.value = TRUE)
   ## Cramers V
