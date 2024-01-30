@@ -1,6 +1,6 @@
 # default ggplot theme used in SmartEDA
 
-smtheme <- function(theme){
+smtheme <- function(x){
   themedf <- theme(axis.text.x = element_text(angle = 90, vjust = .5, hjust = 0.95, size = 8, colour = "grey20"),
                    axis.text.y = element_text(vjust = .5, hjust = 0.95, size = 8, colour = "grey20"),
                    plot.title = element_text(hjust = 0.5, face = "bold", colour = "#5F9EA0", size = 12),
@@ -9,12 +9,12 @@ smtheme <- function(theme){
                    panel.grid.minor = element_blank(),
                    panel.border = element_blank(),
                    panel.background = element_blank())
-  if (theme == "Default") kp <- 1
-  if (theme != "Default") kp <- 2
+  if (x == "Default") kp <- 1
+  if (x != "Default") kp <- 2
 
   switch (kp,
           mytheme <- themedf,
-          mytheme <- theme
+          mytheme <- x
   )
 #if (class(mytheme) != "theme") stop("Input ggplot theme is incorrect")
   return(mytheme)
@@ -57,7 +57,8 @@ scolorsel <- function(col = NULL, nlevel = 0){
       fill_1 <- hcl_colors[1]
     } else
       if (nlevel == 2) {
-        fill_1 <- hcl_colors[1:2]
+        #fill_1 <- hcl_colors[1:2]
+        fill_1 <- sample(hcl_colors, nlevel)
       } else
         if (nlevel > 2) {
           fill_1 <- colors()[srswor(nlevel, length(colors()) ) == 1]
@@ -73,7 +74,8 @@ scolorsel <- function(col = NULL, nlevel = 0){
           fill_1 <- col[1 : nlevel]
         } else
           if (nlevel > 0) {
-            fill_1 <- hcl_colors[1:nlevel]
+            #fill_1 <- hcl_colors[1:nlevel]
+            fill_1 <- sample(hcl_colors, nlevel)
           }
   }
   return(fill_1)

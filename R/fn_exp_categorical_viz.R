@@ -69,7 +69,11 @@ ExpCatViz <- function (data, target = NULL, fname = NULL, clim = 10, col = NULL,
     wrap_40 <- wrap_format(40)
     if (!is.null(target)) {
       if (!target %in% names(xx)) stop("undefined columns selected for target")
-      Yvar <- as.character(paste0(xx[, target]))
+      #Yvar <- as.character(paste0(xx[, target]))
+      Yvar = xx[, target]
+      if (!is.factor(Yvar)){
+        Yvar <- as.character(paste0(xx[, target]))
+      }
       nlevel <- length(unique(Yvar))
       if (!is.null(col) & length(col) != nlevel) stop("Insufficient values in colour, number of colours should be equal to number of categories")
       if (nlevel > 15) message("target variable has more than 15 categories")
@@ -114,7 +118,11 @@ ExpCatViz <- function (data, target = NULL, fname = NULL, clim = 10, col = NULL,
   }
   ### GGPLOT graph start from here
   plot_l <- lapply(Cat_varlst, function(j){
-    Xvar <- as.character(paste0(xx[, j]))
+    Xvar = xx[, j]
+    if (!is.factor(Xvar)){
+      Xvar <- as.character(paste0(xx[, j]))
+    }
+
     if (rdata == TRUE){
       data <- as.data.frame(data)
       tbl <- data[, c(target, value)]
@@ -141,6 +149,7 @@ ExpCatViz <- function (data, target = NULL, fname = NULL, clim = 10, col = NULL,
           fill_1 <- scolorsel(col, nlevel)
           tb <- table(Xvar)
           tbl <- data.frame(round( tb / sum(tb) * 100, r))
+          names(tbl) <- c("Xvar", "Freq")
            pp <- ggplot(tbl, aes(y = Freq, x = Xvar, label = paste0(Freq, "%"))) +
             geom_bar( stat = "identity", position = "dodge", fill = fill_1) + xlab("") +
             ylab("Percentage (%)") + ggtitle(wrap_40(paste(gtitle, " ", j))) +
@@ -174,6 +183,7 @@ ExpCatViz <- function (data, target = NULL, fname = NULL, clim = 10, col = NULL,
       fill_1 <- scolorsel(col, nlevel)
       tb <- table(Xvar)
       tbl <- data.frame(round(tb / sum(tb) * 100, r))
+      names(tbl) <- c("Xvar", "Freq")
       pp <- ggplot(tbl, aes(y = Freq, x = Xvar, label = paste0(Freq, "%"))) +
         geom_bar( stat = "identity", position = "dodge", fill = fill_1) + xlab("") +
         ylab("Percentage (%)") + ggtitle(wrap_40(paste(gtitle, " ", j))) +

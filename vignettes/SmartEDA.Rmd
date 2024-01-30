@@ -62,7 +62,7 @@ Science is the eye of everyone, one who hasnt got it, is like a blind ||
 To summarize, SmartEDA package helps in getting the complete exploratory data analysis just by running the function instead of writing lengthy r code.
 
 ### Journal of Open Source Software Article
-An article describing SmartEDA pacakge for exploratory data analysis approach has been published in [arxiv](https://arxiv.org/pdf/1903.04754.pdf) and Journal of Open Source Software [JOSS](https://joss.theoj.org/papers/10.21105/joss.01509). Please cite the paper if you use SmartEDA in your work!
+An article describing SmartEDA package for exploratory data analysis approach has been published in [arxiv](https://arxiv.org/pdf/1903.04754.pdf) and Journal of Open Source Software [JOSS](https://joss.theoj.org/papers/10.21105/joss.01509). Please cite the paper if you use SmartEDA in your work!
 
 
 ## 2. Data

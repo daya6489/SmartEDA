@@ -1,3 +1,11 @@
+# SmartEDA 0.3.10
+## Bug Fixes
+* Removed the InformationValue package from Rd cross-references, which is used in ExpWoeTable, as it is no longer available on CRAN
+* [#9](https://github.com/daya6489/SmartEDA/issues/9): Corrected spelling mistake "pacakge" to "package"
+* [#11](https://github.com/daya6489/SmartEDA/issues/11): Fixed issues in ExpCatViz while plotting Factor levels. Now we can set factor levels for any categorical columns and plot the graph
+* [#12](https://github.com/daya6489/SmartEDA/issues/12): Theme option problem is fixed
+
+
 # SmartEDA 0.3.9
 ## Bug Fixes
 * Typo correction - "Inforamtion Value" to "Information Value"

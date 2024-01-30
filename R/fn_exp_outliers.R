@@ -1,4 +1,4 @@
-#' Univariate outlier analysis
+#' Univariate Outlier Analysis
 #'
 #' this function will run univariate outlier analysis based on boxplot or SD method. The function returns the summary of oultlier for selected numeric features and adding new features if there is any outliers
 #'

@@ -31,6 +31,3 @@ X = mtcars$gear
 Y = mtcars$am
 WOE = ExpWoeTable(X,Y,valueOfGood = 1)
 }
-\seealso{
-\code{\link[InformationValue:WOETable]{WOETable}}
-}

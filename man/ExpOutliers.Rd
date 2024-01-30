@@ -2,7 +2,7 @@
 % Please edit documentation in R/fn_exp_outliers.R
 \name{ExpOutliers}
 \alias{ExpOutliers}
-\title{Univariate outlier analysis}
+\title{Univariate Outlier Analysis}
 \usage{
 ExpOutliers(
   data,

@@ -212,7 +212,6 @@ ExpCTable <- function(data, Target = NULL, margin = 1, clim = 10, nlim = 10, rou
 #' X = mtcars$gear
 #' Y = mtcars$am
 #' WOE = ExpWoeTable(X,Y,valueOfGood = 1)
-#' @seealso \code{\link[InformationValue:WOETable]{WOETable}}
 #' @details
 #' The weight of evidence tells the predictive power of an independent variable in relation to the dependent variable
 #'
